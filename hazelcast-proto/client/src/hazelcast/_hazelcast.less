@@ -1,0 +1,31 @@
+.eaHazelCast {
+    &-Content {
+        position: relative;
+        padding-top: 20px;
+    }
+    &-MasterSide {
+        float: left;
+        width: 280px;
+        height: 200px;
+    }
+    &-ContentSide {
+        margin-left: 300px;
+
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+
+    // responsive
+    @media screen and (max-width: 640px) {
+        &-MasterSide {
+            width: auto;
+            float: none;
+        }
+        &-ContentSide {
+            margin-left: 0;
+        }
+    }
+}

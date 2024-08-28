@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="crash">
+    <test name="HangTest">
+        <classes>
+            <class name="com.ericsson.cifwk.taf.te.test.HangTest"/>
+        </classes>
+    </test>
+</suite>

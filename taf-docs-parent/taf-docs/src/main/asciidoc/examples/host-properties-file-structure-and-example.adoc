@@ -1,0 +1,146 @@
+Host Properties File Structure and Example
+==========================================
+
+TAF has the functionality to consume host information from properties
+files into Host objects. The values within the host objects can then be
+used for whatever purposes needed.
+
+The TAF module which automatically oversees the locating and loading of
+properties files is the *Data Handler*.
+
+The file must be located in one of the following places:
+
+* In the projects directory structure - preferable in _taf_properties_
+folder
+* In the jar file in properties folder
+* On the classpath
+* In location specified by TAF_PROPERTIES_LOCATION_VARIABLE environment
+variable
+
+*N.B. *The file extension must be *.properties*
+
+*Supported host types: +
+*
+
+* MS
+* SC1
+* SC2
+* PL
+* NFS
+* SFS
+* RC
+* NETSIM
+* JBOSS
+* UNKNOWN
+
+[[HostPropertiesFileStructureandExample-Example]]
+Example
+~~~~~~~
+
+Example _hosts.properties_ file* +
+*
+
+----
+host.ms1.ip=0.0.0.1
+host.ms1.user.root.pass=shroot
+host.ms1.user.root.type=admin
+host.ms1.port.ssh=22
+host.ms1.type=ms
+
+host.sc1.ip=0.0.0.2
+host.sc1.user.root.pass=cobbler
+host.sc1.user.root.type=admin
+host.sc1.type=sc1
+host.sc1.port.ssh=22
+
+host.sc1.node.jboss1.ip=0.0.0.2
+host.sc1.node.jboss1.type=jboss
+host.sc1.node.jboss1.user.root.pass=shroot
+host.sc1.node.jboss1.user.root.type=admin
+host.sc1.node.jboss1.user.guest.type=oper
+host.sc1.node.jboss1.user.guest.pass=guestp
+host.sc1.node.jboss1.port.http=8080
+host.sc1.node.jboss1.port.rmi=4447
+host.sc1.node.jboss1.port.jmx=9999
+host.sc1.node.jboss1.port.jboss_management=9999
+
+host.CI-Netsim.ip=0.0.0.3
+host.CI-Netsim.user.netsim.pass=netpass
+host.CI-Netsim.port.ssh=2202
+host.CI-Netsim.type=NETSIM
+----
+
+[[HostPropertiesFileStructureandExample-Structure]]
+Structure
+---------
+
+Each line in the properties file has the following structure:
+
+host.<hostname>.<hostParameter>=<value> +
+host.<hostname>.port.<portType>=<value> +
+host.<hostname>.node.<nodename>.<nodeParameter>=<value> +
+host.<hostname>.user.<username>.pass=<password> +
+host.<hostname>.user.<username>.type=<admin|oper>
+
+* host, node, user and port are static prefixes
+* <hostname>, <nodename>, <username> are replaced with the name of the
+host, node or user and should be unique in the context
+* <hostParameter>, <nodeParameter> are replaced with whatever parameter
+you are setting
+* <value> is the value of this parameter.
+
+The parameters are:
+
+* ip
+* type
+* port (which is a map of key value pairs)
+* node (which is a list of hostnames, followed by all the parameters for
+a host object)
+
+Supported user types
+
+* -----------------------------------------------
+ADMIN - root user or JBoss management real user
+-----------------------------------------------
+* -------------------------------------------------------
+OPER  - OS regular user or JBoss application realm user
+-------------------------------------------------------
+
+Supported port types
+
+* ----
+HTTP
+----
+* -----
+HTTPS
+-----
+* ---
+SSH
+---
+* ---
+JMX
+---
+* ---
+JMS
+---
+* ----------------
+JBOSS_MANAGEMENT
+----------------
+* ---
+RMI
+---
+
+[[HostPropertiesFileStructureandExample-ExampleUsage]]
+Example Usage
+-------------
+
+-
+ 
+-
+
+[source,java]
+----
+public List<Host> getAllNetsimNosts(){
+    return DataHandler.hosts.findAll {it.type == HostType.NETSIM  &&  it.hostname =="CI-Netsim" }
+}
+----

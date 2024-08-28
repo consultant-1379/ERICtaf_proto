@@ -1,0 +1,16 @@
+Handlers, Tools, and Executors
+====================================================
+
+This section contains all the information on the API’s currently
+available in TAF. This includes Handlers, Command Executors, operators
+and getters developed by TAF and the design teams
+
+Each page contains the following headings:
+
+* What is XXX
+* What is the TAF XXX
+* How to get Started
+* API Documentation Link
+* Current Functionality
+* Planned Improvements
+* Known Issues and Workarounds

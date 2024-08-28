@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="branding/css/assets.css" rel="stylesheet" type="text/css">
+    <link href="branding/css/systemBar.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="dashboard/ext/base/jquery.js"></script>
+    <script type="text/javascript" src="dashboard/ext/base/jquery.flot.js"></script>
+    <script type="text/javascript" src="dashboard/ext/base/jquery.flot.resize.js"></script>
+    <script type="text/javascript" src="dashboard/ext/base/underscore.js"></script>
+    <script type="text/javascript" src="dashboard/ext/base/moment.js"></script>
+    <script type="text/javascript" src="jscore/require/require.js"></script>
+    <script type="text/javascript" src="config/require.config.js"></script>
+    <script>
+        require(['dashboard/TafDashboard'], function(App) {
+            var currentApp = new App();
+            var container = document.getElementById('container');
+            container.innerHTML = '';
+            currentApp.start(container);
+        }, function() {
+            throw "Can't load application";
+        });
+    </script>
+    <title>TAF Dashboard</title>
+</head>
+<body>
+<div id="container"></div>
+</body>
+</html>

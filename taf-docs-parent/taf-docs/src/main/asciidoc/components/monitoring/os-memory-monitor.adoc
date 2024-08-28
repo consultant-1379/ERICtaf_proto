@@ -1,0 +1,155 @@
+Os Memory Monitor
+=================
+
+Os Memory Monitor is time-based monitor collecting data about memory
+aspects of Linux-based system. It also allows to specify a process (or
+group of processes) that should be monitored. 
+
+OS Memory Monitor monitors all hosts available in DataHandler.getHosts()
+method that can be monitored i.e. has user, password and ssh port
+specified and data is fetchable (i.e. ``/proc'' directory is populated
+with data on the machine).
+
+This monitor will save data to mem.csv and it’s chart has title ``mem''
+in the HTML report.
+
+[[OsMemoryMonitor-Monitorconfiguration:]]
+Monitor configuration:
+~~~~~~~~~~~~~~~~~~~~~~
+
+Property
+
+Accepted values
+
+Default value
+
+Description
+
+Example
+
+monitor.mem.enabled
+
+true|false|1|0
+
+false
+
+Property to enable or disable the monitor before run
+
+monitor.mem.enabled=true
+
+monitor.mem.collectionTime
+
+numbers
+
+1
+
+Property to specify interval of data being collected
+
+monitor.mem.collectionTime=1
+
+monitor.mem.dont_plot
+
+columneNames
+
+pages
+
+Property to specify columns that should not be shown on chart
+
+monitor.mem.dont_plot=pages
+
+monitor.mem.process
+
+<processName> = processIdentifiactionArgs…
+
+jboss taf
+
+Property to specify processes that should be monitored during run.
+
+Value of the property is used with ``ps aux'' command to identify PID of
+processes.
+
+If multiple PIDs are detected, every one is monitored, so if there are
+multiple instances of JBoss
+
+on the machine every one will have it set of columns
+
+monitor.mem.process.jboss = java jboss
+
+[[OsMemoryMonitor-OSleveldatathatismonitored:]]
+OS level data that is monitored:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All data columns are prefixed by host name e.g. sc1_
+
+Memory data
+
+Value
+
+Description
+
+os_free
+
+numbers
+
+Free memory available on the machine
+
+os_total
+
+numbers
+
+Total memory available on the machine
+
+os_cached
+
+numbers
+
+Cached memory on the machine
+
+os_active
+
+numbers
+
+Memory actively used on the machine
+
+os_inactive
+
+numbers
+
+Memory reserved but not in use
+
+[[OsMemoryMonitor-Processleveldatathatismonitored:]]
+Process level data that is monitored:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+All data column is prefixed by host name, process name and actual PID on
+system, e.g. sc1_jboss_3343_
+
+Memory data
+
+Value
+
+Description
+
+total_size
+
+numbers
+
+Total memory size used by process
+
+resident_size
+
+numbers
+
+Size of resident memory used by process
+
+shared_pages
+
+numbers
+
+Memory shared pages used by process
+
+code_pages
+
+numbers
+
+Memory code pages used by process

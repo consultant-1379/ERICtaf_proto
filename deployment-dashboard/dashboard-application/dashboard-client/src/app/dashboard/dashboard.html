@@ -1,0 +1,98 @@
+<div class="col-xs-12">
+    <alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+</div>
+
+<div class="col-lg-5 col-md-5 col-xs-3"></div>
+<div class="col-lg-2 col-md-3 col-xs-3 input">
+    <input type="text" class="form-control" placeholder="Cluster ID" aria-describedby="basic-addon1" ng-model="clusterId">
+</div>
+
+<button type="button" class="btn btn-success" ng-click="submitClusterId()">Submit</button>
+<button type="button" class="btn btn-error" ng-click="stopClusterId()">Stop</button>
+
+<div class="row">
+    <div class="col-lg-10 col-md-10 col-xs-10 centre">
+        <rd-widget>
+            <rd-widget-body>
+                <div class="widget-icon pull-left">
+                    <i class="fa fa-tasks"></i>
+                </div>
+                <div class="title status-color" ng-show="statusOfClusterDeployments=='NONE'">Deployment Status</div>
+                <div class="title status-color" ng-show="statusOfClusterDeployments!=='NONE'">
+                    <p class="deployment">Deployment Status for Cluster ID: {{clusterId}}</p>
+                    <p class="deployment">ISO Version: {{version}}</p></div>
+                <div class="noStatus" ng-show="statusOfClusterDeployments=='NONE'">No Deployment Selected</div>
+                <div class="status" ng-show="statusOfClusterDeployments=='ERROR'">Error - Multiple nodes in the same group are offline</div>
+                <div class="status" ng-show="statusOfClusterDeployments=='WARNING'">Warning - Some nodes are Offline</div>
+                <div class="status" ng-show="statusOfClusterDeployments=='ONLINE'">All Nodes are Online</div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 centre">
+
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                    <thead>
+                    <tr>
+                        <th class="text-center">Hosts</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat="(key, value) in hostServices">
+                        <td>{{key}}</td>
+                        <td>
+								<span class="text-success" ng-show="value=='ONLINE'">
+									<i class="fa fa-check"></i>
+								</span>
+								<span class="text-danger" ng-show="value=='OFFLINE'">
+									<i class="fa fa-times"></i>
+								</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-10 col-md-10 col-xs-10 centre">
+
+        <div us-spinner=""
+             spinner-key="dashboard-spinner"
+             spinner-start-active="true"
+             class="app-spinner dashboard-spinner"
+             ng-show="showSpinner()"></div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <tbody>
+                <thead>
+                <tr>
+                    <th class="text-center">Cluster</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">System</th>
+                    <th class="text-center">HA Type</th>
+                    <th class="text-center">Status</th>
+                </tr>
+                </thead>
+                <tr ng-repeat="details in nodeServices" style="background-color:white">
+                    <td>{{details.type}}</td>
+                    <td>{{details.name}}</td>
+                    <td>{{details.system}}</td>
+                    <td>{{details.haType}}</td>
+                    <td>
+                        <span class="text-success" ng-show="details.status=='ONLINE'">
+                            <i class="fa fa-check"></i>
+                        </span>
+                        <span class="text-danger" ng-show="details.status=='OFFLINE'">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+@ebBgColor_grey_40: #adadad;
+
+.eaVisualizationEngineApp-h1 {
+    font-family: 'EricssonCapitalTT';
+    font-weight: normal;
+    text-align: center;
+}
+
+.eaVisualizationEngineApp {
+	&-heading {
+        .eaVisualizationEngineApp-h1;
+	}
+	
+	&-content {
+        /* To make room for the system bar*/
+        padding-top: 40px;
+	}
+
+    &-viewContainer {
+        [class*="span"]:nth-child(n) {
+            margin-left: 0;
+            margin-right: 20px;
+        }
+    }
+
+    &-view {
+        margin-bottom: 20px;
+        position: relative;
+
+        -moz-box-shadow:0px 0px 3px @ebBgColor_grey_40;
+        -webkit-box-shadow:0px 0px 3px @ebBgColor_grey_40;
+        box-shadow:0px 0px 3px @ebBgColor_grey_40;
+        -moz-border-radius:0px 0px 0px 4px;
+        -webkit-border-radius:0px 0px 4px 4px;
+        border-radius:0px 0px 4px 4px;
+    }
+}

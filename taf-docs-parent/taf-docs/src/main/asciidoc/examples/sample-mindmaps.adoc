@@ -1,0 +1,10 @@
+Sample Mindmaps
+===============
+
+The following link contains all the mindmaps imported into AVS by TOR,
+TAF and RV.
+
+https://cifwk-oss.lmera.ericsson.se/avs/stories
+
+What better sample mindmaps than working examples used by developers in
+the office

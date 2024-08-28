@@ -1,0 +1,17 @@
+Tweaking your TAF setup
+=======================
+
+* Some TAF / JCAT steps
+
+http://confluence-oss.lmera.ericsson.se/pages/viewpage.action?pageId=11896424[Setting
+up TAF project to use Legacy Logging (i.e. don’t create a new folder for
+each test run)]
+
+http://confluence-oss.lmera.ericsson.se/display/CIOSS/Setting+up+Jenkins+to+use+HTML+Publisher+Plugin[Setting
+up Jenkins to use HTML Publisher Plugin]
+
+http://confluence-oss.lmera.ericsson.se/display/CIOSS/Setting+up+your+JCAT+project+to+log+to+PDUOSS+Test+Statistics+Database[Setting
+up your TAF project to log to PDUOSS Test Statistics Database]
+
+http://confluence-oss.lmera.ericsson.se/display/CIOSS/Interim+Process+for+working+with+JCAT%2C+in+not+fully+automated+environment[Interim
+Process for working with TAF, in not fully automated environment]

@@ -1,0 +1,24 @@
+{
+"hostname": "sc2",
+"ip": "atvts881.athtem.eei.ericsson.se",
+"type": "sc2",
+"users": [
+{"username": "root", "password": "litpc0b6lEr", "type": "admin"}
+],
+"ports": {"ssh": 2244},
+"nodes": [
+{
+"hostname": "eap",
+"ip": "192.168.0.91",
+"type": "jboss",
+"users": [
+{"username": "suser1", "password": "suser-101", "type": "admin"},
+{"username": "ouser1", "password": "ouser-101", "type": "oper"}
+],
+"tunnel":1,
+"ports": {
+"http": 8080, "rmi": 4447, "jmx": 9999, "jboss_management": 9999, "jms":5445
+}
+}
+]
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="FillERTest">
+
+	<parameter name="taf.vusers" value="1"/>
+	<parameter name="taf.repeat-count" value="1"/>
+	
+	<test name="FillERTest" preserve-order="true">
+		<classes>
+			<class name="com.ericsson.duraci.test.cases.EventRepositoryTest">
+				<methods>
+					<include name="generateCIP_4181Events"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+</suite>

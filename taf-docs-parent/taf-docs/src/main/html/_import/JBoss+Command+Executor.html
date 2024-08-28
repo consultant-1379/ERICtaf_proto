@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : JBoss Command Executor</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : JBoss Command Executor
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Apr 09, 2013 by <font color="#0050B2">esadtom</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="JBossCommandExecutor-WhatisJboss?">What is Jboss?</h1><p>Please see <a href="JBOSS%2BHandler.html">JBOSS Handler</a></p><h1 id="JBossCommandExecutor-WhatistheTAFJBossCommandExecutor?">What is the TAF JBoss Command Executor?</h1><p>The TAF Jboss Command Executor is an API which allows you to execute a Jboss command on a local or remote Jboss instance.</p><p>An instance of JbossCommandExecutor is created within an instance of JBossHandler for you to use to execute commands on the Jboss instance which that JBossHandler points to. It is recommended to access JBoss command executor this way.</p><h1 id="JBossCommandExecutor-Howtogetstarted">How to get started</h1><p>Fetch  an instance of Jboss Command Executor from <a href="JBOSS%2BHandler.html">JBOSS Handler</a></p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;"> 
+JbossCommandExecutor commandExecutor = jbossHandlerInstance.getCommandService()</pre>
+</div></div><div class='panelMacro'><table class='noteMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="images/icons/emoticons/warning.png" width="16" height="16" align="absmiddle" alt="" border="0"></td><td><p>If Jboss Handler was instantiated with 2 hosts in constructor, jboss-cli.sh will be used to execute commands. Otherwise jboss client will be use for this purpose.</p></td></tr></table></div><p>It is also possible to use constructor of JbossCommandExecutor itself for getting command executor:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">JbossCommandExecutor commanExecutor = new JbossCommandExecutor(Host jbossNode,Host serverHostingJbossInstance) //second argument is default null
+JbossCommandExecutor commanExecutor = new JbossCommandExecutor(String hostName,String jbossUser,String jbossPass,String jbossManagementPort,int jbossOffset,Host parentHost) //last 2 arguments are default to 0 and null</pre>
+</div></div><p> </p><p>There are 2 methods to execute a command, both are overloaded in the same way.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">/*Pass the command as a single string, including the arguments in this single string */
+commandExecutor.simplExec(&quot;Command + Arguments&quot;)
+
+/*Pass the command and the arguments seperately. The command as a string and the arguments as a list of Strings */
+commandExecutor.simplExec(&quot;Command&quot;, &quot;Argument1&quot;, &quot;Argument2&quot;, &quot;etc&quot;)
+
+/* Pass the command as a single string, including the arguments in this single string */
+commandExecutor.execute(&quot;Command&quot;)
+
+/*Pass the command and the arguments seperately. The command as a string and the arguments as a list of Strings */
+commandExecutor.execute(&quot;Command&quot;, &quot;Argument1&quot;, &quot;Argument2&quot;, &quot;etc&quot;)</pre>
+</div></div><p>The difference between these 2 methods is what they return.</p><p>simplExec returns the response, whereas execute returns a boolean whether the command succeeded or not. The standard and error outputs of command execution are available via following methods:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">assertTrue(jbossCommandExecutorInstance.execute(&quot;command&quot;))
+String commandResponse = jbossCommandExecutorInstance.getResponse()</pre>
+</div></div><div class='panelMacro'><table class='noteMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="images/icons/emoticons/warning.png" width="16" height="16" align="absmiddle" alt="" border="0"></td><td><p>All exceptions and errors send by jboss command service are thrown as Throwable from the execution and logged as errors.</p></td></tr></table></div><p> </p><h1 id="JBossCommandExecutor-APIDocumentationLink">API Documentation Link</h1><p><a href="https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html" class="external-link" rel="nofollow">JBoss Command Executor API Documentation</a></p><h1 id="JBossCommandExecutor-CurrentFunctionality">Current Functionality</h1><p>Connect to a jboss instance locally or remotely and execute commands.</p><h1 id="JBossCommandExecutor-PlannedImprovements">Planned Improvements</h1><h1 id="JBossCommandExecutor-Knownissuesandworkarounds">Known issues and workarounds</h1>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:39</small></p>
+            </div>
+        </div>     </body>
+</html>

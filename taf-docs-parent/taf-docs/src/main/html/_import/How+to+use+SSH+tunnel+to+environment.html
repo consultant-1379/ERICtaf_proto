@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : How to use SSH tunnel to environment</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : How to use SSH tunnel to environment
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Apr 17, 2013 by <font color="#0050B2">erafkos</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p> </p><h2 id="HowtouseSSHtunneltoenvironment-Issue">Issue</h2><p>One of possible TOR configurations is assuming certain services are exposed on IP address not available from external network. To access them SSH tunneling is suggested and TAF is providing support for this solution via Host object.</p><h2 id="HowtouseSSHtunneltoenvironment-SSHTunnel">SSH Tunnel</h2><p>SSH tunneling or SSH port forwarding allows to access port on server that is not available using another server that can be accessed using SSH.</p><p><div 
+  >
+
+<p>
+<img style="max-width:100%; max-height:100%;" src="attachments/25494524/25395394.png" alt="SSH tunnel" class="ydiagram-img"/>
+</p>
+<p>
+<a href="/plugins/yworks-diagrams/open-editor.action?pageId=25494524&amp;diagramName=U1NIIHR1bm5lbA==&amp;confluenceRoot=&amp;resourceRoot=/download/resources/com.yworks.diagrams.confluence.plugin.yworks-diagrams-for-confluence/resources/yworks-diagrams/&amp;servletRoot=/plugins/servlet&amp;pageUrl=/display/TAF/How+to+use+SSH+tunnel+to+environment&amp;version=1">Edit Diagram</a>
+  |&nbsp;
+<a href="/plugins/yworks-diagrams/remove-diagram-confirmation.action?confluenceRoot=&amp;pageId=25494524&amp;diagramName=U1NIIHR1bm5lbA==&amp;pageUrl=/display/TAF/How+to+use+SSH+tunnel+to+environment">Remove Diagram</a>
+</p>
+</div>
+</p><p> </p><p>In case of TOR Configuration the private addresses are used to expose internal services e.g. by specifying them for JBOSS instances. Access to them can be established using SSH local port forwarding:</p><p><div 
+  >
+
+<p>
+<img style="max-width:100%; max-height:100%;" src="attachments/25494524/25395396.png" alt="TOR el example" class="ydiagram-img"/>
+</p>
+<p>
+<a href="/plugins/yworks-diagrams/open-editor.action?pageId=25494524&amp;diagramName=VE9SIGVsIGV4YW1wbGU=&amp;confluenceRoot=&amp;resourceRoot=/download/resources/com.yworks.diagrams.confluence.plugin.yworks-diagrams-for-confluence/resources/yworks-diagrams/&amp;servletRoot=/plugins/servlet&amp;pageUrl=/display/TAF/How+to+use+SSH+tunnel+to+environment&amp;version=2">Edit Diagram</a>
+  |&nbsp;
+<a href="/plugins/yworks-diagrams/remove-diagram-confirmation.action?confluenceRoot=&amp;pageId=25494524&amp;diagramName=VE9SIGVsIGV4YW1wbGU=&amp;pageUrl=/display/TAF/How+to+use+SSH+tunnel+to+environment">Remove Diagram</a>
+</p>
+</div>
+</p><p> </p><h2 id="HowtouseSSHtunneltoenvironment-Enabling">Enabling</h2><p>TAF handles SSH tunneling on Host objects during initial creation by HostDataPostProcessor. To enable tunneling &quot;tunnel&quot; property needs to be set to offset assigned to the node:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">host.sc1.ip = 10.65.237.137
+host.sc1.user.root.pass = rootPass
+host.sc1.user.root.type = admin
+host.sc1.node.jbossInstance1.tunnel = 1
+host.sc1.node.jbossInstance1.ip = 192.168.113.10
+host.sc1.node.jbossInstance1.port.http = 8080</pre>
+</div></div><p>During parsing of the line and creating Host object, startTunnel method will be called automatically and IP and PORT properties of the Host object will be overridden to use SSH forwarding.</p><div class='panelMacro'><table class='infoMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="images/icons/emoticons/information.png" width="16" height="16" align="absmiddle" alt="" border="0"></td><td><p>Setting tunnel in host.properties file is enough to enabled SSH tunneling in background. There is nothing else to do.</p></td></tr></table></div><p> </p><p>jbossInstance1 will have port 8080 available on localhost port 18081 (10000 for dynamic range + 8080 to map the port + 1 for tunnel offset) or next available port. For TAF handlers this is all transparent as after getting the Host object ports and IP is overridden:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">Host jb1 = DataHandler.getHostByName(&quot;jbossInstance1&quot;);
+assert jb1.getIp() == &quot;127.0.0.1&quot;
+assert jb1.getPort().get(Ports.HTTP) == &quot;18081&quot;</pre>
+</div></div><div class='panelMacro'><table class='warningMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="images/icons/emoticons/forbidden.png" width="16" height="16" align="absmiddle" alt="" border="0"></td><td><p>To enable SSH tunnel, following things are required:</p><ol><li>Host with SSH access - tunnel can only be enabled for node and host needs to have SSH port defined as well as user</li><li>tunnel offsets needs to be unique - one offset number for 1 node</li></ol></td></tr></table></div><p> </p><h2 id="HowtouseSSHtunneltoenvironment-Components">Components</h2><p><img class="confluence-embedded-image" src="attachments/25494524/25395408.gif" data-image-src="attachments/25494524/25395408.gif"></p><p> </p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/25494524/25395394.png">SSH tunnel.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/25494524/25395395.graphml">SSH tunnel.graphml</a> (text/xml)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/25494524/25395410.png">TOR el example.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/25494524/25395411.graphml">TOR el example.graphml</a> (text/xml)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/25494524/25395408.gif">HostSshTunneling.gif</a> (image/gif)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/25494524/25395396.png">TOR el example.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/25494524/25395397.graphml">TOR el example.graphml</a> (text/xml)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:40</small></p>
+            </div>
+        </div>     </body>
+</html>

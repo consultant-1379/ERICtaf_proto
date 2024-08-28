@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default suite" verbose="10" allow-return-values="true">
+  <test verbose="10" name="Default test">
+    <classes>
+    <class name="com.ericsson.cifwk.taf.api.prototype.operators.api.ApiGreeterOperatorTest"/>
+      <class name="com.ericsson.cifwk.taf.api.prototype.GreeterTest"/>
+      
+    </classes>
+  </test> <!-- Default test -->
+</suite> <!-- Default suite -->

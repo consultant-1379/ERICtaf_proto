@@ -1,0 +1,281 @@
+{
+    "properties": {
+        "buildDir": "target",
+        "optimizeDir": "$(buildDir)/optimized",
+        "packageDir": "$(buildDir)/package",
+        "sdkTools": "$(pathToSdk)/tools",
+        "testRunner": "$(sdkTools)/test/test-runner.js",
+        "node": "node",
+        "npm": {
+            "?os.platform=windows": "npm.cmd",
+            "?os.platform=unix": "npm"
+        },
+        "jscoverage": {
+            "?os.platform=windows": "$(sdkTools)/jscoverage/jscoverage.exe",
+            "?os.platform=unix": "$(sdkTools)/jscoverage/jscoverage"
+        },
+        "phantomjs": {
+            "?os.platform=windows": "$(sdkTools)/phantomjs/bin/phantomjs.exe",
+            "?os.platform=unix": "$(sdkTools)/phantomjs/bin/phantomjs"
+        },
+        "uglifyjs": "$(node) $(pathToSdk)/node_modules/uglify-js/bin/uglifyjs",
+        "jshint": "$(node) $(pathToSdk)/node_modules/jshint/bin/jshint",
+        "cssverify": "$(node) $(sdkTools)/cssverify/cssverify.js",
+        "helpverify": "java -jar $(sdkTools)/helptools/helpverify.jar",
+        "helppdf": "java -jar $(sdkTools)/helptools/helppdf.jar",
+        "package": "package",
+        "name": "HazelCast",
+        "title": "HazelCast prototype",
+        "version": "0.0.1-SNAPSHOT"
+    },
+    "defaultPhase": "package-dev",
+    "phases": {
+        "clean": {
+            "delete": {
+                "target": "$(buildDir)"
+            }
+        },
+
+        "update-package-json": {
+            "mergeJson": {
+                "file": "package.json",
+                "json": {
+                    "name": "$(name)",
+                    "version": "$(version)"
+                }
+            }
+        },
+
+        "install-dependencies": {
+            "depends": ["update-package-json"],
+            "execute": {
+                "command": "$(npm)",
+                "attributes": [
+                    "install",
+                    "--force",
+                    "--proxy",
+                    "null",
+                    "--tmp",
+                    "tmp",
+                    "--cache",
+                    "tmp/.npm"
+                ]
+            }
+        },
+
+        "jshint": {
+            "jshint": {
+                "unused":    true,
+                "undef":     true,
+                "curly":     true,
+                "indent":    4,
+                "quotmark":  "single",
+                "exclude":   ["src/3pp/timeline/Timeline.js", "src/3pp/dateFormat/date.format.js"]
+            }
+        },
+
+        "cssverify": {
+            "execute": {
+                "command": "$(cssverify)",
+                "attributes": [
+                    "--name",
+                    "$(name)",
+                    "src/hazelcast"
+                ]
+            }
+        },
+
+        "helpverify": {
+            "execute": {
+                "command": "$(helpverify)",
+                "attributes": [
+                    "help"
+                ]
+            }
+        },
+
+        "analyze": {
+            "depends": [ "jshint", "cssverify", "helpverify" ]
+        },
+
+        "copy-test-files": {
+            "depends": ["install-dependencies"],
+            "copy": {
+                "from": [
+                    "test",
+                    "node_modules",
+                    "config",
+                    "resources",
+                    "index.html"
+                ],
+                "to": "$(buildDir)/"
+            }
+        },
+
+        "copy-tools": {
+            "copy": {
+                "from": "$(sdkTools)/*",
+                "to": "$(buildDir)/_tools/"
+            }
+        },
+
+        "jscoverage": {
+            "execute": {
+                "command": "$(jscoverage)",
+                "attributes": [
+                    "src",
+                    "$(buildDir)/src"
+                ]
+            }
+        },
+
+        "prepare-tests": {
+            "depends": [
+                "copy-test-files",
+                "copy-tools",
+                "jscoverage"
+            ]
+        },
+
+        "test-unit": {
+            "depends": [ "prepare-tests" ],
+            "execute": {
+                "command": "$(phantomjs)",
+                "attributes": [
+                    "$(testRunner)",
+                    "--root $(buildDir)",
+                    "--reports $(buildDir)/reports/unit",
+                    "--type unit",
+                    "--title \"$(title)\""
+                ]
+            }
+        },
+
+        "test-bit": {
+            "depends": [ "prepare-tests" ],
+            "execute": {
+                "command": "$(phantomjs)",
+                "attributes": [
+                    "$(testRunner)",
+                    "--root $(buildDir)",
+                    "--reports $(buildDir)/reports/bit",
+                    "--type bit",
+                    "--title \"$(title)\""
+                ]
+            }
+        },
+
+        "test": {
+            "depends": [ "test-unit", "test-bit" ]
+        },
+
+        "optimize": {
+            "rjs": {
+                "config": {
+                    "baseUrl": "src",
+                    "dir": "$(optimizeDir)",
+					"packageDir": "$(packageDir)/src"
+                }
+            }
+        },
+
+        "copy-app": {
+            "copy": {
+                "from": [
+                    "config",
+                    "node_modules",
+                    "resources",
+                    "src",
+                    "index.html"
+                ],
+                "to": "$(packageDir)/"
+            }
+        },
+
+        "copy-resources": {
+            "copy": {
+                "from": [
+                    "$(buildDir)/resources/*"
+                ],
+                "to": "$(packageDir)/resources/"
+            }
+        },
+
+        "copy-help": {
+            "copy": {
+                "from": [
+                    "help/*"
+                ],
+                "to": "$(packageDir)/help/apps/$(package)/"
+            }
+        },
+
+        "set-help-app-info": {
+            "replace": {
+                "target": "$(packageDir)/help/apps/$(package)/appInfo.xml",
+                "replacements": [
+                    {
+                        "token": "{{version}}",
+                        "value": "$(version)"
+                    }
+                ]
+            }
+        },
+
+        "compile": {
+            "depends": [
+                "clean",
+                "analyze",
+                "test",
+                "optimize",
+                "copy-app",
+                "copy-help",
+                "set-help-app-info"
+            ]
+        },
+
+        "compile-dev": {
+            "depends": [
+                "clean",
+                "analyze",
+                "test",
+                "copy-app",
+                "copy-help",
+                "set-help-app-info"
+            ]
+        },
+
+        "helppdf": {
+            "execute": {
+                "command": "$(helppdf)",
+                "attributes": [
+                    "help",
+                    "--version",
+                    "$(version)",
+                    "--outputDir",
+                    "$(packageDir)/help/apps/docs",
+                    "--outputFilename",
+                    "$(package).pdf"
+                ]
+            }
+        },
+
+        "package-dev": {
+            "depends": ["compile-dev", "helppdf"],
+            "compress": {
+                "root": "$(packageDir)",
+                "files": ["config", "src", "resources", "node_modules", "help"],
+				"target": "$(buildDir)/$(package)-$(version).tar.gz"
+            }
+        },
+
+        "package-prod": {
+            "depends": ["compile", "helppdf"],
+            "compress": {
+                "root": "$(packageDir)",
+                "files": ["$(package)", "help"],
+				"target": "$(buildDir)/$(package)-$(version)-prod.tar.gz"
+            }
+        }
+    }
+}

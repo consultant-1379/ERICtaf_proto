@@ -1,0 +1,9 @@
+{
+  "eqnull": true,
+  "globals": {
+    "_": true,
+    "$": true,
+    "jQuery": true,
+    "EventSource": true
+  }
+}

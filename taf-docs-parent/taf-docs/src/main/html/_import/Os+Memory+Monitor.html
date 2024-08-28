@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : Os Memory Monitor</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : Os Memory Monitor
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Jun 25, 2013 by <font color="#0050B2">EGERRYA</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p>Os Memory Monitor is time-based monitor collecting data about memory aspects of Linux-based system. It also allows to specify a process (or group of processes) that should be monitored. </p><p>OS Memory Monitor monitors all hosts available in DataHandler.getHosts() method that can be monitored i.e. has user, password and ssh port specified and data is fetchable (i.e. &quot;/proc&quot; directory is populated with data on the machine).</p><p>This monitor will save data to mem.csv and it's chart has title &quot;mem&quot; in the HTML report.</p><h2 id="OsMemoryMonitor-Monitorconfiguration:">Monitor configuration:</h2><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Property</th><th class="confluenceTh">Accepted values</th><th class="confluenceTh">Default value</th><th class="confluenceTh">Description</th><th colspan="1" class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">monitor.mem.enabled</td><td class="confluenceTd">true|false|1|0</td><td class="confluenceTd">false</td><td class="confluenceTd">Property to enable or disable the monitor before run</td><td colspan="1" class="confluenceTd">monitor.mem.enabled=true</td></tr><tr><td colspan="1" class="confluenceTd">monitor.mem.collectionTime</td><td colspan="1" class="confluenceTd">numbers</td><td colspan="1" class="confluenceTd">1</td><td colspan="1" class="confluenceTd">Property to specify interval of data being collected</td><td colspan="1" class="confluenceTd">monitor.mem.collectionTime=1</td></tr><tr><td colspan="1" class="confluenceTd">monitor.mem.dont_plot</td><td colspan="1" class="confluenceTd">columneNames</td><td colspan="1" class="confluenceTd">pages</td><td colspan="1" class="confluenceTd">Property to specify columns that should not be shown on chart</td><td colspan="1" class="confluenceTd">monitor.mem.dont_plot=pages</td></tr><tr><td colspan="1" class="confluenceTd">monitor.mem.process</td><td colspan="1" class="confluenceTd">&lt;processName&gt; = processIdentifiactionArgs...</td><td colspan="1" class="confluenceTd">jboss taf</td><td colspan="1" class="confluenceTd"><p>Property to specify processes that should be monitored during run.</p><p>Value of the property is used with &quot;ps aux&quot; command to identify PID of processes.</p><p>If multiple PIDs are detected, every one is monitored, so if there are multiple instances of JBoss</p><p>on the machine every one will have it set of columns</p></td><td colspan="1" class="confluenceTd">monitor.mem.process.jboss = java jboss</td></tr></tbody></table></div><h2 id="OsMemoryMonitor-OSleveldatathatismonitored:">OS level data that is monitored:</h2><p>All data columns are prefixed by host name e.g. sc1_</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Memory data</th><th class="confluenceTh">Value</th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd">os_free</td><td class="confluenceTd">numbers</td><td class="confluenceTd">Free memory available on the machine</td></tr><tr><td colspan="1" class="confluenceTd">os_total</td><td colspan="1" class="confluenceTd">numbers</td><td colspan="1" class="confluenceTd">Total memory available on the machine</td></tr><tr><td colspan="1" class="confluenceTd">os_cached</td><td colspan="1" class="confluenceTd">numbers</td><td colspan="1" class="confluenceTd">Cached memory on the machine</td></tr><tr><td colspan="1" class="confluenceTd">os_active</td><td colspan="1" class="confluenceTd">numbers</td><td colspan="1" class="confluenceTd">Memory actively used on the machine</td></tr><tr><td colspan="1" class="confluenceTd">os_inactive</td><td colspan="1" class="confluenceTd">numbers</td><td colspan="1" class="confluenceTd">Memory reserved but not in use</td></tr></tbody></table></div><h2 id="OsMemoryMonitor-Processleveldatathatismonitored:">Process level data that is monitored:</h2><p>All data column is prefixed by host name, process name and actual PID on system, e.g. sc1_jboss_3343_</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Memory data</th><th class="confluenceTh">Value</th><th class="confluenceTh">Description</th></tr><tr><td class="confluenceTd">total_size</td><td class="confluenceTd">numbers</td><td class="confluenceTd">Total memory size used by process</td></tr><tr><td colspan="1" class="confluenceTd">resident_size</td><td colspan="1" class="confluenceTd">numbers</td><td colspan="1" class="confluenceTd">Size of resident memory used by process</td></tr><tr><td colspan="1" class="confluenceTd">shared_pages</td><td colspan="1" class="confluenceTd">numbers</td><td colspan="1" class="confluenceTd">Memory shared pages used by process</td></tr><tr><td colspan="1" class="confluenceTd">code_pages</td><td colspan="1" class="confluenceTd">numbers</td><td colspan="1" class="confluenceTd">Memory code pages used by process</td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:40</small></p>
+            </div>
+        </div>     </body>
+</html>

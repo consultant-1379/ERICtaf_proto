@@ -1,0 +1,146 @@
+Monitoring
+==========
+
+Goal of monitoring is to provide the functionality of gathering data
+during a test run, this gathering will happen in background.
+
+Each type of data is gathered by a single monitor. Output of the monitor
+is Comma Separated File containing data.
+
+There are 2 types of monitors:
+
+* time-based - monitors that are collecting data based on a defined
+period of time
+* event-based - monitors collecting data when an event happens
+
+Monitors’ behaviour is controlled by properties stored in properties
+files (can be one file per operator or one file for multiple monitors).
+All monitors need to have following properties set:
+
+Property name
+
+Accepted values
+
+Description
+
+enabled
+
+true|false|1|0
+
+Determines if monitor should be enabled during test run
+
+collectionTime
+
+number_As_Seconds,e.g. 2 | eventName
+
+Determines when monitor should collect data (on event specify by name or
+every 2 seconds)
+
+threshold
+
+threshold configuration
+
+Determines value and action if threshold is crossed. Please refer to
+link:thresholds.html[threshold subsection] for details
+
+Most monitors have other properties that can be specified in properties
+files. Please find them in sub-page for particular monitor.
+
+Output csv file of a monitor is put in ``monitoroutput'' directory of
+JCAT log directory. Moreover it is linked to JCAT report and available
+after run in
+section image:https://cifwk-oss.lmera.ericsson.se/jenkins/job/TAF_Utils/HTML_Report/arrow_right_small.jpg[image]Show
+data from monitors 
+
+The initial trending is put on JCAT HTML report in a form of graph.
+Every graph links to a CSV file containing detailed data (just click on
+the graph) and is ready for deep analysis. More about charting can be
+found in link:charting-monitored-data.html[charting subsection].
+
+Monitors are started and shutdown automatically via TestNG
+ExecutionListener mechanism:
+
+* before any of suits starts, the enabled monitors are started
+* after all of the suits ends (regardless of test execution result) 
+
+It is also possible to start and stop all monitors programmatically
+using static methods AbstractMonitor.startMonitors() and
+AbstractMonitor.stopMonitors().
+
+Also for convenience, the methods AbstractMonitor.getMonitors()
+and AbstractMonitor.getStartedMonitors() are provided statically for a
+programmatic way of controlling monitor behaviour.
+
+Currently available monitors:
+
+Name
+
+Description
+
+Status
+
+link:os-memory-monitor.html[mem]
+
+Monitor to fetch data about OS and process level memory information
+
+released
+
+link:as-instrumentation-monitor.html[asmbean]
+
+Monitor to fetch data about MBeans from JBoss
+
+released
+
+link:tool-monitor.html[tool]
+
+Monitor to log data about actions happening on tools
+
+released
+
+cpu
+
+Monitor to fetch data about OS and process level CPU usage
+
+released
+
+net
+
+Monitor to fetch data about current network load between the machine
+running the test and the SUT
+
+released
+
+link:as-log-monitor.html[aslogmon]
+
+Monitor to fetch data from AS log files
+
+available in next release
+
+link:os-log-monitor.html[oslogmon]
+
+Monitor to fetch data from specified OS log files
+
+available in next release
+
+db
+
+Monitor to fetch instrumentation data from RDBMS
+
+planned with synchronization of Data Persistence team
+
+security
+
+Monitor to log data about potential security breaches
+
+planned within UI epic
+
+usability
+
+Monitor to log data about potential UI discrepancies from usability
+guidance
+
+planned within UI epic
+
+ 
+
+ 

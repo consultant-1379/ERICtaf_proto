@@ -1,0 +1,5 @@
+dividend,dividor,expected
+12,3,4
+a,b,ERROR
+6,2,3
+3,0,DIV/0

@@ -1,0 +1,67 @@
+Vagrant.configure("2") do |config|
+
+      config.vm.box = "precise32"
+      config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+
+      config.vm.network "public_network"
+
+      config.vm.provider "virtualbox" do |v|
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      end
+
+      config.env_proxy.http = "www-proxy.ericsson.se:8080"
+      config.env_proxy.https = "www-proxy.ericsson.se:8080"
+      config.proxy.http     = "www-proxy.ericsson.se:8080"
+      config.proxy.https    = "www-proxy.ericsson.se:8080"
+      config.proxy.no_proxy = "localhost,127.0.0.1"
+      
+      # Tomcat port
+      config.vm.network "forwarded_port", guest: 8080, host: 8181
+      # MongoDB management port
+      config.vm.network "forwarded_port", guest: 28017, host: 8282
+      # RabbitMQ management port
+      config.vm.network "forwarded_port", guest: 15672, host: 8383
+      # RabbitMQ service port
+      config.vm.network "forwarded_port", guest: 55672, host: 55672
+
+      config.vm.provision :chef_solo do |chef|
+      chef.add_recipe "apt"
+      chef.add_recipe "yum"
+      chef.add_recipe "python"
+      chef.add_recipe "runit"
+      chef.add_recipe "openssl"
+      chef.add_recipe "mongodb::10gen_repo"
+      chef.add_recipe "mongodb"
+      chef.add_recipe "java::oracle"
+      chef.add_recipe "tomcat"
+      chef.add_recipe "rabbitmq"
+      chef.add_recipe "rabbitmq::mgmt_console"
+      
+      chef.json = {
+          :mongodb => {
+            :package_version => '2.2.7',
+            :dbpath => '/opt/ericsson/er/mongodb',
+            :port => '27017'
+          },
+          :java => {
+            :install_flavor => 'oracle',
+            :jdk_version => '7',
+            :java_home => '/usr/lib/jvm/default-java',            
+            :oracle => {
+              :accept_oracle_download_terms => true,
+            }
+          },
+          :tomcat => {
+            :base_version => '7',
+            :port => 8080,
+            :java_options => '-Xms128m -Xmx512m -server'
+          },
+          :rabbitmq => { 
+          } 
+        }
+    end
+    
+    config.vm.provision "shell", path: "scripts/provision.sh"
+    
+end

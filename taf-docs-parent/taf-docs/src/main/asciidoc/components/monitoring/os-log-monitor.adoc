@@ -1,0 +1,141 @@
+OS Log Monitor
+==============
+
+OS Log Monitor is a time-based monitor which collects all log entries
+from the logs specified in the monitor properties file.
+
+The Monitor collects the log entries from all logs that have a location
+and pattern specified in the properties file.
+
+The monitor adds all the retrieved log entries to the cache, to be
+accessed centrally.
+
+ 
+
+*Monitor Configuration*
+
+Property
+
+Accepted Values
+
+Default Value
+
+Description
+
+Example
+
+monitor.oslogmon.enabled
+
+true|false|1|0
+
+false
+
+Property to enable of disable the monitor before run
+
+monitor.oslogmon.enabled=true
+
+monitor.oslogmon.<hostname>.logPath
+
+log locations
+
+ 
+
+Property to specify the locations of the logs to be monitored
+
+monitor.oslogmon.OSS-RC.logPath=
+
+/var/log/messages, /var/log/cron
+
+monitor.oslogmon.<hostname>.logPattern
+
+log pattern
+
+ 
+
+Property to specify the pattern for the log to be monitored, to allow
+for date extraction from the entry
+
+monitor.oslogmon.OSS-RC.logPattern=
+
+%d\{MMM dd  HH:mm:ss} %m 
+
+monitor.oslogmon.collectionTime
+
+numbers
+
+5
+
+Property to specify the interval in seconds between collections of log
+entries
+
+monitor.oslogmon.collectionTime=
+
+5
+
+monitor.oslogmon.checkInterval
+
+numbers
+
+100
+
+Property to specify the intervals to check for entry until entry is
+found or timeout is reached
+
+monitor.oslogmon.checkInterval=100
+
+monitor.oslogmon.defaultTimeout
+
+numbers
+
+120000
+
+Property to specify the timeout for getEntry method
+
+monitor.oslogmon.defaultTimeout=
+
+120000
+
+monitor.oslogmon.minWaitTime
+
+numbers
+
+100
+
+Property to specify the minimum time to wait for response from
+monitoring agent
+
+monitor.oslogmon.minWaitTime=
+
+100
+
+ 
+
+*Retrieving Log Entries gathered by the Monitor*
+
+The Log Monitors provide 2 methods for retrieving log entries that have
+been gathered and placed in the cache.
+
+In order to call these methods you must first retrieve the instantiated
+monitor.
+
+[source,groovy]
+----
+def thismon = AbstractMonitorHelper.getMonitors().find{ it.name == oslogmon }
+----
+
+_getEntry(String filter) -_This method returns the first log entry
+containing the filter, that is gathered after the method is called.
+
+[source,java]
+----
+LogEntry logEntry = thismon.getEntry(filter);
+----
+
+getAllEntries(String filter) - This method returns all log entries that
+are currently stored in the cache for this monitor and containing the
+filter that is passed in.
+
+[source,java]
+----
+List<LogEntry> logEntries = thismon.getAllEntries(filter);
+----

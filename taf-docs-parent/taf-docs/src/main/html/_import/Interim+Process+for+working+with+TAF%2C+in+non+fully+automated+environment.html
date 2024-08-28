@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : Interim Process for working with TAF, in non fully automated environment</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : Interim Process for working with TAF, in non fully automated environment
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Jan 21, 2013 by <font color="#0050B2">ejohlyn</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><div>
+<ul>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-CIFrameworkTAF-InterimProcedures'>CI Framework TAF - Interim Procedures</a></li>
+<ul>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Steps'><span class="mw-headline">Steps</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-SetupIDE'><span class="mw-headline">Setup IDE</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-JCAT'><span class="mw-headline">JCAT</span></a></li>
+<ul>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Structure'><span class="mw-headline">Structure</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Getthedetailsofthelatestrelease.'><span class="mw-headline">Get the details of the latest release.</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Addthedependencies.'><span class="mw-headline">Add the dependencies.</span></a></li>
+</ul>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-TestCaseAutomation'><span class="mw-headline">Test Case Automation</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-TestCaseNamingConvention'><span class="mw-headline">Test Case Naming Convention</span></a></li>
+<ul>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-GITpush'><span class="mw-headline">GIT push</span></a></li>
+</ul>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-BuildTestWare'><span class="mw-headline">Build TestWare</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ConfigureJenkins'><span class="mw-headline">Configure Jenkins</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-DeployTargetEnvironment'><span class="mw-headline">Deploy Target Environment</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-RunTestCases'><span class="mw-headline">Run Test Cases</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ConfigureTestStatistics'><span class="mw-headline">Configure Test Statistics</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-EnsureallTestArtifactsarerecovered'><span class="mw-headline">Ensure all Test Artifacts are recovered</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ReportandPresentation'><span class="mw-headline">Report and Presentation</span></a></li>
+    <li><a href='#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-AutomatedTestProcess'><span class="mw-headline">Automated Test Process</span></a></li>
+</ul>
+</ul></div></th></tr></tbody></table></div><p class="firstHeading"> </p><h1 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-CIFrameworkTAF-InterimProcedures" class="firstHeading">CI Framework TAF - Interim Procedures</h1><div><div class="mw-content-ltr" lang="en"><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Steps"><span class="mw-headline">Steps</span></h2><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-SetupIDE"><span class="mw-headline">Setup IDE</span></h2><p>It is important that all developers create their IDE in a common way</p><p>Install Eclipse as per instruction [<a class="external-link" href="http://atrclin2.athtem.eei.ericsson.se/wiki/index.php/Development_Environment_Setup" rel="nofollow" style="text-decoration: none;">Development Environment Setup</a>]</p><p><strong>Note:</strong> Couple of things to ensure are in place before setting up the server demo projects</p><ul><li>JDK<ul style="margin-left: 1.5em;"><li>It is stating the obvious but make sure a JDK is installed (not just a JRE)</li><li>JAVA_HOME is set as an environment viarable</li></ul></li><li>Ensure the Maven is installed<ul style="margin-left: 1.5em;"><li>settings.xml file is copied from the repo to c:/Users/&lt;your_ericsson_id&gt;/.m2/ (as outlined in the above link)</li><li>M2_HOME is set as an environment viarable</li></ul></li></ul><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-JCAT"><span class="mw-headline">JCAT</span></h2><p>There are a no of steps required to create test cases through JCAT.</p><h4 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Structure"><span class="mw-headline">Structure</span></h4><p>If you have checked out the JCAT user guide yalready ou will see that JCAT usage is layered:</p><ol><li>JCAT_FW</li><li>JCAT extensions</li><li>JCAT testcases and testsuites</li></ol><p>To reflect this layering the demo projects are split up accordingly. Standard project setup looks like this:</p><ul><li>JCAT_&lt;your sut&gt;_extensions</li><li>JCAT_&lt;your sut&gt;_testcases</li></ul><p><strong>Remember: </strong>SUT = System Under Test. ie Node, Network Element etc.</p><ul><li>JCAT_&lt;your sut&gt;_extensions is where your specific extenstions (common libraries) will be developed.</li><li>JCAT_&lt;your sut&gt;_testcases is where your testcases and testsuites will be developed</li></ul><p>You need to add JCAT as a dependency in your maven project as detailed below.</p><h4 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Getthedetailsofthelatestrelease."><span class="mw-headline">Get the details of the latest release.</span></h4><ol><li>open the following link: <a class="external-link" href="https://eforge.lmera.ericsson.se/sf/frs/do/listReleases/projects.jcat/frs.jcat_ng" rel="nofollow" style="text-decoration: none;">eforge.lmera.ericsson.se/sf/frs/do/listReleases/projects.jcat/frs.jcat_ng</a></li><li>Select the release with &quot;General Availability&quot; in the Maturity column.</li><li>Note the Group Id, Artifact Id and the version of the jcat-fw and jcat-extensions in the description.</li></ol><h4 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Addthedependencies."><span class="mw-headline">Add the dependencies.</span></h4><ol><li>Open eclipse</li><li>Open the pom.xml file of your project.</li><li>Switch to the dependencies tab.</li><li>Click Add.</li><li>Enter the Group Id, Artifact Id and version for the JCAT framework and JCAT extensions.</li></ol><p> </p><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-TestCaseAutomation"><span class="mw-headline">Test Case Automation</span></h2><p>Write the Test Cases and push to GIT</p><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-TestCaseNamingConvention"><span class="mw-headline">Test Case Naming Convention</span></h2><p>It is very important that all Test Cases can be mapped and tracked within the project. This is vital in identifying progress and quality. As such, the naming of the test cases is important to ensure that the test results can ultimately be tracked back to User Stories.</p><p>The following naming convention has been identified</p><p>TC_&lt;User Story ID&gt;_&lt;Test Obj&gt;_&lt;TCID&gt;</p><p>e.g. (only for example's sake...real id's to be added)</p><pre>  TC_TORSF50_Perf_001
+  TC_TORSF50_Perf_002
+  TC_TORSF50_Perf_003
+  TC_TORSF50_Load_001
+  TC_TORSF50_Load_002
+  TC_TORSF50_Func_001
+  TC_TORSF50_Func_002
+  TC_TORSF50_Func_003
+</pre><p>...</p><p> </p><h3 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-GITpush"><span class="mw-headline">GIT push</span></h3><dl /><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-BuildTestWare"><span class="mw-headline">Build TestWare</span></h2><p>The testware will be build as part of a jenkins job - see following section for details</p><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ConfigureJenkins"><span class="mw-headline">Configure Jenkins</span></h2><dl /><ol><li>Check the code out from GIT</li><li>Compile and build the code</li><li>Package the dependencies</li><li>Place the test artifact on the SUT</li></ol><p>A new Jenkins job should be created to build the test cases for each project, when created this job the main steps are</p><ol><li>Go the Jenkins home page and click on 'New Job'</li><li>Give the new job a name of your choice</li><li>Select the 'Build a maven2/3 project' option and click ok</li><li>A new job configuration window will open - give the job a description if required</li><li>If applicable, choose what slave the job is to be run on by checking the 'Restrict where this project can be run' box and input the Jenkins slave name</li><li>In the Source Code Mangagement section, click 'Git' option and input the repository url required to download the project from Git</li><li>If preferred, select the preferred branch to build or leave blank for the default option</li><li>In the 'Build' section add the filename for the 'Root POM' file - e.g. 'pom.xml'</li><li>Input the Maven 'Goals and options' - usually &quot;clean install&quot;</li><li>In the 'Post Build Actions' section, check the box for 'Archive the arifacts' - this will ensure the files created on the Jenkins slave a run time will get pulled back to the Jenkins master</li><li>In the 'Files to archive' section, input the names of the files to be archived or '**' to archive all files</li><li>Check the box for 'Publish TestNG Results' and input report pattern that Jenkins will use to search for the TestNG report file generated by JCAT e.g. '**/test-output/testng-results.xml'</li><li>Check the boxes for 'Escape Test description string?' &amp; 'Escape exception messages?'</li><li>Click on 'Save' to save the job</li></ol><p> </p><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-DeployTargetEnvironment"><span class="mw-headline">Deploy Target Environment</span></h2><p>At present this is a purely manual step!</p><p>1) Deploy LITP</p><dl /><p>2) Ensure JBOSS is installed and running</p><dl /><pre> service jboss-as status
+</pre><p>3) Ensure TOR software is deployed</p><pre>Steps to be added
+.................
+</pre><p>4) Deploy Testware to Jenkins slave running JBOSS</p><pre>Steps to be added
+.................
+</pre><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-RunTestCases"><span class="mw-headline">Run Test Cases</span></h2><dl /><ol><li>By including a Test Runner main method in the packaged jar file</li><li>By invoking the TestNG runner on xml file containing the list of test cases</li></ol><dl /><p> </p><dl /><pre>$ java $vmargs -classpath $CLASSPATH $mainclass $suite</pre><dl /><p> </p><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ConfigureTestStatistics"><span class="mw-headline">Configure Test Statistics</span></h2><dl /><ol><li>The host executing the test cases must be able to contact the Kista hub</li><li>A properties file (usually called logdb.properties) needs to be included in the project resource folder, this properties file holds the information on the path and access to the TS database in the Kista hub</li><li>The location of this file needs to be passed as a VM argument (-Dlogdb.configuration) at run time</li><li>An extra logwriter - 'se.ericsson.jcat.fw.ng.logging.writers.DbLogWriterRIPNG' needs to be passed as a VM argument (-Dlogwriters) at runtime</li><li>A name to identify the test run in the TS database needs to be passed as VM argument (-Dname) at run time.</li></ol><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-EnsureallTestArtifactsarerecovered"><span class="mw-headline">Ensure all Test Artifacts are recovered</span></h2><p>1) Jenkins must be configured to collect all relevent logs and retrieve to Master</p><dl /><p>2) If necessary use JCAT &quot;<em>fetch logs</em>&quot; to retrieve logs stored on remote system</p><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ReportandPresentation"><span class="mw-headline">Report and Presentation</span></h2><pre>Steps to be added
+.................
+</pre><h2 id="InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-AutomatedTestProcess"><span class="mw-headline">Automated Test Process</span></h2><p><a class="external-link" href="http://atrclin2.athtem.eei.ericsson.se/wiki/index.php/File:Automated_Test_Process.png" style="text-decoration: none;" rel="nofollow"><img class="confluence-embedded-image confluence-external-resource" alt="Automated Test Process.png" height="772" width="1039" src="http://atrclin2.athtem.eei.ericsson.se/wiki/images/e/e7/Automated_Test_Process.png" data-image-src="http://atrclin2.athtem.eei.ericsson.se/wiki/images/e/e7/Automated_Test_Process.png"></a></p></div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:40</small></p>
+            </div>
+        </div>     </body>
+</html>

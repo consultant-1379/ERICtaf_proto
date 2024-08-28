@@ -1,0 +1,4 @@
+multiplicand1,multiplicand2,expected
+2,3,6
+-1.5,2.25,-3.375
+4,a,ERROR

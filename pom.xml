@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ericsson</groupId>
+        <artifactId>master</artifactId>
+        <version>3.0</version>
+        <relativePath />
+    </parent>
+
+    <groupId>com.ericsson.cifwk</groupId>
+    <artifactId>ERICtaf_proto</artifactId>
+    <version>1.0.4-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Test Data Management Application</name>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <!--order is important-->
+            <modules>
+                <module>enm-testware-quality-checks</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>site_stage</id>
+            <distributionManagement>
+                <site>
+                    <id>site</id>
+                    <name>Site</name>
+                    <url>${site.url}/enm-cm-test-library</url>
+                </site>
+            </distributionManagement>
+            <properties>
+                <skipAssemblyPlugin>true</skipAssemblyPlugin>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Releases</name>
+            <url>https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Snapshots</name>
+            <url>https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>site</id>
+            <name>Site</name>
+            <url>${site.url}/ERICtaf_proto/${project.version}</url>
+        </site>
+    </distributionManagement>
+</project>

@@ -1,0 +1,115 @@
+DataHandler
+===========
+
+[[DataHandler-WhatisData?]]
+What is Data?
+-------------
+
+Data is what drives the testing in TAF. This can be data about the
+system, data to use to test the system, etc.
+
+[[DataHandler-WhatistheTAFDataHandler?]]
+What is the TAF Data Handler?
+-----------------------------
+
+The TAF Data Handler is a central point of data management.
+
+It retrieves all the data from various reconciles and makes it available
+for test code.
+
+This way data specified in properties file or OS environment variable
+are available using one method call.
+
+Data Handler allows also to store values and fetch them e.g. in
+different thread.
+
+ 
+
+Note: Data set at run time using the Data Handler takes precedence over
+data set via environment variables which takes precedence over data set
+from from property files.
+
+some attribute``attributeA = propertyFileValue''
+
+same attribute could be set via environment variable java -DattributeA =
+environmentVariableValue"
+
+same attribute could be set in code at run time  
+DataHandler.setAttribute=(``attributeA'',``runTimeValue'');
+
+If this was the case the runtime value would be used. More detail below.
+
+[[DataHandler-Howtogetstarted]]
+How to get started
+------------------
+
+The Data Handler methods can be accessed statically so there is no need
+to instantiate it.
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false---------------------------------------------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+/* Get a system property */
+String classpath = DataHandler.getAttribute("java.class.path")
+
+/* Get a property defined by you */
+String variableSpecificToYourTest = DataHandler.getAttribute("path.to.file.specified.by.you")
+
+/* Get a map of all the properties, user defined, system and runtime. */
+Map allAttributes = DataHandler.getAttributes()
+
+/* Get the list of Hosts defined by you */
+List<Host> hosts = DataHandler.getHosts() 
+---------------------------------------------------------------------------------------------
+
+Fetching arguments from property files or OS variables:
+
+----
+testware.properties:
+firstProperty = first
+secondProperty = 2
+ 
+OS environment:
+java -DthirdProperty=3 -DsecondProperty=two ...
+ 
+DataHandler.getAttribute("firstProperty") //(returning Object-String "first")
+DataHandler.getAttribute("thirdProperty") //returning Object-String "3")
+DataHandler.getAttribute("secondProperty") // returning Object-String "two" as OS environment variable has higher priority than property in file
+DataHandler.setAttribute("secondProperty",2) 
+DataHandler.getAttribute("secondProperty") //returning Object - integer 2 as properties set at runtime has higher priority than OS environment variable
+----
+ 
+
+It is also possible to set an attribute at runtime
+
+[source,java]
+----
+DataHandler.setAttribute("path.to.file.specified.by.you", "/home/myfile.txt")
+----
+
+[[DataHandler-APIDocumentationLink]]
+API Documentation Link
+----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/data-handler/apidocs/index.html[DataHandler
+API Documentation]
+
+[[DataHandler-CurrentFunctionality]]
+Current Functionality
+---------------------
+
+Combine data from property files, OS environment settings and runtime
+data to be available via method call.
+
+Get and set attributes/properties in runtime.
+
+[[DataHandler-PlannedImprovements]]
+Planned Improvements
+--------------------
+
+None
+
+[[DataHandler-Knownissuesandworkarounds]]
+Known issues and workarounds
+----------------------------
+
+None

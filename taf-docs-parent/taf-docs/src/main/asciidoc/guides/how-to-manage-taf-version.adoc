@@ -1,0 +1,47 @@
+How to manage TAF version
+=========================
+
+TAF project is available as Maven dependency.
+
+Current released version of TAF is updated in integration pom and
+available as $\{taf.version} variable.
+
+[[HowtomanageTAFversion-AutomaticmanagementofTAFversion]]
+Automatic management of TAF version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In dependencies section use $\{taf.version} variable:
+
+[source,xml]
+----
+<dependencies>
+...
+ <dependency>
+     <groupId>com.ericsson.cifwk</groupId>
+     <artifactId>taf-core</artifactId>
+  <version>${taf.version}</version>
+ </dependency>
+...
+</dependencies>
+----
+
+ 
+
+[[HowtomanageTAFversion-ManualmanagementofTAFversion]]
+Manual management of TAF version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Override TAF version using dependency management:
+
+[source,xml]
+----
+<dependencyManagement>
+    <dependencies>
+...
+        <dependency>
+            <groupId>com.ericsson.cifwk</groupId>
+            <artifactId>taf-core</artifactId>
+            <version>${my.managed.taf.version}</version>
+        </dependency>
+...
+----

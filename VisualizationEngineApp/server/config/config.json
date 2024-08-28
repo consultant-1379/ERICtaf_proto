@@ -1,0 +1,24 @@
+{
+    "server": {
+        "port": 8080,
+        "logDir": "logs",
+        "logFile": "server.log",
+        "logLevel": "DEBUG",
+        "eventSource": "RabbitMQ"
+    },
+    
+    "messageBus": {
+        "host": "esekilxxen507.rnd.ericsson.se",
+        "port": 5673,
+        "exchange": "ci",
+        "bindingKey": "kista.#"
+    },
+    
+    "eiffel": {
+        "supportedVersion": 2
+    },
+    
+    "test": {
+       "port": 8585
+    }
+}

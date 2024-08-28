@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : TestNG Tips &amp; Tricks</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : TestNG Tips &amp; Tricks
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Feb 14, 2013 by <font color="#0050B2">ethomev</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="TestNGTips&amp;Tricks-WhatisTestNG">What is TestNG</h1><div class="O"><div><ul><li>TestNG is a testing framework.</li><li>Designed to simplify a broad range of testing needs.</li><li>Unit to Integration testing.</li><li>Uses annotations and xml.</li><li>All information at <a href="http://testng.org/doc/documentation-main.html" class="external-link" rel="nofollow">TestNG.org</a></li></ul></div></div><h1 id="TestNGTips&amp;Tricks-Benefits">Benefits</h1><div><div class="O"><ul><li>Annotations.<ul><li>@Test. Annotate a method with this and it is then a test.</li><li>And many more…</li></ul></li></ul></div><div class="O"><ul><li>Data Driven Testing<ul><li>Using the @DataProvider annotation you can set up your test case to take test data as input.</li><li>Add more and more data and you never need to update your test case.</li></ul></li></ul><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">    @Test(dataProvider=&quot;calculatorData&quot;)
+    void testSimpleCalculatorAPI(Double firstOperand, Double secondOperand, String operator, Double result){
+        
+        assertEquals(SimpleCalculatorAPI.calculate(&quot;$firstOperand $operator $secondOperand&quot;), result);
+    }
+
+	@DataProvider(name=&quot;calculatorData&quot;)
+    public static Object[][] dataForCalculatorTest(){
+    
+		/* for every array of data the test is run another time.   */ 
+		Object[][] data = {{10,10,&quot;add&quot;,20},
+                            {15,5,&quot;subtract&quot;,10},
+                            {5,7,&quot;multiply&quot;,35}
+                            }
+		
+		return data
+    }</pre>
+</div></div><p> </p></div></div><h1 id="TestNGTips&amp;Tricks-Basics">Basics</h1><div><ul><li class="O">Installing Eclipse plugin.<ul><li class="O1"><a href="http://testng.org/doc/download.html" class="external-link" rel="nofollow">Eclipse plugin download site</a></li></ul></li><li class="O">Maven Dependency.<ul><li class="O1">Through a transitive dependency in TAF you already have TestNG.</li></ul></li><li class="O">Running a test in Eclipse.<ul><li class="O1">Individual test<ul><li class="O2">right click on the class in the package explorer -&gt; Run As -&gt; TestNG Test</li></ul></li><li class="O1">Suite<ul><li class="O2">right click on the xml file in the package explorer -&gt; Run As -&gt; TestNG Suite</li></ul></li><li class="O1">Starting listeners.<ul><li class="O1"><div class="O"><div>There are several interfaces that allow you to modify TestNG's behavior. These interfaces are broadly called &quot;TestNG Listeners&quot;. Example: TorNgSuiteListener -&gt; Starts our monitors, loads all TAF Annotations into memory and puts the graph jpegs into the html report afterwards.</div></div></li><li class="O2">These listeners can be specified in the suite.xml</li><li class="O2">ServiceLoader<ul><li class="O2"><div>This is a different way of loading the listeners. Package the listeners into a jar and put that on the class path. Will enable company wide use of the same listeners without any developer having to remember where the listeners are stored, just put the jar on the classpath.</div></li></ul></li></ul></li></ul></li><li class="O">Running the test as part of the maven build.<ul><li class="O">If you create your project from the TAF archetype it is already configured to run the test as part of a Maven install.</li></ul></li></ul></div><h1 id="TestNGTips&amp;Tricks-Features">Features</h1><div><ul><li class="O">Data Providers<ul><li class="O">Above I've detailed the advantage of using the Data Provider.</li><li class="O1">What is the difference in returning Object[][] and Iterator&lt;Object[]&gt; from the DataProvider method?<ul><li class="O1"><div class="O"><div>Use Object[][] when your data is static, use Iterator&lt;Object[]&gt; when you’re data may change during the course of testing, you may be adding and deleting users.</div></div></li></ul></li><li class="O1">Why TAF is using DataProvider and TestData<ul><li class="O1"><div class="O"><div>You may have wondered why in the TAF structure there is TestDataProvider and Data Provider. – We have these 2 classes so that the TestDataProvider can take the data from the DataProvider and supply it to the test case and the DataProvider can also provide the data to the GenericOperator so that we can get the correct values for the expected and actual and compare them in the testcase. The goal of the TestDataProvider is just to stream the data to the test case.</div></div></li></ul></li></ul></li><li class="O">Before/After(Method,Class,Suite)<ul><li class="O1"><div class="O"><div>Before/After Method/Suite/Class annotations allow you to execute a method before/after a method/suite/class. Can be useful for preparing something to enable the test.</div></div></li><li class="O1"><div class="O"><div>A simple example is in our AbstractMonitorTest, before the suite starts we sleep for 5 seconds.</div></div></li><li class="O1"><div class="O"><div>There is an issue with JCAT and using the @BeforeSuite and @AfterSuite annotation, when you pass multiple suite.xml files jenkins and the html report shows a failed configuration.</div></div></li></ul></li><li class="O">Groups<ul><li class="O">Groups can be used to organize how and when you run tests.</li><li class="O">A test can have multiple groups and in the suite.xml file you can specify the groups you can to run or exclude.</li><li class="O">Example code in the next section.</li><li class="O">Groups will also be used by RV when they want to run all tests from all teams.</li></ul></li></ul></div><h1 id="TestNGTips&amp;Tricks-Extras">Extras</h1><div><ul><li class="O">Verbose<ul><li class="O">Increase the level of TestNG logging which is shown in the console.</li><li class="O">This may be handy if there is an issue in your tests and all TestNG is showing is a one line exception.</li></ul></li><li class="O">Including/excluding groups</li><li class="O">Running in parallel.<ul><li class="O1">Method, class and suite level.</li></ul></li></ul><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: html/xml; gutter: false" style="font-size:12px;">&lt;!-- VERBOSE: include it in the suite tag --&gt;
+&lt;!-- PARALLEL: include parallel and thread-count in the suite tag --&gt;
+&lt;suite name=&quot;RemoteFileHandlerSuite&quot; verbose=&quot;10&quot; parallel=&quot;methods&quot; thread-count=&quot;5&quot;&gt;
+    &lt;!-- This is a comment in the suite.xml file --&gt;
+
+    &lt;test name=&quot;RemoteFileHandlerSuite&quot;&gt;
+&lt;!-- GROUPS: In the groups tag you can include/exclude groups of testcases to be run --&gt;
+        &lt;groups&gt;
+            &lt;run&gt;
+                &lt;exclude name=&quot;Regression&quot; /&gt;
+            &lt;/run&gt;
+        &lt;/groups&gt;
+        &lt;classes&gt;
+            &lt;class name=&quot;com.ericsson.cifwk.taf.taffit.test.cases.RemoteFileHandler&quot; /&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+&lt;/suite&gt;</pre>
+</div></div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:39</small></p>
+            </div>
+        </div>     </body>
+</html>

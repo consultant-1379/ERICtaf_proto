@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ericsson</groupId>
+        <artifactId>master</artifactId>
+        <version>3.0</version>
+        <relativePath />
+    </parent>
+
+    <groupId>com.ericsson.cifwk.taf</groupId>
+    <artifactId>jqassist</artifactId>
+    <packaging>jar</packaging>
+	<version>1.0.5-SNAPSHOT</version>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.3.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>com.buschmais.jqassistant.scm</groupId>
+				<artifactId>jqassistant-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>scan</id>
+						<goals>
+							<goal>scan</goal>
+						</goals>
+						<configuration>
+							<scanIncludes>
+								<scanInclude>
+									<path>lib</path>
+								</scanInclude>
+							</scanIncludes>
+							<!--<scanProperties>-->
+								<!--<customScanner.property>value</customScanner.property>-->
+							<!--</scanProperties>-->
+						</configuration>
+					</execution>
+					<execution>
+						<id>analyze</id>
+						<goals>
+							<goal>analyze</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+  <scm>
+    <connection>scm:git:ssh://gerrit.ericsson.se:29418/OSS/com.ericsson.cifwk/ERICtaf_proto</connection>
+    <developerConnection>scm:git:ssh://gerrit.ericsson.se:29418/OSS/com.ericsson.cifwk/ERICtaf_proto</developerConnection>
+    <tag>jqassist-1.0.3</tag>
+  </scm>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>com.buschmais.jqassistant.scm</groupId>
+				<artifactId>jqassistant-maven-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+
+</project>
+

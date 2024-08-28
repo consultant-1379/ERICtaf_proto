@@ -1,0 +1,55 @@
+= Ways of working
+
+== Develop the operator
+
+During your sprint (or perhaps at the spring planning stage) you
+identify the need for a particular operator. You check the TAF TOR
+operators project to see if such an operator already exits and if not
+you decide that you will develop this operator during your sprint. As
+the sprint progresses the functionality of the operator progresses and
+by the end of the sprint you have an operator that satisfies your need.
+At this stage you are using the operator and you automated tests are
+passing but you think that you would like to share this operator with
+the other teams in TOR because if you share it and someone is able to
+make use of it then obviously they won’t have to spend time developing
+and that time can be put to better use i.e. progressing TOR development.
+
+== Add the operator to the operator project
+
+Ok, your sprint is over and you have decided that you will share your
+operator but think ``I’m not sure it is ready for general availability
+just yet'' so you may spend a little time re-factoring and before long
+you operator is ready for release. You will pull down the latest version
+(see previous page for link to git), you move your operator from your
+TAF project to the TAF TOR Operator project and adjust your TAF project
+accordingly. Do a git push and monitor the
+https://cifwk-oss.lmera.ericsson.se/jenkins/view/TAF+CI/job/TAF_TOR_Operators/[Jenkins job]
+for the operators project to make sure the project builds ok and you
+are good to go.
+
+== Using TAF TOR Operators project compared to using directly
+
+Previously TAF functionality (typically taf-core) would have been
+directly added to the pom of your test project as a dependency. This
+will change if you use the operators project. The new procedure would be
+to replace the dependency on taf-core with a dependency on the operators
+project (see below for the syntax). Your project will still have all the
+functionality of taf-core as the operators project has a dependency on
+taf-core.
+
+[source,xml]
+----
+<groupId>com.ericsson.cifwk</groupId>    
+<artifactId>taf-tor-operators</artifactId>
+<version>1.0.1-SNAPSHOT</version>
+----
+
+== Update confluence pages
+
+The build has passed so it’s time to tell the world that you have added
+a new operator to the project. Add the operator details to the table of
+operators in the
+http://confluence-oss.lmera.ericsson.se/display/TAF/List+of+TAF+TOR+Operators[confluence page].
+Create a child page (based on the example) to hold the detailed
+information about your operator - things like how to use it, possible
+future development that you did not get to do, and known issues etc.

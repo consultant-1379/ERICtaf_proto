@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : JBOSS Handler</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : JBOSS Handler
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Apr 10, 2013 by <font color="#0050B2">EGERGLE</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="JBOSSHandler-WhatisJBOSS?">What is JBOSS?</h1><p>JBOSS stands for JavaBeans Open Source Software and is a free software/open-source Java EE-based application server. More information can be found at <a href="http://www.jboss.org" class="external-link" rel="nofollow">http://www.jboss.org</a></p><p>Ericsson Good JBoss Configuration from the CM Mediation Team <a href="http://confluence-oss.lmera.ericsson.se/display/TLT/TOR+CM+Mediation+Local+Depolyment">TOR CM Mediation Local Depolyment</a></p><h1 id="JBOSSHandler-WhatistheTAFJBOSSHandler?">What is the TAF JBOSS Handler?</h1><p>The TAF JBOSS handler is an API which simplifies the interactions with JBOSS.</p><h1 id="JBOSSHandler-Howtogetstarted">How to get started</h1><p>Firstly you need to create an instance of the JBOSSHandler</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">JbossHandler jboss = new JbossHandler(jbossNode, serverThatHostsJbossInstance)</pre>
+</div></div><p>The first argument is a <a href="https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/data-handler/apidocs/index.html" class="external-link" rel="nofollow">Host object</a> which is the jboss node you want to interact with. The second <u>optional</u> argument is another host object which is the server the node is located on if you are connecting to it remotely. If this argument is not specified, remote access to Jboss is used only.</p><div class='panelMacro'><table class='noteMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="images/icons/emoticons/warning.png" width="16" height="16" align="absmiddle" alt="" border="0"></td><td><p>Please note to use deployment service, management port will need to be specified in Host object as well as Management Real user.</p><p>Please note to use JMX service of JBOSS handler, JMX port needs to be specified in the host object as well as Management Realm user.</p></td></tr></table></div><p> </p><p>Once you have instantiated the jboss handler you can deploy, activate or undeploy a file.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">boolean deployed = jboss.deployFile(file)</pre>
+</div></div><p>The deployFile method's first argument is the file to deploy, in the form of a file object. It also has 2 <u>optional</u> arguments. First is a boolean activate, this specifies whether the file should be executed once it is deployed. The second optional argument is another boolean which decides whether to force deploy the file or not, if this is set to true the file will be deployed regardless of the current state.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">boolean activated  = jboss.activateDeployedFile(filename)</pre>
+</div></div><p>The activate deployed file has just one argument, the string filename of the file to activate.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">boolean undeployed = jboss.undeployFile(filename)</pre>
+</div></div><p>The undeploy file method's first argument is the string filename to undeploy. It also has an <u>optional</u> second argument, this is a boolean, which if set to true removes the file from the jboss node filesystem.</p><p>When an instance of the JbossHandler is created 2 more objects are created in the constructor, an instance of JBOSS Command Executor and JMX Handler. How these can be used to work with your jboss node are detailed in pages under this page.</p><h1 id="JBOSSHandler-APIDocumentationLink">API Documentation Link</h1><p><a href="https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html" class="external-link" rel="nofollow">JBoss API Documentation</a></p><h1 id="JBOSSHandler-CurrentFunctionality">Current Functionality</h1><p>Deploy, activate and undeploy a file</p><h1 id="JBOSSHandler-PlannedImprovements">Planned Improvements</h1><h1 id="JBOSSHandler-Knownissuesandworkarounds">Known issues and workarounds</h1>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:39</small></p>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,101 @@
+How to use SSH tunnel to environment
+====================================
+
+ 
+
+[[HowtouseSSHtunneltoenvironment-Issue]]
+Issue
+~~~~~
+
+One of possible TOR configurations is assuming certain services are
+exposed on IP address not available from external network. To access
+them SSH tunneling is suggested and TAF is providing support for this
+solution via Host object.
+
+[[HowtouseSSHtunneltoenvironment-SSHTunnel]]
+SSH Tunnel
+~~~~~~~~~~
+
+SSH tunneling or SSH port forwarding allows to access port on server
+that is not available using another server that can be accessed using
+SSH.
+
+image:attachments/25494524/25395394.png[SSH tunnel]
+
+link:/plugins/yworks-diagrams/open-editor.action?pageId=25494524&diagramName=U1NIIHR1bm5lbA==&confluenceRoot=&resourceRoot=/download/resources/com.yworks.diagrams.confluence.plugin.yworks-diagrams-for-confluence/resources/yworks-diagrams/&servletRoot=/plugins/servlet&pageUrl=/display/TAF/How+to+use+SSH+tunnel+to+environment&version=1[Edit
+Diagram] | 
+link:/plugins/yworks-diagrams/remove-diagram-confirmation.action?confluenceRoot=&pageId=25494524&diagramName=U1NIIHR1bm5lbA==&pageUrl=/display/TAF/How+to+use+SSH+tunnel+to+environment[Remove
+Diagram]
+
+ 
+
+In case of TOR Configuration the private addresses are used to
+expose internal services e.g. by specifying them for JBOSS instances.
+Access to them can be established using SSH local port forwarding:
+
+image:attachments/25494524/25395396.png[TOR el example]
+
+link:/plugins/yworks-diagrams/open-editor.action?pageId=25494524&diagramName=VE9SIGVsIGV4YW1wbGU=&confluenceRoot=&resourceRoot=/download/resources/com.yworks.diagrams.confluence.plugin.yworks-diagrams-for-confluence/resources/yworks-diagrams/&servletRoot=/plugins/servlet&pageUrl=/display/TAF/How+to+use+SSH+tunnel+to+environment&version=2[Edit
+Diagram] | 
+link:/plugins/yworks-diagrams/remove-diagram-confirmation.action?confluenceRoot=&pageId=25494524&diagramName=VE9SIGVsIGV4YW1wbGU=&pageUrl=/display/TAF/How+to+use+SSH+tunnel+to+environment[Remove
+Diagram]
+
+ 
+
+[[HowtouseSSHtunneltoenvironment-Enabling]]
+Enabling
+~~~~~~~~
+
+TAF handles SSH tunneling on Host objects during initial creation by
+HostDataPostProcessor. To enable tunneling ``tunnel'' property needs to
+be set to offset assigned to the node:
+
+----
+host.sc1.ip = 10.65.237.137
+host.sc1.user.root.pass = rootPass
+host.sc1.user.root.type = admin
+host.sc1.node.jbossInstance1.tunnel = 1
+host.sc1.node.jbossInstance1.ip = 192.168.113.10
+host.sc1.node.jbossInstance1.port.http = 8080
+----
+
+During parsing of the line and creating Host object, startTunnel method
+will be called automatically and IP and PORT properties of the Host
+object will be overridden to use SSH forwarding.
+
+image:images/icons/emoticons/information.png[image]
+
+Setting tunnel in host.properties file is enough to enabled SSH
+tunneling in background. There is nothing else to do.
+
+ 
+
+jbossInstance1 will have port 8080 available on localhost port 18081
+(10000 for dynamic range + 8080 to map the port + 1 for tunnel offset)
+or next available port. For TAF handlers this is all transparent as
+after getting the Host object ports and IP is overridden:
+
+[source,java]
+----
+Host jb1 = DataHandler.getHostByName("jbossInstance1");
+assert jb1.getIp() == "127.0.0.1"
+assert jb1.getPort().get(Ports.HTTP) == "18081"
+----
+
+image:images/icons/emoticons/forbidden.png[image]
+
+To enable SSH tunnel, following things are required:
+
+1.  Host with SSH access - tunnel can only be enabled for node and host
+needs to have SSH port defined as well as user
+2.  tunnel offsets needs to be unique - one offset number for 1 node
+
+ 
+
+[[HowtouseSSHtunneltoenvironment-Components]]
+Components
+~~~~~~~~~~
+
+image:attachments/25494524/25395408.gif[image]
+
+ 

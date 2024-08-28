@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : TAF FAQs</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : TAF FAQs
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Feb 14, 2013 by <font color="#0050B2">qshatus</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p>This page consist TAF FAQs, allowing the users to get quick answers to common questions.</p><p><strong>Table of Contents:</strong></p><p><div>
+<ul>
+    <li><a href='#TAFFAQs-NullHostReturned'>Null Host Returned</a></li>
+    <li><a href='#TAFFAQs-LogWriterException'>Log Writer Exception</a></li>
+    <li><a href='#TAFFAQs-TestCaseReportshowsthatTestCasearebeingCalledTwice'>Test Case Report shows that Test Case are being Called Twice</a></li>
+</ul></div></p><h5 id="TAFFAQs-NullHostReturned">Null Host Returned</h5><p><strong>Question:</strong> The Following code snippet returns <em>null </em>Host:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p><span style="color: rgb(51,51,153);"><strong>final</strong> Host host = <u>DataHandler</u>.getHostByType(HostType.<em>RC</em>);  </span></p><p><span style="color: rgb(51,51,153);"><strong>if</strong> (host == <strong>null</strong>) {</span></p><p><span style="color: rgb(51,51,153);">          <strong>throw</strong> <strong>new</strong> IllegalArgumentException(&quot;No host of type &quot;</span></p><p><span style="color: rgb(51,51,153);">                  + HostType.<em>RC</em>.toString() + &quot;was found&quot;);</span></p><p><span style="color: rgb(51,51,153);">      }</span></p><p><span style="color: rgb(51,51,153);"><strong>return</strong> host;</span></p></th></tr></tbody></table></div><p><strong>Answer: </strong>The reason why this might be happening is that the hosts properties file is not placed at the right location, i.e. taf_properties folder.</p><p><img class="confluence-embedded-image" src="attachments/19857682/19988552.png" data-image-src="attachments/19857682/19988552.png"></p><p>It is important to note that, DataHandler will not be able to fetch host information if the properties file is placed in the classpath.</p><h5 id="TAFFAQs-LogWriterException">Log Writer Exception</h5><p><strong>Question: </strong>Exceptions related to Log Writer is thrown on each test run:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p><span style="color: rgb(51,51,153);">2013-02-13 08:55:39,610 INFO  [main] [se.ericsson.jcat.fw.logging.writers.LogWriterUtils] Extracting Dtree skeleton to: C:/Users/evajkur/tmp/jcat/</span></p><p><span style="color: rgb(51,51,153);">2013-02-13 08:55:39,610 INFO  [main] [se.ericsson.jcat.fw.logging.writers.LogWriterUtils] Extracting Dtree skeleton to: C:/Users/evajkur/tmp/jcat/</span></p><p><span style="color: rgb(51,51,153);">Warning: Could not create directory ./configmethods !</span></p><p><span style="color: rgb(51,51,153);">2013-02-13 08:55:41,255 INFO  [main] [se.ericsson.jcat.fw.ng.logging.LogWriterControl] Added user logWriter: se.ericsson.jcat.fw.ng.logging.writers.DbLogWriterRIPNG</span></p><p><span style="color: rgb(51,51,153);">2013-02-13 08:55:41,255 INFO  [main] [se.ericsson.jcat.fw.ng.logging.LogWriterControl] Added user logWriter: se.ericsson.jcat.fw.ng.logging.writers.DbLogWriterRIPNG</span></p><p><span style="color: rgb(51,51,153);">2013-02-13 08:55:41,265 ERROR [main] [se.ericsson.jcat.fw.ng.logging.LogWriterControl] Exception:</span></p><p><span style="color: rgb(51,51,153);"><u>java.lang.reflect.InvocationTargetException</u></span></p><p><span style="color: rgb(51,51,153);">        at sun.reflect.NativeMethodAccessorImpl.invoke0(<u>Native Method</u>)</span></p><p><span style="color: rgb(51,51,153);">        at sun.reflect.NativeMethodAccessorImpl.invoke(<u>NativeMethodAccessorImpl.java:57</u>)</span></p><p><span style="color: rgb(51,51,153);">        at sun.reflect.DelegatingMethodAccessorImpl.invoke(<u>DelegatingMethodAccessorImpl.java:43</u>)</span></p><p><span style="color: rgb(51,51,153);">        at java.lang.reflect.Method.invoke(<u>Method.<a href="http://java:601" class="external-link" rel="nofollow"><span style="color: rgb(51,51,153);">java:601</span></a></u>)</span></p><p><span style="color: rgb(51,51,153);">        at se.ericsson.jcat.fw.ng.logging.LogWriterControl.event(<u>LogWriterControl.<a href="http://java:208" class="external-link" rel="nofollow"><span style="color: rgb(51,51,153);">java:208</span></a></u>)</span></p><p><span style="color: rgb(51,51,153);">        at se.ericsson.jcat.fw.ng.logging.LogWriterControl.executionStart(<u>LogWriterControl.<a href="http://java:313" class="external-link" rel="nofollow"><span style="color: rgb(51,51,153);">java:313</span></a></u>)</span></p><span style="color: rgb(51,51,153);">        at se.ericsson.jcat.fw.ng.listeners.JcatSuiteListener.onExecutionStart(<u>JcatSuiteListener.<a href="http://java:639" class="external-link" rel="nofollow"><span style="color: rgb(51,51,153);">java:639</span></a></u>)</span></th></tr></tbody></table></div><p><strong>Answer:</strong> TafRun.groovy file is out of date. The latest version of the file will need to be downloaded to the TAF project. This can be fetched by cloning the following repo and copying from location: 'src/main/resources/scripts'</p><h5 id="TAFFAQs-TestCaseReportshowsthatTestCasearebeingCalledTwice">Test Case Report shows that Test Case are being Called Twice</h5><p><strong>Question: </strong>Test Case Report shows that the TCs are being called Twice even though with debugging, it is known that this is not happening.</p><p><img class="confluence-embedded-image" src="attachments/19857682/19988535.png" data-image-src="attachments/19857682/19988535.png"></p><p><strong>Answer: </strong>The reason why this might be happening is because the listeners have been included in the suites twice causing it to print to the report twice. Also, if the TC method is running with multiple context or vuser values then the TC method will be printed out n number of times based on that.</p><p> </p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/19857682/19988535.png">image2013-2-13 12:15:57.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/19857682/19988552.png">image2013-2-13 14:28:40.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:40</small></p>
+            </div>
+        </div>     </body>
+</html>

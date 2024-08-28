@@ -1,0 +1,11 @@
+<div>
+    {{#if template.servers}}
+    <ul class="ebList">
+        {{#each template.servers}}
+        <li class="ebList-item">{{name}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>Servers List is empty.</p>
+    {{/if}}
+</div>

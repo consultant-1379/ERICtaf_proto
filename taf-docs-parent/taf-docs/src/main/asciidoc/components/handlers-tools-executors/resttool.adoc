@@ -1,0 +1,51 @@
+RestTool
+========
+
+*What is REST?*
+
+RepresentationalStateTransfer (REST) is an architecture style for
+designing network applications. The idea is that, rather than using
+complex mechanisms such as CORBA, RPC or SOAP to connect between
+machines, simple HTTP/HTTPS is used to make calls between machines.
+
+ 
+
+*What is the TAF REST tool?*
+
+The TAF REST Tool provides an API which allows us to execute REST calls
+and retrieve information about the calls, such as execution time,
+response size, response headers, etc.
+
+ 
+
+*How to get started*
+
+Create an instance of the REST Tool. There is 1 constructor which takes
+1 argument, a Host object. The host object is the server to which you
+want to make the REST call.
+
+[source,java]
+----
+RestTool restTool = new RestTool(restServer)
+----
+
+Once the RestToll is instantiated you can now make Rest Calls. Below is
+an example of executing a Rest Get call with user authentication.
+
+[source,java]
+----
+restTool.setAuthenticationCredentails(username, password);
+List<String> result = restTool.get(uri);
+----
+
+* +
+*
+
+*API Documentation Link*
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html[RestTool
+API Documentation]
+
+ 
+
+ 

@@ -1,0 +1,36 @@
+.eaVEApp-wTreeChart-svgArea {
+  overflow: auto;
+  max-height: 500px;
+  padding: 1px;
+}
+
+.eaVEApp-wTreeChart-svgArea .node rect {
+  fill: #ebebeb;
+}
+
+.eaVEApp-wTreeChart-svgArea .node[data-result="success"] rect {
+  fill: #d0e3a2;
+}
+
+.eaVEApp-wTreeChart-svgArea .node[data-result="failure"] rect {
+  fill: #f4a6a3;
+}
+
+.eaVEApp-wTreeChart-svgArea .node rect[data-parent] {
+  cursor: pointer;
+}
+
+.eaVEApp-wTreeChart-svgArea .node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+.eaVEApp-wTreeChart-svgArea path.link {
+  fill: none;
+  stroke: #adadad;
+  stroke-width: 1px;
+}
+
+.eaVEApp-wTreeChart-svgArea {
+  text-align: center;
+}

@@ -1,0 +1,16 @@
+#tree-chart .node rect {
+  cursor: pointer;
+  fill: #f5f5f5;
+  fill-opacity: 0.7;
+}
+
+#tree-chart .node text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+#tree-chart path.link {
+  fill: none;
+  stroke: #adadad;
+  stroke-width: 1px;
+}

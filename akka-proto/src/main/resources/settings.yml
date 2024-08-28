@@ -1,0 +1,56 @@
+# Default configurations
+common: &default_settings
+  debug:
+    enabled: false
+    job: cip-3727
+  akka:
+    name: actor-system
+  netty:
+    hostname: 0.0.0.0
+    port: 8585
+    webdir: ./web
+  amqp:
+    host: atclvm793.athtem.eei.ericsson.se
+    port: 5672
+    exchangeName: eiffel.poc.testing
+    username: guest
+    password: guest
+    routingKey: "#"
+  eventRepository:
+    uri: http://10.59.140.185:8080/eventrepository-1.1.4/restapi
+    minutes: 60
+    eventType: EiffelJobStepStartedEvent
+  jira:
+    uri: http://jira-oss.lmera.ericsson.se
+    username: lciadm100
+    password: lciadm100
+    fields:
+      storyPoints: customfield_10123
+  eiffel:
+    version: "3.0.3.0.2"
+
+# Development
+development:
+  <<: *default_settings
+  debug:
+    enabled: false
+    job: cip-3727
+  netty:
+    hostname: localhost
+    port: 8585
+    webdir: ../VisualizationEngineApp/root
+
+# For local machine deployment
+local:
+  <<: *default_settings
+  amqp:
+    host: localhost
+    port: 5672
+    exchangeName: eiffel.poc.testing
+    username: guest
+    password: guest
+    routingKey: "#"
+
+# Production
+production:
+  <<: *default_settings

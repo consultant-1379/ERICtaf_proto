@@ -1,0 +1,108 @@
+Tool Monitor
+============
+
+Goal of the tool monitor is to log data related to actions executed on
+Tools and response times of SUT.
+
+Tool Monitor is event-based and it logs data only if tool action is
+called. Yet data is logged with correspondence to time, so it can be
+correlated with other monitors’ data.
+
+[[ToolMonitor-MonitorConfiguration:]]
+Monitor Configuration:
+~~~~~~~~~~~~~~~~~~~~~~
+
+Property name
+
+Accepted Values
+
+Default value
+
+Description
+
+Example
+
+monitor.tool.enabled
+
+true|false|1|0
+
+false
+
+Property to enable or disable monitor
+
+monitor.tool.enabled = true
+
+monitor.tool.collectionTime
+
+string
+
+action
+
+Property to set the event when monitor should log data
+
+monitor.tool.collectionTime=action
+
+monitor.tool.dont_plot
+
+strings
+
+ vusers result tc_name
+
+Property to set columns that should be ignored when monitor’s data is
+visualized
+
+monitor.tool.dont_plot=  vusers result tc_name
+
+[[ToolMonitor-Monitoroutput:]]
+Monitor output:
+~~~~~~~~~~~~~~~
+
+Tool monitor saves data in tool.csv file and logs following columns:
+
+Title
+
+Values
+
+Description
+
+TimeStamp
+
+Date
+
+Milisecond when action was logged
+
+TC_Name
+
+String
+
+Name of the test method currently executed
+
+Operator_Method_Name
+
+String
+
+Name of the operator method currently executed
+
+Tool_Name
+
+String
+
+Name of the Tool class current being used
+
+VUsers
+
+Number
+
+Current vusers value
+
+Result
+
+Boolean
+
+Result of the action
+
+Response_Time
+
+Numbers
+
+Average (between all vusers) response time of the action

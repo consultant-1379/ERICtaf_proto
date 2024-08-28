@@ -1,0 +1,67 @@
+.nodebox {
+    fill: #fff;
+    stroke-width: 3.5px;
+}
+
+#node_PHYSICAL                  .nodebox { stroke: beige;}
+#node_PHYSICAL_HARD             .nodebox { stroke: tan;}
+#node_PHYSICAL_SOFT             .nodebox { stroke: yellow;}
+
+#node_BIOTA                     .nodebox { stroke: darkgreen;}
+#node_BIOTA_SPONGES             .nodebox { stroke: orange;}
+#node_BIOTA_ALGAE               .nodebox { stroke: green;}
+#node_BIOTA_ALGAE_CANOPY_ECK    .nodebox { stroke: lightgreen;}
+#node_BIOTA_ALGAE_CRUSTOSE      .nodebox { stroke: purple;}
+
+.nodeTitle {
+    font: 12px sans-serif;
+    font-weight: bold;
+}
+
+
+.nodeText {
+    font: 10px sans-serif;
+}
+
+.f1Text {
+    font: 10px sans-serif;
+    fill: red;
+}
+
+.SUCCESS {
+    fill: #89ba17;
+	color: #89ba17;
+}
+
+.FAILURE {
+    fill: #e32119;
+	colort:#e32119;
+}
+
+.UNSTABLE {
+    fill: #f08a00;
+	color: #f08a00;
+}
+.undefined {
+color:#f08a00;
+}
+.NOT_BUILT {
+    fill: #858585;
+	color: #858585;
+}
+
+#eaVisualization-jobChartStatus-ToolTip {
+display: inline-block;
+}
+
+.eaVisualization-jobChartEvent-JSON{
+display:none;
+border: 1px solid black;
+background: #E2E4B4;
+}
+
+
+[class*="eaVisualizationEngineApp-wPopup"]:hover .eaVisualization-jobChartEvent-JSON  {
+display:block;
+}
+

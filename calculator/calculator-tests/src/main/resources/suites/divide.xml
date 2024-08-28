@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="divide TAFTEST-14">
+	<parameter name="taf.repeat-count" value="100000"/>
+	<test name="Transaction" preserve-order="true">
+		<classes>
+			<class name="com.ericsson.cifwk.taf.demo.calculator.test.cases.CalculatorTest">
+				<methods>
+					<include name="verifyCalculatorDividesNumbersAsExpected" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

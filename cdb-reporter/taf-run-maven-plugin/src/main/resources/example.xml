@@ -1,0 +1,44 @@
+<build>
+	<plugins>
+		<plugin>
+			<groupId>com.ericsson.cifwk.taf</groupId>
+			<artifactId>taf-run-maven-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>execute-cdb-run</id>
+					<phase>test</phase>
+					<goals>
+						<goal>run</goal>
+					</goals>
+					<configuration>
+
+						<artifactItems>
+							<artifactItem>
+								<groupId>com.ericsson.cifwk.cloud</groupId>
+								<artifactId>cite-test-run</artifactId>
+								<version>1.0.11</version>
+							</artifactItem>
+							<artifactItem>
+								<groupId>com.ericsson.cifwk.taf</groupId>
+								<artifactId>manual</artifactId>
+								<version>2.0.4</version>
+							</artifactItem>
+							<groupId>com.ericsson.nms.bsim.testware</groupId>
+							<artifactId>test-run</artifactId>
+							<version>1.0.4</version>
+						</artifactItem>
+						</artifactItems>
+						<schedule>
+							<artifactItem>
+								<groupId>com.ericsson.cifwk.cloud</groupId>
+								<artifactId>cite-test-run</artifactId>
+								<version>1.0.11</version>
+							</artifactItem>
+							<schedule_name>ossrc_initial_cdb_14A</schedule_name>
+						</schedule>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>

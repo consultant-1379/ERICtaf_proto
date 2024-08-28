@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : OS Log Monitor</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : OS Log Monitor
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Mar 27, 2013 by <font color="#0050B2">ekellmi</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p>OS Log Monitor is a time-based monitor which collects all log entries from the logs specified in the monitor properties file.</p><p>The Monitor collects the log entries from all logs that have a location and pattern specified in the properties file.</p><p>The monitor adds all the retrieved log entries to the cache, to be accessed centrally.</p><p> </p><p><strong>Monitor Configuration</strong></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p>Property</p></th><th class="confluenceTh">Accepted Values</th><th class="confluenceTh">Default Value</th><th class="confluenceTh">Description</th><th class="confluenceTh">Example</th></tr><tr><td class="confluenceTd">monitor.oslogmon.enabled</td><td class="confluenceTd">true|false|1|0</td><td class="confluenceTd">false</td><td class="confluenceTd">Property to enable of disable the monitor before run</td><td class="confluenceTd">monitor.oslogmon.enabled=true</td></tr><tr><td class="confluenceTd">monitor.oslogmon.&lt;hostname&gt;.logPath</td><td class="confluenceTd">log locations</td><td class="confluenceTd"> </td><td class="confluenceTd">Property to specify the locations of the logs to be monitored</td><td class="confluenceTd"><p>monitor.oslogmon.OSS-RC.logPath=</p><p>/var/log/messages, /var/log/cron</p></td></tr><tr><td class="confluenceTd">monitor.oslogmon.&lt;hostname&gt;.logPattern</td><td class="confluenceTd">log pattern</td><td class="confluenceTd"> </td><td class="confluenceTd">Property to specify the pattern for the log to be monitored, to allow for date extraction from the entry</td><td class="confluenceTd"><p>monitor.oslogmon.OSS-RC.logPattern=</p><p>%d{MMM dd<span style="color: rgb(42,0,255);font-size: small;"> </span> HH:mm:ss} %m<span style="color: rgb(42,0,255);font-size: small;"> </span></p></td></tr><tr><td class="confluenceTd"><p>monitor.oslogmon.collectionTime</p></td><td class="confluenceTd">numbers</td><td class="confluenceTd">5</td><td class="confluenceTd">Property to specify the interval in seconds between collections of log entries</td><td class="confluenceTd"><p>monitor.oslogmon.collectionTime=</p><p>5</p></td></tr><tr><td class="confluenceTd"><p>monitor.oslogmon.checkInterval</p></td><td class="confluenceTd">numbers</td><td class="confluenceTd">100</td><td class="confluenceTd">Property to specify the intervals to check for entry until entry is found or timeout is reached</td><td class="confluenceTd">monitor.oslogmon.checkInterval=100</td></tr><tr><td class="confluenceTd"><p>monitor.oslogmon.defaultTimeout</p></td><td class="confluenceTd">numbers</td><td class="confluenceTd">120000</td><td class="confluenceTd">Property to specify the timeout for getEntry method</td><td class="confluenceTd"><p>monitor.oslogmon.defaultTimeout=</p><p>120000</p></td></tr><tr><td class="confluenceTd"><p>monitor.oslogmon.minWaitTime</p></td><td class="confluenceTd">numbers</td><td class="confluenceTd">100</td><td class="confluenceTd">Property to specify the minimum time to wait for response from monitoring agent</td><td class="confluenceTd"><p>monitor.oslogmon.minWaitTime=</p><p>100</p></td></tr></tbody></table></div><p> </p><p><strong>Retrieving Log Entries gathered by the Monitor</strong></p><p>The Log Monitors provide 2 methods for retrieving log entries that have been gathered and placed in the cache.</p><p>In order to call these methods you must first retrieve the instantiated monitor.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">def thismon = AbstractMonitorHelper.getMonitors().find{ it.name == oslogmon }</pre>
+</div></div><p><em>getEntry(String filter) - </em>This method returns the first log entry containing the filter, that is gathered after the method is called.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">LogEntry logEntry = thismon.getEntry(filter);</pre>
+</div></div><p>getAllEntries(String filter) - This method returns all log entries that are currently stored in the cache for this monitor and containing the filter that is passed in.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">List&lt;LogEntry&gt; logEntries = thismon.getAllEntries(filter);</pre>
+</div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:40</small></p>
+            </div>
+        </div>     </body>
+</html>

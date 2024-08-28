@@ -1,0 +1,103 @@
+NetSimHandler
+=============
+
+[[NetSimHandler-WhatisNetSim?]]
+What is NetSim?
+---------------
+
+NetSim is software used in PDU OSS to simulate network nodes and
+traffic.
+
+[[NetSimHandler-WhatistheTAFNetSimHandler?]]
+What is the TAF NetSim Handler?
+-------------------------------
+
+The NetsimHandler should be used to communicate with and control a
+Netsim simulation
+
+[[NetSimHandler-Howtogetstarted]]
+How to get started
+------------------
+
+The NetSimHandler has a single constructor which you pass a host object
+to.
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false-------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+NetsimHandler myNetsimHandler = new NetsimHandler(host)
+-------------------------------------------------------
+
+The Netsim Host information comes from your Host properties file in
+format. Use the DataHandler to pass host to constructor.
+
+host.CI-Netsim.ip=x.x.x.x
+
+host.CI-Netsim.user.netsim.pass=netsim
+
+host.CI-Netsim.port.ssh=2202
+
+host.CI-Netsim.type=NETSIM
+
+[[NetSimHandler-APIDocumentationLink]]
+API Documentation Link
+----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html[NetSim
+Handler API Documentation]
+
+[[NetSimHandler-CurrentFunctionality]]
+Current Functionality
+---------------------
+
+The current functionality of the netsim handler allows you to connect
+to, get information from and manipulate a netsim installation
+
+The functionality available is:
+
+* Is the simulation running - isNetsimRunning()
+* Get a list of all the Network Elements in the simulation -
+getAllNEs(String Simulation)
+* Get a list of all started Network Elements for a simulation -
+getAllStartedNEs(String Simulation)
+* Execute a command on the simulation -
+executeCommandWithSimulation(String simulation, String… commands)
+* Execute a command on the Netsim server (not on a any simulation) -
+executeCommand(String)
+* Check to see if a Network Element is started - isNeStarted(String)
+* Start a Network Element - startNE(String, NetsimNE)
+* Stop a Network Element -stopNE(String, NetsimNE)
+* Get the Corba Security status for a given Network Element -
+secStatus(String Simulation, … node)
+
+The below code block contains some examples of the above functionality
+
+[source,java]
+----
+boolean isMyNetsimRunning = myNetsimHandler.isNetsimRunning()
+
+List<NetsimNE> listOfNEs = myNetsimHandler.getAllNEs(simulation)
+
+String response = myNetsimHandler.executeCommandWithSimulation(simulation, command)
+
+String response = myNetsimHandler.executeCommand(command)
+
+boolean myNodeIsStated = myNetsimHandler.isNEStarted(simulation,node)
+
+boolean didNodeStart = startNE(simulation, node)
+
+boolean didNodeStop = stopNE(simulation, node)
+----
+
+[[NetSimHandler-PlannedImprovements]]
+Planned Improvements
+--------------------
+
+-------------------------------------
+Support for creation of netsim alarms
+-------------------------------------
+
+ 
+
+[[NetSimHandler-Knownissuesandworkarounds]]
+Known issues and workarounds
+----------------------------

@@ -1,0 +1,120 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.eaTafLanding {
+  background: #fafafa url('../resources/noise_100px.png');
+}
+
+.eaTafLanding {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.eaTafLanding-wrapper {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 20px 40px;
+}
+
+.eaTafLanding .ebSystemBar {
+  max-height: none;
+  background-color: #fff;
+  color: #4d4d4d;
+}
+
+.eaTafLanding .ebSystemBar > * {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.eaTafLanding .eaTafLanding-title {
+  margin-left: 60px;
+  padding: 15px 15px 0;
+  font-size: 40px;
+}
+
+.eaTafLanding .eaTafLanding-subtitle {
+  margin-left: 60px;
+  padding: 0 15px;
+  font-size: 18px;
+}
+
+.eaTafLanding .ebSystemBar-logo {
+  position: static;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  background-size: 60px 60px;
+}
+
+.eaTafLanding-body {
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+.eaTafLanding-row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.eaTafLanding-row:after {
+  clear: both;
+}
+
+.eaTafLanding-row:before,
+.eaTafLanding-row:after {
+  display: table;
+  content: ' ';
+}
+
+.eaTafLanding-col {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .eaTafLanding-col_4 {
+    float: left;
+    width: 33.33333333333333%;
+  }
+}
+
+.eaTafLanding-col-title {
+  border-bottom: none;
+  margin-bottom: 30px;
+  font-size: 28px;
+  text-align: center;
+}
+
+.eaTafLanding-col-title i {
+  display: block;
+  margin: 20px;
+  font-size: 70px;
+}
+
+.eaTafLanding-box {
+  margin-bottom: 20px;
+  padding: 10px 30px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.eaTafLanding-links {
+  padding: 0;
+  list-style: none;
+}
+
+.eaTafLanding-links li {
+  padding-left: 20px;
+  background: url('../resources/16px/ArrowRight_black_16px.svg') no-repeat left center;
+}
+
+.eaTafLanding-links li,
+.eaTafLanding-links a {
+  font-size: 14px;
+  line-height: 1.5em;
+}

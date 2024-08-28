@@ -1,0 +1,32 @@
+@ericsson-dark-blue: #00285e;
+// @widget-height: 120px;
+@widget-width: 150px; 
+
+.hover-element (@offsetX: -1px, @offsetY: -1px, @shadowOffsetX: 4px, @shadowOffsetY: 4px, @shadowBlur: 4px) {
+  -webkit-transform: translate(@offsetX, @offsetY);
+  -moz-transform: translate(@offsetX, @offsetY);
+  -ms-transform: translate(@offsetX, @offsetY);
+  transform: translate(@offsetX, @offsetY);
+  box-shadow: @shadowOffsetX @shadowOffsetY @shadowBlur rgba(0,0,0,0.1);
+}
+
+.eaVisualizationEngineApp-wVisualizationSelect {
+	border: 2px solid @ericsson-dark-blue;
+	border-radius: 4px;
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+	cursor: move;
+	display: inline-block;
+	margin-left: 10px;
+	padding: 0 0 0 10px;
+	width: @widget-width;	
+
+  &:hover {
+    .hover-element
+  }
+}
+
+.eaVisualizationEngineApp-wVisualizationSelect-spinner {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}

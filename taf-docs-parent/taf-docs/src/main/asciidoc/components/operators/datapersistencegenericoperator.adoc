@@ -1,0 +1,43 @@
+DataPersistenceGenericOperator
+==============================
+
+ 
+
+[[DataPersistenceGenericOperator-Name]]
+Name
+----
+
+DataPersistenceGenericOperator
+
+[[DataPersistenceGenericOperator-Description]]
+Description
+-----------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/taf-tor-operators/DataPersistenceTest-api/apidocs/index.html
+
+[[DataPersistenceGenericOperator-Howtousetheoperator]]
+How to use the operator
+-----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/taf-tor-operators/DataPersistenceTest-api/apidocs/index.html
+
+ 
+
+[[DataPersistenceGenericOperator-Possiblefuturedevelopment]]
+Possible future development
+---------------------------
+
+ 
+
+[[DataPersistenceGenericOperator-Anyknownissues/limitations]]
+Any known issues / limitations
+------------------------------
+
+ 
+
+ 
+
+[[DataPersistenceGenericOperator-Note:Pleasefeelfreetocommentstothisoperatorpage,thesecommentswillserverasadiscussiononthecurrentstatusandfuturedevelopmentofthisoperator]]
+*Note:* Please feel free to comments to this operator page, these
+comments will server as a discussion on the current status and future
+development of this operator

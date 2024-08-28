@@ -1,0 +1,49 @@
+import com.ericsson.duraci.eiffelmessage.messages.EiffelMessage 
+import com.ericsson.duraci.eiffelmessage.messages.events.EiffelConfidenceLevelModifiedEvent
+import com.ericsson.duraci.eiffelmessage.messages.events.EiffelMonitoringDataEvent
+import com.ericsson.duraci.eiffelmessage.messages.events.testing.EiffelTestCaseStarted;
+import com.ericsson.duraci.eiffelmessage.messages.events.testing.EiffelTestCaseFinished;
+import com.ericsson.rule.engine.message.sender.Sender
+import com.ericsson.rule.engine.configuration.MyConfiguration
+import com.ericsson.rule.engine.configuration.Confidence
+
+rule "Receive Message"
+when
+ m : EiffelMessage()
+then
+ System.out.println("Message Received");
+ System.out.println("Rule engine received: " + m.getEventType());
+end
+
+rule "Retrieve Test Case Info"
+when
+ m: EiffelMessage(eventType=="EiffelTestCaseStarted")
+then
+ System.out.println("Test Case Started Message Received");
+end
+
+rule "Update Confidence"
+when
+ m: EiffelMessage(eventType=="EiffelTestCaseFinished")
+then
+ System.out.println("Test Case Finished Message Received");
+ EiffelTestCaseFinished event = (EiffelTestCaseFinished)m.getEvent();
+ Confidence.updateConfidence(event);
+end
+
+rule "Catch confidence level events"
+when
+ m : EiffelMessage(eventType=="EiffelConfidenceLevelModifiedEvent")
+then
+ EiffelConfidenceLevelModifiedEvent event = (EiffelConfidenceLevelModifiedEvent)m.getEvent();
+ System.out.println("Confidence level event received: " + event.toString());
+ System.out.println("ConfidenceDonut Percentage Parameter is: " + event.getOptionalParameter("confidenceDonut"));
+end
+
+rule "Read Data from MonitoringDataEvent"
+when
+ m : EiffelMessage(eventType=="EiffelMonitoringDataEvent")
+then
+ EiffelMonitoringDataEvent event = (EiffelMonitoringDataEvent)m.getEvent();
+ System.out.println("Data from Data Event is: " + event.getData());
+end

@@ -1,0 +1,9 @@
+{
+	"name": "HazelCast",
+	"version": "0.0.1-SNAPSHOT",
+	"devDependencies": {
+		"branding": "https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/service/local/artifact/maven/redirect?r=releases&g=com.ericsson.oss&a=branding&v=1.0.54&e=tar.gz&c=dev",
+		"jscore": "https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/service/local/artifact/maven/redirect?r=releases&g=com.ericsson.oss.uisdk.clientsdk&a=jscore&v=1.0.83&e=tar.gz&c=dev",
+		"widgets": "https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/service/local/artifact/maven/redirect?r=releases&g=com.ericsson.oss.uisdk.clientsdk&a=widgets&v=1.0.59&e=tar.gz&c=dev"
+	}
+}

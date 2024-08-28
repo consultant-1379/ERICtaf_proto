@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<configuration>
+  <system/>
+  <properties fileName="default_taffit_hosts.properties"/>
+  <base fileName="json_format.json"/>
+</configuration>

@@ -1,0 +1,108 @@
+JBoss Command Executor
+======================
+
+[[JBossCommandExecutor-WhatisJboss?]]
+What is Jboss?
+--------------
+
+Please see link:jboss-handler.html[JBOSS Handler]
+
+[[JBossCommandExecutor-WhatistheTAFJBossCommandExecutor?]]
+What is the TAF JBoss Command Executor?
+---------------------------------------
+
+The TAF Jboss Command Executor is an API which allows you to execute a
+Jboss command on a local or remote Jboss instance.
+
+An instance of JbossCommandExecutor is created within an instance of
+JBossHandler for you to use to execute commands on the Jboss instance
+which that JBossHandler points to. It is recommended to access JBoss
+command executor this way.
+
+[[JBossCommandExecutor-Howtogetstarted]]
+How to get started
+------------------
+
+Fetch  an instance of Jboss Command Executor
+from link:jboss-handler.html[JBOSS Handler]
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false-------------------------------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+ 
+JbossCommandExecutor commandExecutor = jbossHandlerInstance.getCommandService()
+-------------------------------------------------------------------------------
+
+image:images/icons/emoticons/warning.png[image]
+
+If Jboss Handler was instantiated with 2 hosts in constructor,
+jboss-cli.sh will be used to execute commands. Otherwise jboss client
+will be use for this purpose.
+
+It is also possible to use constructor of JbossCommandExecutor itself
+for getting command executor:
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+JbossCommandExecutor commanExecutor = new JbossCommandExecutor(Host jbossNode,Host serverHostingJbossInstance) //second argument is default null
+JbossCommandExecutor commanExecutor = new JbossCommandExecutor(String hostName,String jbossUser,String jbossPass,String jbossManagementPort,int jbossOffset,Host parentHost) //last 2 arguments are default to 0 and null
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 
+
+There are 2 methods to execute a command, both are overloaded in the
+same way.
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false------------------------------------------------------------------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+/*Pass the command as a single string, including the arguments in this single string */
+commandExecutor.simplExec("Command + Arguments")
+
+/*Pass the command and the arguments seperately. The command as a string and the arguments as a list of Strings */
+commandExecutor.simplExec("Command", "Argument1", "Argument2", "etc")
+
+/* Pass the command as a single string, including the arguments in this single string */
+commandExecutor.execute("Command")
+
+/*Pass the command and the arguments seperately. The command as a string and the arguments as a list of Strings */
+commandExecutor.execute("Command", "Argument1", "Argument2", "etc")
+------------------------------------------------------------------------------------------------------------------
+
+The difference between these 2 methods is what they return.
+
+simplExec returns the response, whereas execute returns a boolean
+whether the command succeeded or not. The standard and error outputs of
+command execution are available via following methods:
+
+[source,java]
+----
+assertTrue(jbossCommandExecutorInstance.execute("command"))
+String commandResponse = jbossCommandExecutorInstance.getResponse()
+----
+
+image:images/icons/emoticons/warning.png[image]
+
+All exceptions and errors send by jboss command service are thrown as
+Throwable from the execution and logged as errors.
+
+ 
+
+[[JBossCommandExecutor-APIDocumentationLink]]
+API Documentation Link
+----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html[JBoss
+Command Executor API Documentation]
+
+[[JBossCommandExecutor-CurrentFunctionality]]
+Current Functionality
+---------------------
+
+Connect to a jboss instance locally or remotely and execute commands.
+
+[[JBossCommandExecutor-PlannedImprovements]]
+Planned Improvements
+--------------------
+
+[[JBossCommandExecutor-Knownissuesandworkarounds]]
+Known issues and workarounds
+----------------------------

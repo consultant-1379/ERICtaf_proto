@@ -1,0 +1,4 @@
+minuend,subtrahend,expected
+99,45,54
+-5,4,-9
+4,a,ERROR

@@ -1,0 +1,13 @@
+#%RAML 0.8
+---
+title: sortable trait used
+
+traits:
+  - sortable:
+      queryParameters:
+        orderBy:
+
+/resource:
+  get:
+    is:
+      - sortable

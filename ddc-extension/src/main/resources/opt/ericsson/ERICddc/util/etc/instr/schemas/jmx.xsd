@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:include schemaLocation="common.xsd" />
+    <xs:complexType name="jmx">
+        <xs:annotation>
+            <xs:documentation>
+                A jmx defines a type of provider which collects data via Java
+                Management Extensions (JMX) built into the Java Virtual Machine
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice minOccurs="1" maxOccurs="1">
+                <xs:element name="searchString" type="xs:string" />
+                <xs:element ref="ipService" />
+            </xs:choice> 
+            <xs:element name="metricGroup" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="mbeanName" type="xs:string" />
+                        <xs:element ref="metric" minOccurs="0" maxOccurs="unbounded" />
+                        <xs:element ref="mapMetric" minOccurs="0" maxOccurs="unbounded" />
+                        <xs:element ref="compositeMetric" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                    <xs:attribute name="name" type="xs:string" use="required" />
+                </xs:complexType>
+            </xs:element> <!-- metricGroup -->
+            <xs:element ref="metric" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+</xs:schema>

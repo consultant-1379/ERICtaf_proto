@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Each team will need to update the following section to reflect the
+        correct parent for their com.ericsson.cifwk.taf.enm.test cases -->
+    <parent>
+        <groupId>com.ericsson.nms</groupId>
+        <artifactId>integration</artifactId>
+        <version>13.2.0.240</version>
+    </parent>
+
+    <groupId>com.ericsson.cifwk</groupId>
+    <artifactId>ERICTAFtaf_performancetests</artifactId>
+    <version>1.0.3-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <properties>
+        <taf_version>2.2.36</taf_version>
+        <taf_sdk>all</taf_sdk>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.ericsson.cifwk.taf</groupId>
+                    <artifactId>taf-maven-plugin</artifactId>
+                    <version>${taf_version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>com.ericsson.cifwk.taf</groupId>
+                <artifactId>taf-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <scm>
+        <connection>scm:git:ssh://gerrit.ericsson.se:29418/OSS/com.ericsson.cifwk/ERICtaf_proto</connection>
+        <developerConnection>scm:git:ssh://gerrit.ericsson.se:29418/OSS/com.ericsson.cifwk/ERICtaf_proto</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <modules>
+        <module>ERICTAFtaf_performancetests_CXP9031377</module>
+        <module>test-pom-ERICTAFtaf_performancetests</module>
+    </modules>
+</project>

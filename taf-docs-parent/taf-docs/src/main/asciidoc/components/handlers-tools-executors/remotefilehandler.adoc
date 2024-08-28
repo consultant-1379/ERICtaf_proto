@@ -1,0 +1,113 @@
+RemoteFileHandler
+=================
+
+ 
+
+The remoteFileHandler allows the user to send a file across to the
+another host i.e from your local machine to remote or from your remote
+machine to your local. It uses an ssh connection to FTP it across.
+
+[[RemoteFileHandler-Constructor]]
+Constructor
+^^^^^^^^^^^
+
+There are two constructors one that takes a host argument and another
+that does not. 
+
+Arguments
+
+Description
+
+Default
+
+Host
+
+The host to where you want to send the file
+
+Null
+
+[[RemoteFileHandler-]]
+ 
+^
+
+[[RemoteFileHandler-Example]]
+Example
+^^^^^^^
+
+[[RemoteFileHandler-Sendingonefile]]
+Sending one file
+
+[source,java]
+----
+Host host = DataHandler.getHostByName("sc1");
+RemoteFileHandler remote = new RemoteFileHandler(host);
+ 
+//// sending file from local host to remotehost
+String localFileLocation = "src/resources/FilesToSend.txt";   //windows address
+String remoteFileLocation = "/opt/resources/target/";    //unix address
+remote.copyLocalFileToRemote(localFileLocation ,remoteFileLocation);
+  
+// sending file from remote host to local host
+String localFileLocation = "C:/src/resources/FilesToSend.txt";
+String remoteFileLocation = "/opt/resources/target/";
+remote.copyRemoteFileToLocal(localFileLocation, remoteFileLocation);
+----
+
+ 
+
+[[RemoteFileHandler-SendingMultiplefiles]]
+Sending Multiple files
+
+[source,java]
+----
+Host host = DataHandler.getHostByName("sc1"); 
+RemoteFileHandler remote = new RemoteFileHandler(host); 
+ 
+// sending file from local host to remotehost 
+String remoteFileLocation = "/opt/resources/target/";    //unix address 
+ 
+ 
+File file = new File("src/main/FilesToSend");
+List allFiles = file.listFiles();
+ 
+for(int i=0; i<allfiles.size(); i++){
+remote.copyLocalFileToRemote(allFiles[i].getAbsolutePath(),remoteFileLocation); 
+}
+----
+
+ 
+
+[[RemoteFileHandler-SFTPFailedtostartException]]
+SFTP Failed to start Exception
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If by using the file handler to send mutliple files across  and you
+recieve an error stating that the SFTP client failed to start or the
+server has refused the connection. It may be because the blade ssh
+configuration for the maximum number of ssh session concurrently has not
+been set or is set to low. By default this value is 10. It will need to
+be changed to a higher value for this issuer to be resolved.
+
+ 
+
+\1) Use putty connection to ssh to your remote machine
+
+\2) Go to the sshd configuration file cd /etc/ssh/sshd_config
+
+\3) Edit file and add ``MaxSession <your_new_value>'' to the file
+
+\4) Restart the SSH server by typing /etc/init.d/sshd restart
+
+ 
+
+[[RemoteFileHandler-.1]]
+ 
+^
+
+ 
+
+ 
+
+ 
+
+ 

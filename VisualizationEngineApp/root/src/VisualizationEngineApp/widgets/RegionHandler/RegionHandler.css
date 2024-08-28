@@ -1,0 +1,67 @@
+header .regionBar {
+    z-index:99;
+	position:absolute;
+	height: 20px;
+	width: 100%;
+	
+	-webkit-box-shadow:0px 1px 2px rgb(210, 210, 210);
+	-moz-box-shadow:0px 1px 2px rgb(210, 210, 210);
+	-ms-box-shadow:0px 1px 2px rgb(210, 210, 210);
+	
+	box-shadow:0px 0px 3px #aaa;
+	background-image: -moz-linear-gradient(center top , rgb(255, 255, 255) 0%, rgb(244, 244, 244) 100%);
+	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, #f4f4f4));
+	background-image:-webkit-linear-gradient(top, #ffffff 0%, #f4f4f4 100%);
+	background-image:-ms-linear-gradient(top, #ffffff 0%, #f4f4f4 100%);
+	background-image:linear-gradient(top bottom, #ffffff 0%, #f4f4f4 100%);
+	background-color:rgba(100,100,100,); opacity:0;
+}
+.regionBar-logo{
+	height:16px;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	background:url('./node_modules/branding/resources/systemBar/econ01.svg') no-repeat center center transparent;
+	width:20px;
+	background-size:13px 13px;
+	padding:0 2px;
+}
+
+.regionBar-rightButton {
+    height: 16px;
+	float:right;
+}
+
+.eaVisualizationEngineApp-wVERegionHandler-ModalDialog h1 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.ebDialog {
+    background: rgba(0,0,0,0.4);
+}
+
+
+.regionBar-topMenuName {
+	position:relative;
+    float:left;
+    left:10%;
+	
+	margin-top: 3px;
+	font-family: 'EricssonCapitalTT';
+	font-weight: normal;
+	font-size: 1.3rem;
+	color: rgb(0, 40, 94);
+}
+
+.regionBar:hover{background-color:rgba(100,100,100,); opacity:100;}
+
+[class*="eaVisualizationEngineApp-r"]:hover  .regionBar{
+background-color:rgba(100,100,100,);
+opacity:100;
+}
+[class*="eaVisualizationEngineApp-r"]:hover .eaVisualizationEngineApp-rPadding-Space {
+padding-top:24px;
+}
+

@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ABCThresholdMonitoring">
+
+    <test name="ABCThresholdMonitoring">
+        <classes>
+            <class name="com.ericsson.abc.test.cases.ABCThresholdMonitoring"/>
+        </classes>
+    </test>
+
+</suite>

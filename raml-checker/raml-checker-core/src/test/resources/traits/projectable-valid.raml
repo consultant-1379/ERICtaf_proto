@@ -1,0 +1,13 @@
+#%RAML 0.8
+---
+title: projectable trait used
+
+traits:
+  - projectable:
+      queryParameters:
+        select:
+
+/resource:
+  get:
+    is:
+      - projectable

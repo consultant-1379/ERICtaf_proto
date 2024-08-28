@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unit tests</title>
+    <script src="../../_tools/test/mocha/test-prepare.js"></script>
+    <script src="../../config/require.test.config.js"></script>
+    <script>
+        loadTestDependencies({
+            tests: [
+                "VisualizationEngineApp",
+                "ext/socket",
+                "config/config",
+                "ext/regionFactory",
+                "ext/draggable",
+                "ext/LocationController",
+                "lib/validator",
+                "lib/CommunicationHandler",
+                "models/EventModel",
+                "models/EventCollection",
+                "regions/PieChart/PieChart",
+                "widgets/EventListItem/EventListItem",
+                "widgets/FlowChart/FlowChart",
+                "widgets/Icon/Icon",
+                "widgets/RegionHandler/RegionHandler",
+                "widgets/SettingsDialog/Subscription/Subscription",
+                "widgets/SpinnerHorizontal/SpinnerHorizontal",
+				"widgets/TreeChart/TreeChart"
+            ]
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>

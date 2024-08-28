@@ -1,0 +1,23 @@
+= Introduction
+
+== Test Automation Framework (TAF) 
+
+TAF is a *Test Automation Framework* to allow the user to create/perform
+Automated Testing of Test cases. It is built using JCAT and TestNG. 
+
+TAF is a framework and a comunity based project in which the users of
+TAF can provide code such as Operators so that they can be used by other
+teams from within that project.
+
+The Core TAF product will be developed and maintained by the the TAF
+Team.
+
+=== Contact
+
+If you have any questions then please contact the TAF team using the following email:
+
+TA Framework Team (LMI) <PDLTAFRAME@ex1.eemea.ericsson.se>.
+
+=== TAF JavaDoc
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/

@@ -1,0 +1,74 @@
+Thresholds
+==========
+
+Goal of threshold is to add verification logic to data collected by
+monitor. This logic can be used to log or warn if a specific event
+occurs or even fail a test case if some characteristic criteria are
+violated.
+
+Thresholds are configured using properties similar to ones used for
+monitors. Currently thresholds can be applied only to numerical values.
+
+Configuration allowing threshold to operate on monitored data has
+following format:
+
+----
+monitor.<monitor_name>.threshold.<value_name>.<above|below>.<threshold_value> = <log| warn|fail>
+----
+
+All the configuration comes after threshold keyword:
+
+name
+
+accepted values
+
+description
+
+value_name
+
+String
+
+Name of the monitored value - any part of the column visible in CSV file
+created by monitor
+
+above|below
+
+above or below keywords
+
+Scoping the threshold to act if value is either greater than expected or
+small and equal
+
+threshold_value
+
+Number
+
+Value that specifies the threshold - if monitor return anything
+above/below this value, threshold violation will be raised
+
+action
+
+log or warn or fail
+
+Action that suppose to happen if threshold value is crossed. ``log'' and
+``warn'' are actions adding data to report.
+
+``fail'' means that an Threshold Violation event will be sent to
+currently executed test case.
+
+ 
+
+Examples:
+
+To fail a test case if free memory on sc1 system is below 10 MB,
+following configuration should be used:
+
+----
+monitor.mem.threshold.free.sc1.below.10000 = fail
+----
+
+To warn if any JBoss process is using more than 5000 nanosecond of CPU
+power (more than 50%)
+
+----
+monitor.cpu.threshold.jboss.above.5000 = warn
+----

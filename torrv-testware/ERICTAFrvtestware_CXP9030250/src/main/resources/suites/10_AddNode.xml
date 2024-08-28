@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- DV_CMCLI_TORF-931 Add Node to TOR. Test Case Id: 10. Add a Node using CM CLI -->
+<suite name="NodeTest" verbose="10">
+    <parameter name="taf.vusers" value="10"/>
+	<test name="Add Node" preserve-order="true">
+		<classes>
+			<class name="com.ericsson.nms.rv.taf.test.cmapache.cases.NodeTest">
+                <methods>
+                    <include name="verifyAddingNodeBehavesAsExpected"/>
+                    <include name="deleteNode"/>
+                </methods>
+			</class>
+		</classes>
+	</test>
+</suite>

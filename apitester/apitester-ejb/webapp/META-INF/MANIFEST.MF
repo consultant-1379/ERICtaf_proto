@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: erafkos
+Build-Jdk: 1.7.0_03
+Class-Path: WEB-INF/lib/apitester-api-1.0.1.jar 
+WEB-INF/lib/antlr-2.7.7.jar
+WEB-INF/lib/ant.jar  
+WEB-INF/lib/sdk-cache-api-1.0.1.jar
+WEB-INF/lib/groovy-all-1.8.6.jar  
+Created-By: Apache Maven 3.0.4
+Archiver-Version: Plexus Archiver

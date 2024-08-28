@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.ericsson.nms</groupId>
+		<artifactId>integration</artifactId>
+		<version>13.2.0.99</version>
+	</parent>
+
+    <groupId>com.ericsson.cifwk</groupId>
+    <artifactId>apitester</artifactId>
+    <version>1.0.5-SNAPSHOT</version>
+    <name>ApiTester</name>
+    <packaging>pom</packaging>
+
+	<properties>
+    	<version.sfwk.api>1.0.11</version.sfwk.api>
+    	<version.sfwk.impl>1.0.9</version.sfwk.impl>
+    	<project.ear.Dependencies>org.slf4j, org.infinispan, org.infinispan.client.hotrod</project.ear.Dependencies>
+    	<version.infinispan>5.1.5.FINAL</version.infinispan>
+    </properties>
+    
+    <modules>
+        <module>apitester-api</module>
+        <module>apitester-core</module>
+        <module>apitester-ejb</module>
+        <module>apitester-ear</module>
+    </modules>
+
+
+    <dependencyManagement>
+		<dependencies>
+			<!-- here we specify what version of Service Framework we want to use. 
+				All modules will be imported -->
+			<dependency>
+				<groupId>com.ericsson.oss.itpf.sdk</groupId>
+				<artifactId>ServiceFramework</artifactId>
+				<version>${version.sfwk.impl}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency> 
+		</dependencies>
+	</dependencyManagement>
+	
+    <dependencies>
+        
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+           
+		
+    </dependencies>
+    <build>
+    	<pluginManagement>
+    		<plugins>
+    			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    			<plugin>
+    				<groupId>org.eclipse.m2e</groupId>
+    				<artifactId>lifecycle-mapping</artifactId>
+    				<version>1.0.0</version>
+    				<configuration>
+    					<lifecycleMappingMetadata>
+    						<pluginExecutions>
+    							<pluginExecution>
+    								<pluginExecutionFilter>
+    									<groupId>
+    										com.ericsson.maven.plugins
+    									</groupId>
+    									<artifactId>
+    										rstate-maven-plugin
+    									</artifactId>
+    									<versionRange>
+    										[1.0,)
+    									</versionRange>
+    									<goals>
+    										<goal>rstate</goal>
+    									</goals>
+    								</pluginExecutionFilter>
+    								<action>
+    									<ignore />
+    								</action>
+    							</pluginExecution>
+    							<pluginExecution>
+    								<pluginExecutionFilter>
+    									<groupId>
+    										org.apache.maven.plugins
+    									</groupId>
+    									<artifactId>
+    										maven-dependency-plugin
+    									</artifactId>
+    									<versionRange>
+    										[2.4,)
+    									</versionRange>
+    									<goals>
+    										<goal>analyze-dep-mgt</goal>
+    									</goals>
+    								</pluginExecutionFilter>
+    								<action>
+    									<ignore />
+    								</action>
+    							</pluginExecution>
+    						</pluginExecutions>
+    					</lifecycleMappingMetadata>
+    				</configuration>
+    			</plugin>
+    		</plugins>
+    	</pluginManagement>
+    </build>
+</project>

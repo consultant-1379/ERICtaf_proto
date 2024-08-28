@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : Charting monitored data</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : Charting monitored data
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Jan 17, 2013 by <font color="#0050B2">ejohlyn</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p>Data from monitors (regardless of monitor type) are stored with reference to time. It means that first column of each CSV file produced by monitor is the millisecond when the data has been logged.</p><p>Based on this, each monitor's data is plotted on time-based chart. Only actual numbers can be charted, yet in many of reported data there are columns containing string values. In such a case default behaviour is to group not-numerical data together to other files, until only numerical values are remaiing.</p><p>For example, the CSV file with following data:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">TimeStamp</th><th class="confluenceTh">Tc_name</th><th class="confluenceTh">Operator_method</th><th class="confluenceTh">Tool</th><th colspan="1" class="confluenceTh">Vusers</th><th colspan="1" class="confluenceTh">Result</th><th colspan="1" class="confluenceTh">Response Time</th></tr><tr><td class="confluenceTd">2013:01:17:12:31:46:090</td><td class="confluenceTd">connectionTimeout</td><td class="confluenceTd">executeTimedOutCall</td><td class="confluenceTd">RestTool</td><td colspan="1" class="confluenceTd">1</td><td colspan="1" class="confluenceTd">true</td><td colspan="1" class="confluenceTd">0</td></tr><tr><td class="confluenceTd">2013:01:17:12:31:46:615</td><td class="confluenceTd">executeAuthorizedRestCalls</td><td class="confluenceTd">executeSecureCall</td><td class="confluenceTd">RestTool</td><td colspan="1" class="confluenceTd">1</td><td colspan="1" class="confluenceTd">true</td><td colspan="1" class="confluenceTd">230</td></tr><tr><td colspan="1" class="confluenceTd"><span>2013:01:17:12:31:51:600</span></td><td colspan="1" class="confluenceTd"><span>executeAuthorizedRestCalls</span></td><td colspan="1" class="confluenceTd"><span>executeUnsecureCall</span></td><td colspan="1" class="confluenceTd">RestTool</td><td colspan="1" class="confluenceTd">1</td><td colspan="1" class="confluenceTd">true</td><td colspan="1" class="confluenceTd">192</td></tr></tbody></table></div><p>Will be splitt to following files:</p><p><span>0=connectionTimeout_1=<span>executeTimedOutCall_2=RestTool_4=true with data</span></span></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">TimeStamp</th><th class="confluenceTh">Vusers</th><th class="confluenceTh">ResponseTime</th></tr><tr><td class="confluenceTd"><span>2013:01:17:12:31:46:090</span></td><td class="confluenceTd">1</td><td class="confluenceTd">0</td></tr></tbody></table></div><p>and 0=<span>executeAuthorizedRestCalls_1=<span>executeSecureCall_2=RestTool_4=true with data</span></span></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">TimeStamp</th><th class="confluenceTh">Vusers</th><th class="confluenceTh">ResponseTime</th></tr><tr><td class="confluenceTd"><span>2013:01:17:12:31:46:615</span></td><td class="confluenceTd">1</td><td class="confluenceTd">230</td></tr></tbody></table></div><p>and and 0=executeAuthorizedRestCalls_1=<span>executeUnsecureCall</span>=RestTool_4=true with data</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">TimeStamp</th><th class="confluenceTh">Vusers</th><th class="confluenceTh">ResponseTime</th></tr><tr><td class="confluenceTd"><span>2013:01:17:12:31:51:600</span></td><td class="confluenceTd">1</td><td class="confluenceTd">192</td></tr></tbody></table></div><p>and will be plotted as 3 lines on the chart. There is lot of redundant data in such a case and visualization should be simplified. E.g. I don't really need information about tool, result, operator method and vusers on my chart. To have a chart without it, we use the &quot;dont_plot&quot; property, this property can be used as follows:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">monitor.&lt;monitorName&gt;.dont_plot = vusers tool result operator_method</pre>
+</div></div><p>In such a case CSV file that will be plot looks following:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">TimeStamp</th><th class="confluenceTh">Tc_name</th><th colspan="1" class="confluenceTh">Response Time</th></tr><tr><td class="confluenceTd">2013:01:17:12:31:46:090</td><td class="confluenceTd">connectionTimeout</td><td colspan="1" class="confluenceTd">0</td></tr><tr><td class="confluenceTd">2013:01:17:12:31:46:615</td><td class="confluenceTd">executeAuthorizedRestCalls</td><td colspan="1" class="confluenceTd">230</td></tr><tr><td colspan="1" class="confluenceTd">2013:01:17:12:31:51:600</td><td colspan="1" class="confluenceTd">executeAuthorizedRestCalls</td><td colspan="1" class="confluenceTd">192</td></tr></tbody></table></div><p>Which will occur as 2 lines on the chart - one per test case. To have one line per all the rest calls, I can specify following:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">monitor.&lt;monitorName&gt;.dont_plot = vusers tc_name result operator_method</pre>
+</div></div><p>Which ends up inf following data:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">TimeStamp</th><th class="confluenceTh">Tool</th><th colspan="1" class="confluenceTh">Response Time</th></tr><tr><td class="confluenceTd">2013:01:17:12:31:46:090</td><td class="confluenceTd"><span>RestTool</span></td><td colspan="1" class="confluenceTd">0</td></tr><tr><td class="confluenceTd">2013:01:17:12:31:46:615</td><td class="confluenceTd"><span>RestTool</span></td><td colspan="1" class="confluenceTd">230</td></tr><tr><td colspan="1" class="confluenceTd">2013:01:17:12:31:51:600</td><td colspan="1" class="confluenceTd"><span>RestTool</span></td><td colspan="1" class="confluenceTd">192</td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:40</small></p>
+            </div>
+        </div>     </body>
+</html>

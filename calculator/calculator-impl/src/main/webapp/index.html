@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Sample Calculator (HTML5)</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+		body, button {
+			font-family: Consolas, monospace;
+		}
+		
+		body {
+			font-size: 24px;
+			line-height: 2;
+		}
+		
+		button {
+			font-size: 100%;
+			margin: 0.05em;
+		}
+		
+		#errorMessage, #validationErrorMessage {
+			background-image: url('images/error.png');
+			background-repeat: no-repeat;
+			background-position: 0px center;
+			color: #D8000C;
+			background-color: #FFBABA;
+			max-width: 440px;
+			padding-left: 34px;
+			margin-top:25px;
+			display: none;
+		}
+		
+		#inProgress {
+			background-image: url('images/progress.gif');
+			background-repeat: no-repeat;
+			background-position: 0px center;
+			margin-top:25px;
+			padding-left: 18px;
+			display: none;
+		}
+		
+		#mainCalc {
+			text-align: center;
+			width: 400px;
+			background-color: #7A7A7A;
+		}
+		
+		input[type=number], input[type=text] {
+			max-width: 80px;
+			font-size: 24px;
+		}
+		
+		#okButton {
+			font-size: 24px;
+		}
+		
+		#operation {
+			font-size: 24px;
+		}
+		
+		#heading {
+			margin-bottom: 25px;
+			padding-bottom: 0px;
+			line-height: 1;
+		}
+
+		</style>
+		<script src="jquery-1.7.1.min.js" type="text/javascript"></script>
+		<script>
+		function calculate() {
+		
+			var operation = $('#operation').val();
+			var var1 = $('#variable1').val();
+			var var2 = $('#variable2').val();
+			
+			if (!var1 || !var2 || isNaN(var1) || isNaN(var2)) {
+				showError("Please enter the correct numbers");
+				$("#result").val("");
+				return;
+			}
+			
+			var jsonData = JSON.stringify({"variableOne":var1, "variableTwo":var2});
+			$.ajax({
+			    type: "POST",
+			    url: "/calculator/rest/" + operation,
+			    contentType: "application/json",
+			    dataType: 'json',
+			    data: jsonData,
+			    beforeSend: function() { 
+					$("#errorMessage").hide();
+					$("#inProgress").show();
+				},
+			    complete: function() { 
+					$("#inProgress").hide();
+				},
+			    success: function(data) { 
+					$("#result").val(data.result);
+				},
+			    error: function(xhr, status, error) {
+			    	//alert("error " + status + " " + error + "(" + xhr.responseXML + ")");
+					if (xhr.responseText && xhr.responseText.indexOf("DivisionByZeroException") != -1) {
+						$("#result").val("DIV/0");
+					} else {
+						$("#result").val("ERR");
+					}
+					showError("An error has occured");
+			    }
+			});		
+		}
+		
+		function showError(errorText) {
+			$("#errorMessage").text(errorText);
+			$("#errorMessage").show();
+		}
+		
+		function hideError() {
+			$("#errorMessage").hide();
+		}
+		
+		</script>
+	</head>
+
+	<body>
+		<h2 id="heading">Simple Calculator</h2>
+	
+		<div id="mainCalc">
+		<input type="number" id="variable1" name="variable1" value="" />
+		<select id="operation" name="operation">
+			<option value="add" selected>+</option>
+			<option value="subtract">-</option>
+			<option value="multiply">*</option>
+			<option value="divide">/</option>
+		</select>
+		<input type="number" id="variable2" name="variable2" value="" />
+		<input type="button" id="okButton" name="ok" value="=" onclick="calculate()"/>
+		<input type="text" id="result" name="result" value="" readonly="readonly" />
+		</div>
+
+		<div id="inProgress">Calculating...</div>
+		<div id="errorMessage"></div>
+		<div id="validationErrorMessage"></div>
+	</body>
+	
+</html>

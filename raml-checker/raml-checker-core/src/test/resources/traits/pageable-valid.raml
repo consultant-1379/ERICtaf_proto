@@ -1,0 +1,15 @@
+#%RAML 0.8
+---
+title: pageable trait used
+
+traits:
+  - pageable:
+      queryParameters:
+        offset:
+        limit:
+        page:
+
+/resource:
+  get:
+    is:
+      - pageable

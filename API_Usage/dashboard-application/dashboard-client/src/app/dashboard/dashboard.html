@@ -1,0 +1,79 @@
+<div class="overview">
+
+    <div pageslide ps-open="vm.checked" ps-side="left">
+        <div style="padding:20px" id="demo-left">
+            <h2>Navigation</h2>
+            <ul>
+                <li class="clickable" ng-click="vm.dashboardRequest()">Dashboard</li>
+                <li class="clickable" ng-click="vm.overviewRequest()">Usage Overview</li>
+                <li class="clickable" ng-click="vm.listTafClasses()">List TAF Classes</li>
+                <li class="clickable" ng-click="vm.listTeamClasses()">List Teams Classes</li>
+                <li class="clickable" ng-click="vm.listTeamMethods()">List Teams Methods</li>
+                <li class="clickable" ng-click="vm.countMethodsRequest()">Method Count</li>
+            </ul>
+            <a ng-click="vm.toggle()" class="button clickable" >Close</a>
+        </div>
+    </div>
+
+    <h1>TAF @API</h1>
+
+    <img src="../assets/images/arrow.png" alt="Open Sidebar" style="width:40px;height:40px;" class="sidebarButton clickable" ng-click="vm.toggle()">
+
+    <div class="panel panel-default medium">
+        <div class="panel-heading clickable" ng-click="stableIsCollapsed = !stableIsCollapsed">
+            <h4 class="panel-title">
+                <a href="#">
+                    Stable
+                </a>
+            </h4>
+        </div>
+        <div uib-collapse="stableIsCollapsed">
+            <div class="panel-body" ng-hide="vm.dataAvailable">{{vm.stable}}</div>
+            <div class="panel-body" ng-hide="!vm.dataAvailable">{{vm.stableData}}</div>
+        </div>
+        <div uib-collapse="stableIsCollapsed">
+        </div>
+    </div>
+
+    <div class="panel panel-default medium">
+        <div class="panel-heading clickable" ng-click="deprecatedIsCollapsed = !deprecatedIsCollapsed">
+            <h4 class="panel-title">
+                <a href="#">
+                    Deprecated
+                </a>
+            </h4>
+        </div>
+        <div uib-collapse="deprecatedIsCollapsed">
+            <div class="panel-body" ng-hide="vm.dataAvailable">{{vm.deprecated}}</div>
+            <div class="panel-body" ng-hide="!vm.dataAvailable">{{vm.deprecatedData}}</div>
+        </div>
+    </div>
+
+    <div class="panel panel-default medium">
+        <div class="panel-heading clickable" ng-click="internalIsCollapsed = !internalIsCollapsed">
+            <h4 class="panel-title">
+                <a href="#">
+                    Internal
+                </a>
+            </h4>
+        </div>
+        <div uib-collapse="internalIsCollapsed">
+            <div class="panel-body" ng-hide="vm.dataAvailable">{{vm.internal}}</div>
+            <div class="panel-body" ng-hide="!vm.dataAvailable">{{vm.internalData}}</div>
+        </div>
+    </div>
+
+    <div class="panel panel-default medium">
+        <div class="panel-heading clickable" ng-click="experimentalIsCollapsed = !experimentalIsCollapsed">
+            <h4 class="panel-title">
+                <a href="#" >
+                    Experimental
+                </a>
+            </h4>
+        </div>
+        <div uib-collapse="experimentalIsCollapsed">
+            <div class="panel-body" ng-hide="vm.dataAvailable">{{vm.experimental}}</div>
+            <div class="panel-body" ng-hide="!vm.dataAvailable">{{vm.experimentalData}}</div>
+        </div>
+    </div>
+</div>

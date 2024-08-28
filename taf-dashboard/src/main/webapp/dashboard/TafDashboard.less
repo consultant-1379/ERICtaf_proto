@@ -1,0 +1,77 @@
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.eaTafDashboard {
+  &-panel {
+    position: relative;
+    height: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    overflow: hidden;
+  }
+
+  .eaTafDashboard {
+    &-panels {
+      position: fixed;
+      top: 45px;
+      bottom: 0;
+      width: 100%;
+    }
+    &-panel {
+      position: absolute;
+      overflow: hidden;
+      height: auto;
+    }
+
+    &-panel-confidence {
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 40%;
+    }
+    &-panel-status {
+      top: 0;
+      left: 0;
+      width: 30%;
+      height: 40%;
+    }
+    &-panel-cpu {
+      top: 0;
+      left: 30%;
+      right: 280px;
+      height: 20%;
+    }
+    &-panel-memory {
+      top: 20%;
+      left: 30%;
+      right: 280px;
+      height: 20%;
+    }
+    &-panel-log {
+      top: 40%;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .eaTafDashboard {
+    &-panel-status {
+      width: 40%;
+    }
+    &-panel-cpu {
+      left: 40%;
+    }
+    &-panel-memory {
+      left: 40%;
+    }
+  }
+}

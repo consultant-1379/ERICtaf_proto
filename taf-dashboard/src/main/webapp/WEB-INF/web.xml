@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <description>TAF Dashboard</description>
+    <display-name>taf-dashboard</display-name>
+
+    <filter>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>guiceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>com.ericsson.cifwk.dashboard.application.DashboardConfiguration</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.ericsson.cifwk.dashboard.application.RabbitMqServletListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>amqpHost</param-name>
+        <param-value>atclvm793.athtem.eei.ericsson.se</param-value>
+    </context-param>
+    <context-param>
+        <param-name>amqpPort</param-name>
+        <param-value>5672</param-value>
+    </context-param>
+    <context-param>
+        <param-name>amqpUsername</param-name>
+        <param-value>guest</param-value>
+    </context-param>
+    <context-param>
+        <param-name>amqpPassword</param-name>
+        <param-value>guest</param-value>
+    </context-param>
+    <context-param>
+        <param-name>amqpExchange</param-name>
+        <param-value>eiffel.poc.testing</param-value>
+    </context-param>
+
+    <mime-mapping>
+        <extension>json</extension>
+        <mime-type>application/json</mime-type>
+    </mime-mapping>
+</web-app>

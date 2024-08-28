@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+
+    <skin>
+        <groupId>com.ericsson.cds</groupId>
+        <artifactId>ericsson-skin-stats</artifactId>
+        <version>1.0.1</version>
+    </skin>
+
+    <bannerLeft>
+        <name>${project.name}</name>
+    </bannerLeft>
+
+    <publishDate position="right"/>
+
+    <bannerRight>
+        <src>images/logo.png</src>
+    </bannerRight>
+
+    <body>
+        <links>
+            <item name="Nexus" href="${nam.nexus.url}"/>
+            <item name="Ericsson" href="http://www.ericsson.com"/>
+        </links>
+
+        <menu name="Testware Quality Plugin">
+            <item name="Documentation" href="/index.html"/>
+        </menu>
+
+    </body>
+
+</project>

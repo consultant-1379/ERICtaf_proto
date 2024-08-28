@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : Create TAF-based test project</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : Create TAF-based test project
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on May 16, 2013 by <font color="#0050B2">ejohlyn</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p>TAF-based project needs to be a Maven project with dependency to TAF. It is strongly recommended to use following convention:</p><ul style="list-style-type: square;"><li>non business logic should be kept in com.ericsson.cifwk.taf packages - this logic will be incorporated inside TAF and delivered in TAF jar. Keeping it in these packages from begging, will remove any need for change later on.</li><li>keep getters, operators and data in properly named packages - these packages will be shared with rest of community via TAF jar, but they namespace needs to be preserved in relation to their business logic</li><li>keep test cases and test data in proper packages undesr test package - this part will not be shared with rest of the project teams or PDU </li></ul><p>Following structure is created if com.ericsson.taffit:testcases archetype is used. To use it, invoke following command:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">mvn archetype:generate -DarchetypeCatalog=https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/repositories/snapshots/archetype-catalog.xml</pre>
+</div></div><div align="left">and select option:</div><div align="left"><p> </p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/repositories/snapshots/archetype-catalog.xml -&gt; com.ericsson.teamname:example_taf_project-archetype (-)</pre>
+</div></div><p>Next interactively specify group and project id as well as project name and package name as per example below.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">Define value for property &#39;groupId&#39;: : com.ericsson.teamname
+Define value for property &#39;artifactId&#39;: : example_taf_project
+Define value for property &#39;version&#39;:  1.0-SNAPSHOT: : 1.0.1-SNAPSHOT
+Define value for property &#39;package&#39;:  com.ericsson.teamname: : 
+Confirm properties configuration:
+groupId: com.ericsson.teamname
+artifactId: example_taf_project
+version: 1.0.1-SNAPSHOT
+package: com.ericsson.teamname
+ Y: : Y</pre>
+</div></div><p>This will create following file structure:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">./src/main/java/com/ericsson/teamname/integrationtest/operators/RestOperatorExampleOperatorActions.java
+./src/main/java/com/ericsson/teamname/integrationtest/operators/rest/RestToolExampleRestOperator.java
+./src/main/java/com/ericsson/teamname/integrationtest/operators/RestToolExampleOperator.java
+./src/main/java/com/ericsson/teamname/integrationtest/data/RestToolExampleDataProvider.java
+./src/main/java/com/ericsson/teamname/integrationtest/getters/rest/RestToolExampleRestGetter.java
+./src/main/java/com/ericsson/teamname/integrationtest/test/cases/RestToolExample.java
+./src/main/java/com/ericsson/teamname/integrationtest/test/data/RestToolExampleData.java
+./src/main/resources/scripts/TafRun.groovy
+./src/main/resources/example_data/exampledata.csv
+./src/main/resources/log4j.properties
+./src/main/resources/taf_properties/hosts.properties
+./src/main/resources/taf_properties/examplemonitors.properties
+./src/main/resources/taf_properties/rest_toolexample_host.properties
+./src/main/resources/suites/RestToolExampleSuite.xml
+./src/main/resources/suites/listeners.xml
+./pom.xml</pre>
+</div></div><div align="left">The files are a working TAF testcase example and can be run from the get go.</div><p>The project created can be ran directly by changing into the directory &quot;example_taf_project&quot; and running command:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">mvn clean install</pre>
+</div></div><p>This will compile the project and run the dummy testcases.</p><p> </p><p>To further understand this example you can examine the class diagram - <a href="http://confluence-oss.lmera.ericsson.se/display/TAF/Rest+Example+Overview" rel="nofollow">Rest Example Overview</a></p><p> </p><p>Furthermore if you import the project created above into eclipse you will be able to run it by right clicking on the &quot;RestToolExampleSuite.xml&quot; file in the the &quot;src /main/resources/suites&quot; folder and choose &quot;Run As&quot; -&gt; &quot;TestNG&quot;, as shown below.</p><p><img class="confluence-embedded-image" src="attachments/13435039/19989159.png" data-image-src="attachments/13435039/19989159.png"></p></div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/13435039/16056427.jpg">screen.jpg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/13435039/19989159.png">RunAs-TestNG-Suite.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/13435039/29950900.html">emailable-report.html</a> (text/html)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="comments" class="pageSectionTitle">Comments:</h2>
+                        </div>
+
+                        <table border="0" width="100%">
+                                                        <tr>
+                                <td >
+                                    <a name="comment-23531489"></a>
+                                    <font class="smallfont"><div class="wiki-content"><div class="wiki-content"><p>If your project directory structure in eclipse doesn't look correct the following steps will resolve this.</p><ol><li>Close eclipse</li><li>Open the command line and navigate to the folder your project is in.</li><li>run &quot;mvn <a href="http://eclipseclean" class="external-link" rel="nofollow">eclipse:clean</a>&quot;</li><li>Followed by &quot;mvn &quot;<a href="http://eclipseeclipse" class="external-link" rel="nofollow">eclipse:eclipse</a>&quot;</li></ol><p>Everything should be hunky-dory in your eclipse now.</p></div></div></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by ethomev at Apr 04, 2013 13:15
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td  style="border-top: 1px dashed #666666">
+                                    <a name="comment-30023730"></a>
+                                    <font class="smallfont"><p>When I tried to create the project by the steps provided in this page, only the structure and source folders in it are been created but no files i.e. .java or any other configuration files are not being created.</p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by XTRINAR at Aug 06, 2013 10:49
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr>
+                                <td  style="border-top: 1px dashed #666666">
+                                    <a name="comment-30023790"></a>
+                                    <font class="smallfont"><p>Hi Trisandhya,</p><p>That is strange. I'll walk through the steps on my machine to re-create the issue and get back to you with hopefully a solution.</p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by ethomev at Aug 06, 2013 12:44
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </table>
+                    </div>
+                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:39</small></p>
+            </div>
+        </div>     </body>
+</html>

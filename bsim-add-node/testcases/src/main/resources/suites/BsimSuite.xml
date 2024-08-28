@@ -1,0 +1,10 @@
+<suite name="BSIM operations">
+
+
+        <!-- This is a comment in the suite.xml file -->
+        <test name="BSIM operations">
+                <classes>                     
+                        <class name="com.ericsson.oss.bsim.test.cases.Bsim" />
+                </classes>
+        </test>
+</suite>

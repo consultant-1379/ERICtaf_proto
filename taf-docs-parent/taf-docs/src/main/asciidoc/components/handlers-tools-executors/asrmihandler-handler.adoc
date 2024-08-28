@@ -1,0 +1,67 @@
+AsRmiHandler Handler
+====================
+
+[[AsRmiHandlerHandler-WhatisASRMI?]]
+What is AS RMI?
+---------------
+
+RMI is a mechanism used by Application Server to allow remote clients
+call methods in beans deployed inside Application Server Container
+
+[[AsRmiHandlerHandler-WhatistheTAFASRMIHandler?]]
+What is the TAF AS RMI Handler?
+-------------------------------
+
+RMI Handler supports fetching bean/remote object with remote interface
+using a JNDI lookup inside Application Server so the developer can then
+call methods on it.
+
+[[AsRmiHandlerHandler-Howtogetstarted]]
+How to get started
+------------------
+
+Constructor of AsRmiHandler is called following:
+
+----
+AsRmiHandler(Host jbossNode)
+----
+
+image:images/icons/emoticons/warning.png[image]
+
+Host requires to have RMI port set and application realm user.
+
+This handler allows use of it to get bean/remote object using method
+getServiceViaJndiLookup():
+
+----
+Object rmiHandlerInstance.getServiceViaJndiLookup(String jndiString)
+----
+
+Note:
+
+AsRmiHandler provides close method to close lookup context and
+connection to Application Server and these need to be used to gracefully
+close connections to AS.
+
+[[AsRmiHandlerHandler-APIDocumentationLink]]
+API Documentation Link
+----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html[AsRMIHandler
+API Documentation]
+
+[[AsRmiHandlerHandler-CurrentFunctionality]]
+Current Functionality
+---------------------
+
+Fetch bean exposed with remote interface
+
+[[AsRmiHandlerHandler-PlannedImprovements]]
+Planned Improvements
+--------------------
+
+[[AsRmiHandlerHandler-Knownissuesandworkarounds]]
+Known issues and workarounds
+----------------------------
+
+Topology

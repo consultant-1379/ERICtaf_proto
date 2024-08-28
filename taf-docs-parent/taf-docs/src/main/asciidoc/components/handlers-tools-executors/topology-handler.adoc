@@ -1,0 +1,43 @@
+Topology Handler
+================
+
+[[TopologyHandler-WhatisTopology?]]
+What is Topology?
+-----------------
+
+Topology is the representation of all the network elements in a network.
+
+[[TopologyHandler-WhatistheTAFTopologyHandler?]]
+What is the TAF Topology Handler?
+---------------------------------
+
+The TAF Topology Handler is an API which allows you to get this topology
+from the OSS.
+
+[[TopologyHandler-Howtogetstarted]]
+How to get started
+------------------
+
+The Topology handler is used by the link:oss-handler.html[OSS Handler]
+and so this handler should be referenced and used.
+
+[[TopologyHandler-APIDocumentationLink]]
+API Documentation Link
+----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html[Topology
+Handler API Documentation]
+
+[[TopologyHandler-CurrentFunctionality]]
+Current Functionality
+---------------------
+
+[[TopologyHandler-PlannedImprovements]]
+Planned Improvements
+--------------------
+
+[[TopologyHandler-Knownissuesandworkarounds]]
+Known issues and workarounds
+----------------------------
+
+ 

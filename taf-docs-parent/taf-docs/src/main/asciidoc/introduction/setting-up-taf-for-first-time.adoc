@@ -1,0 +1,205 @@
+= Setting up TAF for First time
+
+== Introduction
+
+In this section we will bring the user through setting up TAF for
+the first time. First and for most please read the link:introduction.html[Introduction]
+section which includes what TAF is about in slides on how it works and
+videos on getting started. These should give the user a good start on
+creating a new project.
+
+=== TAF JavaDoc
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/
+
+== Environment - Eclipse, Maven, GIT
+
+Setting up the environment for the first time.
+TAF project is a http://maven.apache.org/what-is-maven.html[Maven] project.
+
+In order to run TAF the user will need the following 
+
+* Eclipse E4e (Ericsson's version of Eclipse)
+* Maven Apache server
+* Maven Plugin for Eclipse
+* Groovy Plugin for Eclipse - not really required but may be needed to
+  view *taf-core* when troubleshooting and to navigate Java docs in Eclipse
+* EGit plugin for eclipse
+
+=== Development Environment
+
+The link below will show the user from the TAF team's setup how to setup
+the environments from scratch. *Please note to check your own team if
+they have their own environment setup.*
+
+http://confluence-oss.lmera.ericsson.se/display/TAF/Development+Environment+Setup[Development Environment Setup] -
+This link contains instructions to setup
+Eclipse E4E, GIT, Maven Apache Server, EGIT (Eclipse plugin) JBoss, JDK.
+
+=== Maven plugin
+
+Follow this link below to install Maven m2e for Eclipse.
+You may also need to install the *Eclipse marketplace* plugin.
+
+http://marketplace.eclipse.org/content/maven-integration-eclipse#.UWbI7lROixo
+
+=== Groovy Plugin
+
+Follow this link below to install Groovy.
+You may also need to install the *Eclipse marketplace* plugin.
+
+http://marketplace.eclipse.org/content/groovy-eclipse-juno#.UWbJh1ROixo
+
+=== Other Installations
+
+Within your team you may need the following but please check with your team.
+
+* Git –> This can be found in the in the link above to show you
+  how to setup Git and set an SSH key.
+* JBoss Application server – depending on your project you may use JBoss.
+  Please check with your team.
+
+=== JBoss
+
+The CM Mediation Team have created a good setup with pre-written
+standalone file that will provide a quick setup of JBoss.
+
+Good JBoss Setup from CM Mediation Team
+http://confluence-oss.lmera.ericsson.se/display/TLT/TOR+CM+Mediation+Local+Depolyment[Click here]
+
+NOTE: This is not Managed by TAF
+
+== AVS
+
+AVS is used to firstly store your test cases that have been created
+using FreeMind. Freemind is a tool that allows the user to map out the
+test cases they wish to use. The freemind map for each team can then be
+stored in the AVS webpage https://cifwk-oss.lmera.ericsson.se/. The
+Freemind map will then be taken and converted into Test cases structure
+of TAF when uploaded to the website. The user can then take the code
+produced and continue to write your code. Please see slides on
+http://confluence-oss.lmera.ericsson.se/display/TAF/Introduction[introduction]
+page on AVS
+
+1. Get Freemind AVS template -
+   https://ericoll.internal.ericsson.com/sites/Integration_Verification/core_CI_Framework/Test%20Automation/Blank_AVS_template.mm[AVS Template]
+2. Use template to create freemind map of Test cases
+3. Upload AVS template to website  https://cifwk-oss.lmera.ericsson.se/
+4. Download zip file of generate TAF testcases
+5. Add Test case classes and add suite.xml in src/resource folder
+6. User can now add their code to the test structure or *Archetype*
+
+== Archetype
+
+The Archetype is a Maven template project that has already been setup
+with TAF to run Test cases. It comes with example testcases for remote
+file handling and also a Rest example.
+
+For starting out this is a quick and easy way of starting off with using
+TAF to setup your Test cases.
+
+The link below will explain how to run the Archetype command using the
+maven apache server to generate the project. Once this is completed
+simply import the Maven Project into eclipse run the example test cases
+to see it working. The Team can now use this project as there
+
+NOTE: The user will have to change the package names to name the
+      project has been given when creating the Archetype. This is not
+      automatically generated from the Archetype.
+
+http://confluence-oss.lmera.ericsson.se/display/TAF/Create+TAF-based+test+project[Generating the Archetype]
+
+The user has now all essential tools to start creating Test cases.
+
+http://confluence-oss.lmera.ericsson.se/display/RRPM/TAF+on+Linux+HUB[TAF on Linux HUB] -
+for people working in the HUB to generate the archetype and have issues with the maven settings xml
+
+== Things you should know when getting started
+
+TAF package comes complete with handlers for JBoss, RMI etc. TAF uses
+properties files to store Host connections and for its monitoring and
+threshold functionality which is used to chart for example CPU, Memory
+etc usage when testcases are run. This is linked to the JCat report that
+is produced by TAF once completed. Please see inside TAF for more
+information link:inside-taf.html[Inside TAF]
+
+=== DataHandlers
+
+From the properties file the user can get this information by using the
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/data-handler/apidocs/index.html[*DataHandler*] class
+to retrieve property information that is stored in the resource folder,
+on the classpath or in the project folders. Data Handler can also get OS
+environment properties as well and is a central point for data
+retrieval. This class can be used to get the Host properties that is
+needed for example to add into the JBoss handlers. For example:
+
+NOTE: All property files must be stored in
+      src/main/resources/*taf_properties* in the project folder.
+
+.Example: get all JBoss instances
+[source,java]
+----
+/**
+ * Get all the host objects from all data sources and return in a list
+ * @return a list of Host objects.
+ */
+public static List<Host> getHosts() { ... }
+
+List<Host> result = new ArrayList<Host>();
+for (Host potentialNode : DataHandler.getHosts()) {
+    if (potentialNode.getType() == HostType.JBOSS)
+        result.add(potentialNode);
+}
+return result;
+----
+
+
+.Example: get my first node
+[source,java]
+----
+Host host = Datahandler.getHostByName("sc1");
+----
+
+The Host Properties file value takes the form.
+
+    host.hostname.property = value
+    host.hostname.node.nodename.property = value
+
+
+.Example: Host Properties file
+----
+host.sc1.type=sc1
+host.sc1.ip=10.12.1.17
+host.sc1.user=root
+host.sc1.pass=12shroot
+host.sc1.port.ssh=22
+host.sc1.node.firstNode.type=jboss
+host.sc1.node.firstNode.port.http=8080
+host.sc1.node.firstNode.user=admin
+host.sc1.node.firstNode.pass=adminPass
+host.sc1.node.firstNode.port.jmx=9999
+host sc1.node.secondNode.type=jboss
+host.sc1.node.secondNode.port.http=8081
+host.sc1.node.secondNode.port.jmx=10000
+host.sc1.node.secondNode.user=admin
+host.sc1.node.secondNode.pass=adminPass
+----
+
+=== Monitoring
+
+Please see this link to slides on monitoring and the basic setting up of
+properties files for Monitoring
+
+link:hands-on-monitoring.html[Hands on Monitoring] 
+
+=== Thresholds
+
+Goal of threshold is to add verification logic to data collected by
+monitor. This logic can be used to log or warn if a specific event
+occurs or even fail a test case if some characteristic criteria are
+violated. Please see link:thresholds.html[Thresholds]
+
+Thresholds are configured using properties similar to ones used for
+monitors. Currently thresholds can be applied only to numerical values.
+
+image:attachments/23532691/25395454.png[image]image:attachments/23532691/25395455.png[image]

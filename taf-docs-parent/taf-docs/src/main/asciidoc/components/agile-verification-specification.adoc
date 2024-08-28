@@ -1,0 +1,18 @@
+Agile Verification Specification
+================================
+
+Agile Verification Specificiation (AVS) is a toolchain allowing to
+quickly create comprehensive Test Case specificiation in Agile
+environment.
+
+*AVS Mindmap Template can be found here:
+link:attachments/12657890/27329298.mm[AVS Template] +
+*
+
+*Link to AVS Service to import Mindmap*:
+https://cifwk-oss.lmera.ericsson.se/avs/
+
+ +
+
+Mindmap can be edited uing Freemind
+tool: http://downloads.sourceforge.net/freemind/FreeMind-Windows-Installer-0.9.0-max-java-installer-embedded.exe?download

@@ -1,0 +1,34 @@
+#http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties
+
+# Spring Boot
+spring:
+    profiles.active: dev
+    main.banner-mode: "off"
+    cloud:
+        discovery:
+          client:
+            simple:
+              instances:
+                TDM_Stage:
+                  - uri: http://seliiuts00050.lmera.ericsson.se
+                    metadata:
+                      management.context-path: /api
+
+server:
+    port: 8080
+    socket: localhost:8080
+
+#Build Info
+info.build:
+    version: @project.version@
+#    name: @project.name@
+    artifact: @project.artifactId@
+
+
+# Actuator
+management.security.enabled: false
+management.context-path: /api
+
+# JMX
+endpoints.jolokia.enabled: true
+spring.jmx.enabled: true

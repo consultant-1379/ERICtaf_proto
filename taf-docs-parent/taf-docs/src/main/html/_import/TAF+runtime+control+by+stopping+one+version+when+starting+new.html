@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : TAF runtime control by stopping one version when starting new</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : TAF runtime control by stopping one version when starting new
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Sep 11, 2013 by <font color="#0050B2">EDENUDO</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p>see: <span class="jira-issue resolved" >
+    <a href="http://jira-oss.lmera.ericsson.se/browse/CIP-3303"><img class="icon" src="http://jira-oss.lmera.ericsson.se/images/icons/issuetypes/story.png">CIP-3303</a> -
+    Possibility to do a hot redeploy of tests by stopping one version and starting new
+    (<span class="jira-status"><img class="icon" src="http://jira-oss.lmera.ericsson.se/images/icons/statuses/closed.png">Closed</span>)
+</span>
+</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Problem:</th><td class="confluenceTd"><p><span style="color: rgb(41,41,41);">Possibility to do a hot redeploy of tests by stopping one version and starting new<br /></span><span style="color: rgb(41,41,41);font-size: 10.0pt;line-height: 13.0pt;">TAF runtime, which is controllable via Jenkins jobs and allows deployment and running of tests</span></p></td></tr><tr><th class="confluenceTh">Solution:</th><td class="confluenceTd"><p>Add into TAF runtime JMX service who allow control TAF (stop) through Java JMX API</p></td></tr></tbody></table></div><p><div>
+<ul>
+    <li><a href='#TAFruntimecontrolbystoppingoneversionwhenstartingnew-Components:'>Components:</a></li>
+    <li><a href='#TAFruntimecontrolbystoppingoneversionwhenstartingnew-TAFRuntimecontrolflow:'>TAF Runtime control flow:</a></li>
+    <li><a href='#TAFruntimecontrolbystoppingoneversionwhenstartingnew-TAFRuntimecontrolparameters:'>TAF Runtime control parameters:</a></li>
+</ul></div></p><h4 id="TAFruntimecontrolbystoppingoneversionwhenstartingnew-Components:">Components:</h4><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Taf</th><td class="confluenceTd"><ul style="list-style-type: square;"><li>Create and store <span>TafRunnerContext</span></li><li>Start TafJMXManagement</li><li>Start TestNG and execute all test cases throught TafScheduledTestRunnervv</li><li>Stop TafJMX<span>Management</span></li></ul></td></tr><tr><th class="confluenceTh"><span>TafRunnerContext</span></th><td class="confluenceTd"><p>Provide TAF Runtime context variables:</p><ul style="list-style-type: square;"><li><code>isInterrupted</code></li><li><code>isTerminated </code></li><li>TAF Runtime name</li></ul></td></tr><tr><th class="confluenceTh"><span>TafJMXManagement</span></th><td class="confluenceTd"><ul style="list-style-type: square;"><li>Check system property &quot;taf.manadement&quot; and start if it is defined</li><li>Try to find &quot;old Taf runtime&quot; through JMX</li><li>Try to shutdown or kill &quot;old Taf runtime&quot; through JMX MBean com.ericsson.cifwk.taf:type=TafManager</li><li>Create JMX MBean TafJMXManager and register it into JMX</li></ul></td></tr><tr><th class="confluenceTh"><span>TafJMXManager </span></th><td class="confluenceTd"><ul style="list-style-type: square;"><li>Implement TafManager interface and provide it's functionality through JMX</li><li>send received JMX command to TafRunnerContext</li></ul></td></tr><tr><th class="confluenceTh">TafScheduledTestRunner</th><td class="confluenceTd"><ul style="list-style-type: square;"><li>Check isInterrupted on <span>TafRunnerContext </span></li><li><span>Stop all testcases if Taf runtime is interrupted </span></li></ul></td></tr></tbody></table></div><h4 id="TAFruntimecontrolbystoppingoneversionwhenstartingnew-TAFRuntimecontrolflow:">TAF Runtime control flow:</h4><p><img class="confluence-embedded-image confluence-thumbnail" width="300" src="attachments/thumbnails/30911698/31066063" data-image-src="attachments/30911698/31066063.jpg"></p><h4 id="TAFruntimecontrolbystoppingoneversionwhenstartingnew-TAFRuntimecontrolparameters:">TAF Runtime control parameters:</h4><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh"><p>System propery</p><ul><li style="list-style-type: none;background-image: none;"><ul><li><code>taf.management</code> </li></ul></li></ul></th><td class="confluenceTd"><p>Used to control TafJMXManagement<br />possible value:<br /><code>-D</code><span><code>taf.management</code><br /><code>-D</code><span><code>taf.management=*</code><br /><code><span>-Dtaf.management=servicename{;otherservice}</span></code></span><code> </code></span></p><ul style="list-style-type: square;"><li><span>TafJMXManagement enabled if </span><code>taf.management</code></li><li>is defined with empty value, such as<code> -Dtaf.management</code></li><li>TafJMXManagement enabled if <code>taf.management</code> is defined with * (star) value, such as<code> -Dtaf.management=*</code></li><li>TafJMXManagement enabled if <code>taf.management</code> is defined with service list and of the services name is jmxlocal, such as <code>-Dtaf.management=jmxlocal</code></li></ul><p>How to use:</p><ul><li><span style="font-size: 10.0pt;line-height: 13.0pt;">from command line: </span><code style="font-size: 10.0pt;line-height: 13.0pt;"><span style="font-size: 10.0pt;line-height: 13.0pt;">mvn test -Dtaf.management  <em>...other parameters</em></span></code></li><li>in pom.xml, add systemProperty <span>taf.management</span> info exec-maven-plugin/configuration</li></ul></td></tr><tr><th class="confluenceTh"><p>System properties:</p><ul><li style="list-style-type: none;background-image: none;"><ul><li><code>taf.groupId</code></li><li><code><span style="font-size: 10.0pt;line-height: 13.0pt;">taf.artifac</span><span style="font-size: 10.0pt;line-height: 13.0pt;">tId</span></code></li><li><span style="font-size: 10.0pt;line-height: 13.0pt;"><code>taf.version</code> </span></li></ul></li></ul></th><td class="confluenceTd"><p>Used to create Taf Runtime name such as taf.groupId:taf.artifactId:taf:version.<br />This name used by TafJmxManagement to find corresponding old Taf runtime. TafJMXManagement stop old Taf runtime is current Taf runime has same name value.<br />If you do not define any or all of the values, the will use the defaults value:</p><ul><li><span style="font-size: 10.0pt;line-height: 13.0pt;">for <code>taf.groupId</code> default value is <code>com.ericsson.cifwk.taf</code></span></li><li><span style="font-size: 10.0pt;line-height: 13.0pt;">for <code>taf.arfifactId</code> default value is <code>testcases</code></span></li><li><span style="font-size: 10.0pt;line-height: 13.0pt;">for<code> taf.version</code> default value is <code>0</code></span><span style="font-size: 10.0pt;line-height: 13.0pt;"><br /></span>if jou not specifying any values, default Taf Runtime name is <em><strong><code>com.ericsson.cifwk.taf:testcases:0</code></strong></em></li></ul><p>How to use:</p><ul><li><span>from command line: </span><code><span>mvn test -D<code>taf.groupId=my.team.project</code>  ...other parameters</span></code></li><li>in pom.xml, add <code>systemProperty</code> info <code>exec-maven-plugin/configuration</code></li></ul></td></tr></tbody></table></div><p>How to stop Old Taf Runtime w/o running new tests</p><ul><li><span style="font-size: 10.0pt;line-height: 13.0pt;">Use non-existent suite name on command line: mvn test -Dsuites=</span>Jabberwocky</li><li><p>or create empty suites.xml, such as </p><div class="code panel" style="border-width: 1px;"><div class="codeHeader panelHeader" style="border-bottom-width: 1px;"><b>stop-taf.xml</b></div><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: html/xml; gutter: false" style="font-size:12px;">&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot; &gt;
+&lt;suite name=&quot;stop-taf&quot; /&gt;
+</pre>
+</div></div><p>and use <code><span>mvn test -Dsuites=</span>stop-taf.xml</code> in command line </p><p>or add it's on pom.xml to<code> exec-maven-plugin/configuration</code> in pom.xml</p></li></ul>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/30911698/31066064.jpg">TAF_JMX_Runtime_Control_1.JPG</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/30911698/31066063.jpg">TAF_JMX_Runtime_Control_1.JPG</a> (image/jpeg)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:40</small></p>
+            </div>
+        </div>     </body>
+</html>

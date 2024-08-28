@@ -1,0 +1,16 @@
+{"eiffelMessageVersions": {
+  "2.2.2.0.18": {
+    "domainId": "test.execution",
+    "eventId": "389deac4-1fc0-4bdf-8ba5-c248b9e3a4e1",
+    "eventTime": "2013-08-22T12:36:36.139Z",
+    "eventType": "EiffelTestTestAction",
+    "inputEventIds": ["90a22d26-d965-4292-a316-98ba32512d85"],
+    "eventData": {
+      "message": "Messagefromtestclasscom.ericsson.cifwk.taf.eiffel.testng.TestNgListenerTestaboutresulttrue",
+      "optionalParameters": {
+        "level": "INFO",
+        "class": "classcom.ericsson.cifwk.taf.eiffel.testng.TestNgListenerTest"
+      }
+    }
+  }
+}}

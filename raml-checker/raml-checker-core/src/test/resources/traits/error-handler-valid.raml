@@ -1,0 +1,13 @@
+#%RAML 0.8
+---
+title: error-handler trait used
+
+traits:
+  - error-handler:
+      responses:
+        500:
+
+/resource:
+  get:
+    is:
+      - error-handler

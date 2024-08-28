@@ -1,0 +1,256 @@
+[
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "4108d343-dec7-4ae9-8f8e-f6f3e48f33b0",
+        "eventTime": "2013-08-28T12:03:07.907Z",
+        "eventType": "EiffelTestExecutionStarted",
+        "inputEventIds": [],
+        "eventData": {
+          "environmentName": "E72C59E5BD3825.ericsson.se",
+          "name": "TAF_RUN",
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "f2849db6-5789-4b04-ba45-5e737b51d6fb",
+        "eventTime": "2013-08-28T12:03:30.255Z",
+        "eventType": "EiffelTestSuiteStarted",
+        "inputEventIds": ["4108d343-dec7-4ae9-8f8e-f6f3e48f33b0"],
+        "eventData": {
+          "expectedExecutionNo": 3,
+          "name": "Custom suite",
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "9e2027cc-7b44-41e4-9886-f8974f4923b3",
+        "eventTime": "2013-08-28T12:03:30.980Z",
+        "eventType": "EiffelTestCaseStarted",
+        "inputEventIds": ["f2849db6-5789-4b04-ba45-5e737b51d6fb"],
+        "eventData": {
+          "title": "shouldFail",
+          "testCaseId": "Custom suite@522377941",
+          "params": ["ala", "8"],
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "5b2fe767-b358-484c-817b-025027533049",
+        "eventTime": "2013-08-28T12:03:31.037Z",
+        "eventType": "EiffelTestCaseFinished",
+        "inputEventIds": ["9e2027cc-7b44-41e4-9886-f8974f4923b3"],
+        "eventData": {
+          "result": "FAILURE",
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "2fba0c6e-16dc-4fd9-813e-b633a1ae88be",
+        "eventTime": "2013-08-28T12:03:31.113Z",
+        "eventType": "EiffelTestCaseStarted",
+        "inputEventIds": ["f2849db6-5789-4b04-ba45-5e737b51d6fb"],
+        "eventData": {
+          "title": "shouldFail",
+          "testCaseId": "Custom suite@522377941",
+          "params": ["bala", "6"],
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "87788dcf-7057-491f-8296-8f7c6def5f3b",
+        "eventTime": "2013-08-28T12:03:31.132Z",
+        "eventType": "EiffelTestCaseFinished",
+        "inputEventIds": ["2fba0c6e-16dc-4fd9-813e-b633a1ae88be"],
+        "eventData": {
+          "result": "SUCCESS",
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "1378097e-b3e6-4f1e-956a-f86170944429",
+        "eventTime": "2013-08-28T12:03:31.161Z",
+        "eventType": "EiffelTestCaseStarted",
+        "inputEventIds": ["f2849db6-5789-4b04-ba45-5e737b51d6fb"],
+        "eventData": {
+          "title": "shouldHaveExecutionId",
+          "testCaseId": "Custom suite@522377941",
+          "params": [],
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "c9714df0-31bc-4762-9961-b21af6c34ab4",
+        "eventTime": "2013-08-28T12:03:31.230Z",
+        "eventType": "EiffelTestCaseFinished",
+        "inputEventIds": ["1378097e-b3e6-4f1e-956a-f86170944429"],
+        "eventData": {
+          "result": "SUCCESS",
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "c8fd5168-2439-402d-8573-63a1c33d691b",
+        "eventTime": "2013-08-28T12:03:31.251Z",
+        "eventType": "EiffelTestCaseStarted",
+        "inputEventIds": ["f2849db6-5789-4b04-ba45-5e737b51d6fb"],
+        "eventData": {
+          "title": "shouldManageSuite",
+          "testCaseId": "Custom suite@522377941",
+          "params": [],
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "9f26143e-12cf-4c42-ac74-426125b7c3f2",
+        "eventTime": "2013-08-28T12:03:31.270Z",
+        "eventType": "EiffelTestSuiteStarted",
+        "inputEventIds": ["4108d343-dec7-4ae9-8f8e-f6f3e48f33b0"],
+        "eventData": {
+          "expectedExecutionNo": 1,
+          "name": "GSuite",
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "ed13be19-d3d8-41d2-967e-e3f4295ca12a",
+        "eventTime": "2013-08-28T12:03:31.290Z",
+        "eventType": "EiffelTestTestAction",
+        "inputEventIds": ["c8fd5168-2439-402d-8573-63a1c33d691b"],
+        "eventData": {
+          "message": "Message from test class com.ericsson.cifwk.taf.eiffel.testng.TestNgListenerTest about result true",
+          "optionalParameters": {
+            "level": "INFO",
+            "class": "class com.ericsson.cifwk.taf.eiffel.testng.TestNgListenerTest"
+          }
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "a1557ecd-d4bb-4c2d-b8ba-982a3ed885e8",
+        "eventTime": "2013-08-28T12:03:31.302Z",
+        "eventType": "EiffelTestTestAction",
+        "inputEventIds": ["c8fd5168-2439-402d-8573-63a1c33d691b"],
+        "eventData": {
+          "message": "Message from test class com.ericsson.cifwk.taf.eiffel.testng.TestNgListenerTest about result true",
+          "optionalParameters": {
+            "level": "INFO",
+            "class": "class com.ericsson.cifwk.taf.eiffel.testng.TestNgListenerTest"
+          }
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "55701e3f-e912-45cf-a370-83e4b44f74b5",
+        "eventTime": "2013-08-28T12:03:31.306Z",
+        "eventType": "EiffelTestSuiteFinished",
+        "inputEventIds": ["9f26143e-12cf-4c42-ac74-426125b7c3f2"],
+        "eventData": {
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "90f0f34c-1cb3-4a06-877f-45025c058374",
+        "eventTime": "2013-08-28T12:03:31.312Z",
+        "eventType": "EiffelTestCaseFinished",
+        "inputEventIds": ["c8fd5168-2439-402d-8573-63a1c33d691b"],
+        "eventData": {
+          "result": "SUCCESS",
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "c2ae84e6-c0b3-48e4-b829-485065a5633c",
+        "eventTime": "2013-08-28T12:03:31.340Z",
+        "eventType": "EiffelTestSuiteFinished",
+        "inputEventIds": ["f2849db6-5789-4b04-ba45-5e737b51d6fb"],
+        "eventData": {
+          "optionalParameters": {}
+        }
+      }
+    }
+  },
+  {
+    "eiffelMessageVersions": {
+      "2.2.2.0.20": {
+        "domainId": "test.execution",
+        "eventId": "9d868fca-bd47-431e-a182-e25f4697ac7f",
+        "eventTime": "2013-08-28T12:03:31.352Z",
+        "eventType": "EiffelTestExecutionFinished",
+        "inputEventIds": ["4108d343-dec7-4ae9-8f8e-f6f3e48f33b0"],
+        "eventData": {
+          "optionalParameters": {}
+        }
+      }
+    }
+  }
+]

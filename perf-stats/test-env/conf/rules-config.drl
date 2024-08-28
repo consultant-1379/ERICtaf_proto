@@ -1,0 +1,7 @@
+rule "Store and log all received Eiffel Messages" 
+    when
+        m : EiffelMessage()
+    then
+        log.info("RULE ENGINE RECEIVED: " + m.getEventType());
+        datastore.store(m); 
+end

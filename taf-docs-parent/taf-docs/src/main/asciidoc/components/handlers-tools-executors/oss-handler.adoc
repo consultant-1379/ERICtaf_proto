@@ -1,0 +1,67 @@
+OSS Handler
+===========
+
+[[OSSHandler-WhatisOSS?]]
+What is OSS?
+------------
+
+OSS is the main product which has been developed in PDU OSS for the past
+20 years. More information can be at
+http://internal.ericsson.com/page/hub_net/unit/unit_01/u_04/index.jsp
+
+[[OSSHandler-WhatistheTAFOSSHandler?]]
+What is the TAF OSS Handler?
+----------------------------
+
+The TAF OSS Handler is an API which allows us to interact with an OSS-RC
+Server.
+
+[[OSSHandler-Howtogetstarted]]
+How to get started
+------------------
+
+Firstly, create an instance of the OSSHandler. There is 1 constructor
+which takes 1 argument, a
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/data-handler/apidocs/index.html[Host
+object]. This host object is the OSS-RC server you wish to interact
+with.
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false--------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+OssHandler oss = new OssHandler(ossRcServer)
+--------------------------------------------
+
+The functionality available is the ability to get the full topology or
+the topology of a given type.
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false----------------------------------------------------------------------------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+/* This returns the full topology*/
+List<MibRoot> topology = oss.getFullTopology()
+
+String [] type = {"com.ericsson.nms.cif.cs.mo.mimONRM.SubNetworkImpl","MIBRoot","ManagedEleme","Io"}
+
+ /* The type can be full class names, class names,partial class names or any key word. Empty string return full topology. */
+ List<MibRoot> topology = oss.getTopology(type)
+----------------------------------------------------------------------------------------------------------------------------
+
+ 
+
+[[OSSHandler-APIDocumentationLink]]
+API Documentation Link
+----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html[OSS
+Handler API Documentation]
+
+[[OSSHandler-CurrentFunctionality]]
+Current Functionality
+---------------------
+
+[[OSSHandler-PlannedImprovements]]
+Planned Improvements
+--------------------
+
+[[OSSHandler-Knownissuesandworkarounds]]
+Known issues and workarounds
+----------------------------

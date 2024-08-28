@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : DataHandler</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : DataHandler
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Dec 06, 2012 by <font color="#0050B2">ethomev</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="DataHandler-WhatisData?">What is Data?</h1><p>Data is what drives the testing in TAF. This can be data about the system, data to use to test the system, etc.</p><h1 id="DataHandler-WhatistheTAFDataHandler?">What is the TAF Data Handler?</h1><p>The TAF Data Handler is a central point of data management.</p><p>It retrieves all the data from various reconciles and makes it available for test code.</p><p>This way data specified in properties file or OS environment variable are available using one method call.</p><p>Data Handler allows also to store values and fetch them e.g. in different thread.</p><p> </p><p>Note: Data set at run time using the Data Handler takes precedence over data set via environment variables which takes precedence over data set from from property files.</p><p>some attribute&quot;attributeA = propertyFileValue&quot;</p><p>same attribute could be set via environment variable java -DattributeA = environmentVariableValue&quot;</p><p>same attribute could be set in code at run time   DataHandler.setAttribute=(&quot;attributeA&quot;,&quot;runTimeValue&quot;);</p><p>If this was the case the runtime value would be used. More detail below.</p><h1 id="DataHandler-Howtogetstarted">How to get started</h1><p>The Data Handler methods can be accessed statically so there is no need to instantiate it.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">/* Get a system property */
+String classpath = DataHandler.getAttribute(&quot;java.class.path&quot;)
+
+/* Get a property defined by you */
+String variableSpecificToYourTest = DataHandler.getAttribute(&quot;path.to.file.specified.by.you&quot;)
+
+/* Get a map of all the properties, user defined, system and runtime. */
+Map allAttributes = DataHandler.getAttributes()
+
+/* Get the list of Hosts defined by you */
+List&lt;Host&gt; hosts = DataHandler.getHosts()	</pre>
+</div></div><p>Fetching arguments from property files or OS variables:</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">testware.properties:
+firstProperty = first
+secondProperty = 2
+ 
+OS environment:
+java -DthirdProperty=3 -DsecondProperty=two ...
+ 
+DataHandler.getAttribute(&quot;firstProperty&quot;) //(returning Object-String &quot;first&quot;)
+DataHandler.getAttribute(&quot;thirdProperty&quot;) //returning Object-String &quot;3&quot;)
+DataHandler.getAttribute(&quot;secondProperty&quot;) // returning Object-String &quot;two&quot; as OS environment variable has higher priority than property in file
+DataHandler.setAttribute(&quot;secondProperty&quot;,2) 
+DataHandler.getAttribute(&quot;secondProperty&quot;) //returning Object - integer 2 as properties set at runtime has higher priority than OS environment variable</pre>
+</div></div><p> </p><p>It is also possible to set an attribute at runtime</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">DataHandler.setAttribute(&quot;path.to.file.specified.by.you&quot;, &quot;/home/myfile.txt&quot;)</pre>
+</div></div><h1 id="DataHandler-APIDocumentationLink">API Documentation Link</h1><p><a href="https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/data-handler/apidocs/index.html" class="external-link" rel="nofollow">DataHandler API Documentation</a></p><h1 id="DataHandler-CurrentFunctionality">Current Functionality</h1><p>Combine data from property files, OS environment settings and runtime data to be available via method call.</p><p>Get and set attributes/properties in runtime.</p><h1 id="DataHandler-PlannedImprovements">Planned Improvements</h1><p>None</p><h1 id="DataHandler-Knownissuesandworkarounds">Known issues and workarounds</h1><p>None</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:39</small></p>
+            </div>
+        </div>     </body>
+</html>

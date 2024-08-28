@@ -1,0 +1,4 @@
+node,attribute,value
+LTE07ERBS00155,"cmedit get LTE07ERBS00155 ENodeBFunction.(dnsLookupTimer)","{""dtoType"":""nameValue"",""dtoName"":null,""value"":""0"",""name"":""dnsLookupTimer""}"
+LTE07ERBS00155,"cmedit set MeContext=LTE07ERBS00155,ManagedElement=1,ENodeBFunction=1 dnsLookupTimer=500",1 instance(s) updated
+LTE07ERBS00155,"cmedit get LTE07ERBS00155 ENodeBFunction.(dnsLookupTimer)","{""dtoType"":""nameValue"",""dtoName"":null,""value"":""500"",""name"":""dnsLookupTimer""}"

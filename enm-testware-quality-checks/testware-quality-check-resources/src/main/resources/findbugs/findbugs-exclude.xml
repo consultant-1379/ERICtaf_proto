@@ -1,0 +1,8 @@
+<FindBugsFilter>
+  <Match>
+    <Or>
+      <Package name="~com\..*generated\.*.java"/>
+      <Package name="~com\.[.a-zA-Z]*.legacy.*"/>
+    </Or>
+  </Match>
+</FindBugsFilter>

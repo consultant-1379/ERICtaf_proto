@@ -1,0 +1,96 @@
+Operators
+=========================
+
+[[ListofTAFTOROperators-Operator]]
+Operator
+^^^^^^^^
+
+[[ListofTAFTOROperators-BriefDescription]]
+Brief Description
+^^^^^^^^^^^^^^^^^
+
+[[ListofTAFTOROperators-Moreinfo(link)]]
+More info (link)
+^^^^^^^^^^^^^^^^
+
+[[ListofTAFTOROperators-MaintainedBy]]
+Maintained By
+^^^^^^^^^^^^^
+
+ExampleOperator
+
+An example operator for the purpose of showing the structure of the
+confluence pages
+
+http://confluence-oss.lmera.ericsson.se/display/TAF/Example+Operator[Confluence
+page for operator]
+
+Test Automation Team
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/taf-tor-operators/DataPersistenceTest-api/apidocs/index.html[DataPersistenceGenericOperator]
+
+The DataPersistenceGenericOperator is intended to expose the Tor Network
+Model to CRUD operations.
+
+http://confluence-oss.lmera.ericsson.se/display/TAF/DataPersistenceGenericOperator[Confluence
+page for operator]
+
+TOR CM Team
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/taf-tor-operators/TopologySyncTest-api/apidocs/index.html[TopologySyncGenericOperator]
+
+The TopologySyncGenericOperator is intended to be used to test topology
+synchronization related functionality.
+
+http://confluence-oss.lmera.ericsson.se/display/TAF/TopologySyncGenericOperator[Confluence
+page for operator]
+
+TOR CM Team
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 

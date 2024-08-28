@@ -1,0 +1,97 @@
+AS Instrumentation Monitor
+==========================
+
+AS Instrumentation Monitor is a time-based monitor collecting MBean
+metrics at intervals specified in the properties file. 
+
+Monitor fetches data from JBOSS nodes available in
+DataHandler.getHosts() method that can be monitored i.e. has user,
+password and JXM port specifed and data is fetchable.
+
+Monitor is saving data to ``asbmean.csv'' and it’s chart has title
+``asmbean'' in the HTML report.
+
+[[ASInstrumentationMonitor-Monitorconfiguration:]]
+Monitor configuration:
+~~~~~~~~~~~~~~~~~~~~~~
+
+Property
+
+Accepted values
+
+Default value
+
+Description
+
+Example
+
+monitor.asmbean.enabled
+
+true|false|1|0
+
+false
+
+Property to enable or disable the monitor before run
+
+monitor.asmbean.enabled=true
+
+monitor.asmbean.collectionTime
+
+numbers
+
+1
+
+Property to specify interval of data being collected
+
+monitor.asmbean.collectionTime=1
+
+monitor.asmbean.dont_plot
+
+columneNames
+
+N/A
+
+Property to specify columns that should not be shown on chart
+
+monitor.asmbean.dont_plot=enabled
+
+monitor.asmbean.mbean._id._name
+
+string
+
+N/A
+
+Property to specify name of the data inside a MBean and actual MBean
+string
+
+monitor.asmbean.mbean.memory.name=java.lang:type=Memory
+
+monitor.asmbean.mbean._id._forget
+
+string
+
+N/A
+
+Property to specify which fields of MBean should not be monitored
+
+monitor.asmbean.mbean.memory.forget=memorypool, Verbose
+
+As per above examples, every MBean that should be monitored must have
+specified name and can have specified fields that should not be
+monitored (e.g static fields like ``enabled'' that has same value
+``true''.
+
+[[ASInstrumentationMonitor-MonitoredData:]]
+Monitored Data:
+~~~~~~~~~~~~~~~
+
+Data logged into file has following column names:
+
+nodeName_MBeanId__fieldOrSubfields,
+e.g.: eap_Memory_HeapMemoryUsage_committed
+
+as every MBean’s properties has separate column and are flattened until
+simple data format is reached. If List of Array is inside MBean
+property, its size is logged to the file, e.g
+for eap_Threading_AllThreadIds instead of list of Thread ids, amount of
+IDs will be logged.

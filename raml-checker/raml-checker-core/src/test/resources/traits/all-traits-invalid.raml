@@ -1,0 +1,48 @@
+#%RAML 0.8
+---
+title: all traits are not used
+
+/resource-a:
+  get:
+    responses:
+      500:
+
+  /sub-resource-b:
+    get:
+      queryParameters:
+        filter:
+
+  /sub-resource-c:
+    get:
+      queryParameters:
+        offset:
+        limit:
+        page:
+
+/resource-d:
+  get:
+    queryParameters:
+      select:
+
+  /sub-resource-e:
+    get:
+      queryParameters:
+        search:
+        find:
+
+  /sub-resource-f:
+    get:
+      queryParameters:
+        orderBy:
+        sort:
+
+    /sub-resource-g:
+      get:
+        queryParameters:
+          order:
+          sorting:
+
+    /sub-resource-h:
+      get:
+        responses:
+          422:

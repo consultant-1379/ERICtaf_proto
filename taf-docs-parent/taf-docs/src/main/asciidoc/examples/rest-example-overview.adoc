@@ -1,0 +1,39 @@
+Rest Example Overview
+=====================
+
+Rest Example is delivered as part of
+link:create-taf-based-test-project.html[TAF archetype] (you can get it
+using mvn command: )
+
+code,theme:,Confluence;,brush:,bash;,gutter:,false---------------------------------------------------------------------------------------------------------------------------------------
+code,theme:,Confluence;,brush:,bash;,gutter:,false
+mvn archetype:generate -DarchetypeCatalog=https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/repositories/snapshots/archetype-catalog.xml
+---------------------------------------------------------------------------------------------------------------------------------------
+
+ 
+
+Goal of this example is to document the way of using RestTool in test
+cases.
+
+image:attachments/19857495/19988517.gif[image]
+
+ 
+
+Left part of class diagram shows the data flow and right part shows the
+logic flow. 
+
+Top layer is Test layer - it is not shared between teams and does not
+contain ``business'' logic - doesn’t define how to operate on System. 
+
+Middle layer is Operator - it is shared between the teams inside
+taf-tor-operators project. It contains all the business logic required
+to execute actions on System. It contains both generic and contextual
+Operators and Data Provider to fetch data from the system.
+
+Lowest layer contains mappings of points exposed by SUT. This layer is
+shared between the teams and is created to easily manage changes of SUT.
+
+ 
+
+RestTool is containing System Under Test using some implementation of
+rest tool (e.g. JMeter or cURL).

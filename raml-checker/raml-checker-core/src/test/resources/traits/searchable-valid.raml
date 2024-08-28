@@ -1,0 +1,14 @@
+#%RAML 0.8
+---
+title: searchable trait used
+
+traits:
+  - searchable:
+      queryParameters:
+        search:
+        find:
+
+/resource:
+  get:
+    is:
+      - searchable

@@ -1,0 +1,23 @@
+<schedule>
+	<item>
+		<component>com.ericsson.ci.cloud.cdb_ossrc_install.cite-tests</component>
+		<suite>install.xml</suite>
+		<stop_on_fail>true</stop_on_fail>
+	</item>
+	<item>
+                <component>com.ericsson.oss.bsim.test-pom</component>
+                <suite>BsimTempSuite.xml</suite>
+                <stop_on_fail>false</stop_on_fail>
+        </item>
+<!--	<item>
+		<component>com.ericsson.oss.bsim.test-pom</component>
+		<suite>BsimLTESuite.xml, BsimWCDMASuite.xml</suite>
+		<stop_on_fail>false</stop_on_fail>
+	</item>
+-->
+	<item>
+		<component>com.ericsson.cifwk.taf.cdb-manual</component>
+		<suite>manual_test.xml</suite>
+		<stop_on_fail>false</stop_on_fail>
+	</item>
+</schedule>

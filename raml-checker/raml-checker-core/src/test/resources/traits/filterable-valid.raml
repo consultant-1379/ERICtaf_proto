@@ -1,0 +1,13 @@
+#%RAML 0.8
+---
+title: filterable trait used
+
+traits:
+  - filterable:
+      queryParameters:
+        filter:
+
+/resource:
+  get:
+    is:
+      - filterable

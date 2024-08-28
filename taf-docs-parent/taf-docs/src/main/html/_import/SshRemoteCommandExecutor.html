@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : SshRemoteCommandExecutor</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : SshRemoteCommandExecutor
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Jan 02, 2013 by <font color="#0050B2">ethomev</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="SshRemoteCommandExecutor-WhatisSsh?">What is Ssh?</h1><p>Ssh stands for Secure Shell and is a network protocol for secure data communication, more information can be found at <a href="http://en.wikipedia.org/wiki/Secure_Shell" class="external-link" rel="nofollow">http://en.wikipedia.org/wiki/Secure_Shell</a></p><h1 id="SshRemoteCommandExecutor-WhatistheTAFSshRemoteCommandExecutor?">What is the TAF SshRemoteCommandExecutor?</h1><p>The TAF SshRemoteCommandExecutor is an API which allows you to connect to a host and execute commands on that host through TAF as if you had opened an ssh terminal on port 22.</p><p>Note: is is also possible to ssh to a host with a port other than port 22 - please see API for more details</p><h1 id="SshRemoteCommandExecutor-Howtogetstarted">How to get started</h1><p>First off, you'll need to create an instance of SshRemoteCommandExecutor. The constructor takes a <a href="https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/data-handler/apidocs/index.html" class="external-link" rel="nofollow">Host object</a> which contains the info of the host to connect to.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">SshRemoteCommandExecutor executor = SshRemoteCommandExecutor(host)</pre>
+</div></div><h1 id="SshRemoteCommandExecutor-APIDocumentationLink">API Documentation Link</h1><p><a href="https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html" class="external-link" rel="nofollow">Ssh Remote Command Executor API Documentation</a></p><h1 id="SshRemoteCommandExecutor-CurrentFunctionality">Current Functionality</h1><p>The current functionality of the SshRemoteCommandExecutor allows you to run commands on a remote system over ssh.</p><p>It has 2 overloaded methods to execute commands. Both are overloaded in the same way, they either take a string with the command and arguments in one string or they take a string with the command and a String array with all the arguments. The main difference is in what they return, execute returns a boolean for success or failure and simpleExec returns a string which contains the response of the command. You can also access the std out, the std error out and the exit code for execute() command but not for simplExec() using methods getStdOut() getErrOut getExitCode().</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">String response = executor.simplExec(&quot;ls -al&quot;)
+boolean success = executor.execute(&quot;ls&quot;, &quot;-a&quot;, &quot;l&quot;)</pre>
+</div></div><p>The current functionality provided is:-</p><ul><li>Set the host to execute the command on  - setHost(Host) </li><li>Do a simple execute of a command without options e.g. 'ls' on the host  - simplExec(String)</li><li>Do a simple execute of a command with options e.g. 'ls -lrt' on the host  - simplExec(String, String...)</li><li>Do a regular execute of a command without options e.g. 'ls' on the host - execute(String)</li><li>Do a regular execute of a command with options e.g. 'ls -lrt' on the host - execute(String, String...)</li></ul><h1 id="SshRemoteCommandExecutor-PlannedImprovements">Planned Improvements</h1><p>None at this time</p><h1 id="SshRemoteCommandExecutor-Knownissuesandworkarounds">Known issues and workarounds</h1><p>None at this time</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:39</small></p>
+            </div>
+        </div>     </body>
+</html>

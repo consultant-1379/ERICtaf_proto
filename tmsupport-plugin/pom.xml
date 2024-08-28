@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ericsson.nms</groupId>
+        <artifactId>integration</artifactId>
+        <version>13.2.0.251</version>
+    </parent>
+
+    <groupId>com.ericsson.taf.hackathon</groupId>
+    <artifactId>tmsupport-plugin</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>hpi</packaging>
+
+    <properties>
+        <target.java.version>1.7</target.java.version>
+        <jenkins.version>1.501</jenkins.version>
+        <stackoverflow-api.version>1.0.0-SNAPSHOT</stackoverflow-api.version>
+    </properties>
+
+    <!-- <repositories> <repository> <id>repo.jenkins-ci.org</id> <url>http://repo.jenkins-ci.org/public/</url> 
+        </repository> </repositories> -->
+    <!-- <pluginRepositories> <pluginRepository> <id>repo.jenkins-ci.org</id> 
+        <url>http://repo.jenkins-ci.org/public/</url> </pluginRepository> </pluginRepositories> -->
+        
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.13</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.kohsuke.stapler</groupId>
+                <artifactId>maven-stapler-plugin</artifactId>
+                <version>1.16</version>
+                <!-- version specified in parent pom -->
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.kohsuke</groupId>
+                <artifactId>access-modifier-checker</artifactId>
+                <version>1.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jenkins-ci.tools</groupId>
+                <artifactId>maven-hpi-plugin</artifactId>
+                <version>1.95</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency><!-- if a plugin wants to depend on the maven plugin, 
+                    choose the right version automatically -->
+                <groupId>org.jenkins-ci.main</groupId>
+                <artifactId>maven-plugin</artifactId>
+                <version>${jenkins.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ericsson.taf.hackathon</groupId>
+            <artifactId>stackoverflow-api</artifactId>
+            <version>${stackoverflow-api.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>jenkins-core</artifactId>
+            <version>${jenkins.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--Needed for testCompile -->
+        <dependency>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>jenkins-test-harness</artifactId>
+            <version>${jenkins.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--Needed for classes: ServletException -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.jenkins-ci.main</groupId> -->
+<!--             <artifactId>jenkins-war</artifactId> -->
+<!--             <type>war</type> -->
+<!--             <version>${jenkins.version}</version> -->
+<!--             <scope>test</scope> -->
+<!--         </dependency> -->
+    </dependencies>
+</project>

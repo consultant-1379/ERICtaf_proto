@@ -1,0 +1,186 @@
+Charting monitored data
+=======================
+
+Data from monitors (regardless of monitor type) are stored with
+reference to time. It means that first column of each CSV file produced
+by monitor is the millisecond when the data has been logged.
+
+Based on this, each monitor’s data is plotted on time-based chart. Only
+actual numbers can be charted, yet in many of reported data there are
+columns containing string values. In such a case default behaviour is to
+group not-numerical data together to other files, until only numerical
+values are remaiing.
+
+For example, the CSV file with following data:
+
+TimeStamp
+
+Tc_name
+
+Operator_method
+
+Tool
+
+Vusers
+
+Result
+
+Response Time
+
+2013:01:17:12:31:46:090
+
+connectionTimeout
+
+executeTimedOutCall
+
+RestTool
+
+1
+
+true
+
+0
+
+2013:01:17:12:31:46:615
+
+executeAuthorizedRestCalls
+
+executeSecureCall
+
+RestTool
+
+1
+
+true
+
+230
+
+2013:01:17:12:31:51:600
+
+executeAuthorizedRestCalls
+
+executeUnsecureCall
+
+RestTool
+
+1
+
+true
+
+192
+
+Will be splitt to following files:
+
+0=connectionTimeout_1=executeTimedOutCall_2=RestTool_4=true with data
+
+TimeStamp
+
+Vusers
+
+ResponseTime
+
+2013:01:17:12:31:46:090
+
+1
+
+0
+
+and 0=executeAuthorizedRestCalls_1=executeSecureCall_2=RestTool_4=true
+with data
+
+TimeStamp
+
+Vusers
+
+ResponseTime
+
+2013:01:17:12:31:46:615
+
+1
+
+230
+
+and and
+0=executeAuthorizedRestCalls_1=executeUnsecureCall=RestTool_4=true with
+data
+
+TimeStamp
+
+Vusers
+
+ResponseTime
+
+2013:01:17:12:31:51:600
+
+1
+
+192
+
+and will be plotted as 3 lines on the chart. There is lot of redundant
+data in such a case and visualization should be simplified. E.g. I don’t
+really need information about tool, result, operator method and vusers
+on my chart. To have a chart without it, we use the ``dont_plot''
+property, this property can be used as follows:
+
+----
+monitor.<monitorName>.dont_plot = vusers tool result operator_method
+----
+
+In such a case CSV file that will be plot looks following:
+
+TimeStamp
+
+Tc_name
+
+Response Time
+
+2013:01:17:12:31:46:090
+
+connectionTimeout
+
+0
+
+2013:01:17:12:31:46:615
+
+executeAuthorizedRestCalls
+
+230
+
+2013:01:17:12:31:51:600
+
+executeAuthorizedRestCalls
+
+192
+
+Which will occur as 2 lines on the chart - one per test case. To have
+one line per all the rest calls, I can specify following:
+
+----
+monitor.<monitorName>.dont_plot = vusers tc_name result operator_method
+----
+
+Which ends up inf following data:
+
+TimeStamp
+
+Tool
+
+Response Time
+
+2013:01:17:12:31:46:090
+
+RestTool
+
+0
+
+2013:01:17:12:31:46:615
+
+RestTool
+
+230
+
+2013:01:17:12:31:51:600
+
+RestTool
+
+192

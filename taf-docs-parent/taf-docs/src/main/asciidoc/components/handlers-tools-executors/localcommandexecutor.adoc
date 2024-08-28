@@ -1,0 +1,70 @@
+LocalCommandExecutor
+====================
+
+[[LocalCommandExecutor-WhatisLocal?]]
+What is Local?
+--------------
+
+Local is the host you are running on.
+
+[[LocalCommandExecutor-WhatistheTAFLocalCommandExecutor?]]
+What is the TAF Local Command Executor?
+---------------------------------------
+
+The TAF local command executor is an API which allows you to execute
+commands on the machine the JVM is running on.
+
+[[LocalCommandExecutor-Howtogetstarted]]
+How to get started
+------------------
+
+This API just has the default constructor so start with that
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false----------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+LocalCommandExecutor executor = new LocalCommandExecutor()
+----------------------------------------------------------
+
+It has 2 overloaded methods to execute commands. Both are overloaded in
+the same way, they either take a string with the command and arguments
+in one string or they take a string with the command and a String array
+with all the arguments. The main difference is in what they return,
+execute returns a boolean for success or failure and simpleExec returns
+a string which contains the response of the command.  The stdout, dtderr
+and exit code from the command are also available using methods
+getStdOut() getErrOut getExitCode().
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false---------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+String response = executor.simplExec("ls -al")
+boolean success = executor.execute("ls", "-a", "l")
+
+String stdOut= executor.getStdOut()
+String stdErr= executor.getErrOut()
+int exitCode= executor.getExitCode()
+---------------------------------------------------
+
+[[LocalCommandExecutor-APIDocumentationLink]]
+API Documentation Link
+----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html[Local
+Command Executor API Documentation]
+
+[[LocalCommandExecutor-CurrentFunctionality]]
+Current Functionality
+---------------------
+
+Execute commands on the current machine the TAF JVM is operating on
+
+[[LocalCommandExecutor-PlannedImprovements]]
+Planned Improvements
+--------------------
+
+None at this time
+
+[[LocalCommandExecutor-Knownissuesandworkarounds]]
+Known issues and workarounds
+----------------------------
+
+None at this time

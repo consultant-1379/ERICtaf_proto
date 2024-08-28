@@ -1,0 +1,41 @@
+TopologySyncGenericOperator
+===========================
+
+ 
+
+[[TopologySyncGenericOperator-Name]]
+Name
+----
+
+TopologySyncGenericOperator
+
+[[TopologySyncGenericOperator-Description]]
+Description
+-----------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/taf-tor-operators/TopologySyncTest-api/apidocs/index.html
+
+[[TopologySyncGenericOperator-Howtousetheoperator]]
+How to use the operator
+-----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/taf-tor-operators/TopologySyncTest-api/apidocs/index.html
+
+[[TopologySyncGenericOperator-Possiblefuturedevelopment]]
+Possible future development
+---------------------------
+
+ 
+
+[[TopologySyncGenericOperator-Anyknownissues/limitations]]
+Any known issues / limitations
+------------------------------
+
+ 
+
+ 
+
+[[TopologySyncGenericOperator-Note:Pleasefeelfreetocommentstothisoperatorpage,thesecommentswillserverasadiscussiononthecurrentstatusandfuturedevelopmentofthisoperator]]
+*Note:* Please feel free to comments to this operator page, these
+comments will server as a discussion on the current status and future
+development of this operator

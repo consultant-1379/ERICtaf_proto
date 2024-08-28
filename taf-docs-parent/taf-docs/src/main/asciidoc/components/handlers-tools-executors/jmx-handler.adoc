@@ -1,0 +1,86 @@
+JMX Handler
+===========
+
+[[JMXHandler-WhatisJMX?]]
+What is JMX?
+------------
+
+JMX stands for Java Management eXtensions which is a Java technology
+that supplies tools for managing and monitoring applications, system
+objects, devices (e. g. printers) and service oriented networks
+
+[[JMXHandler-WhatistheTAFJMXHandler?]]
+What is the TAF JMX Handler?
+----------------------------
+
+The TAF JMX Handler is an API which allows jmx connection to a JBoss AS
+which will allow you to monitor and manage applications in the jboss
+instance.
+
+[[JMXHandler-Howtogetstarted]]
+How to get started
+------------------
+
+Create an instance of JMXHandler
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false------------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+JmxHandler jmx = new JmxHandler(host)
+/* OR */
+JmxHandler jmx = new JmxHandler(ip, username, pass, jmxPort)
+------------------------------------------------------------
+
+The JmxHandler has 2 constructors, one which takes a
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/data-handler/apidocs/index.html[Host
+object] and the other which takes all the host details individually i.e.
+username, password, ip, etc.
+
+image:images/icons/emoticons/warning.png[image]
+
+Host object requires admin user and jmx port to be set
+
+With JMX handler you can get a particular MBean or a list of MBeans from
+the JBoss instance
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false--------------------------------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+GroovyMBean mBean = jmx.getMBean(mBeanName)
+List<String> beanList = jmx.getMBeansList(string query) // Query defaults to all
+--------------------------------------------------------------------------------
+
+mBean has all the operations and attributes available via injection or
+via setProperty/getProperty and invokeMethod helpers.
+
+image:images/icons/emoticons/warning.png[image]
+
+JMX connection to JBoss server is re-used and monitored for idle time
+(set by default to 10 seconds). This value can be changed by setting
+connectionTimeout static property.
+
+ 
+
+[[JMXHandler-APIDocumentationLink]]
+API Documentation Link
+----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html[JMX
+Handler API Documentation]
+
+[[JMXHandler-CurrentFunctionality]]
+Current Functionality
+---------------------
+
+Create a connection to the JMX port on a Jboss instance and get a
+particular mbean or a list of them.
+
+[[JMXHandler-PlannedImprovements]]
+Planned Improvements
+--------------------
+
+None at this time
+
+[[JMXHandler-Knownissuesandworkarounds]]
+Known issues and workarounds
+----------------------------
+
+None at this time

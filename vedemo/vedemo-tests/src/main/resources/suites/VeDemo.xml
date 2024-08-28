@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="VeDemo">
+
+    <test name="VeDemo">
+        <classes>
+        	<class name="com.ericsson.cifwk.taf.taffit.test.cases.VeDemoTests"></class>
+            <!-- <class name="com.ericsson.cifwk.taf.testng.VusersTest"/> -->
+        </classes>
+    </test>
+
+</suite>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : Host Properties File Structure and Example</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : Host Properties File Structure and Example
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on Jan 31, 2013 by <font color="#0050B2">erafkos</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <p>TAF has the functionality to consume host information from properties files into Host objects. The values within the host objects can then be used for whatever purposes needed.</p><p>The TAF module which automatically oversees the locating and loading of properties files is the <strong>Data Handler</strong>.</p><p>The file must be located in one of the following places:</p><ul><li>In the projects directory structure - preferable in <em>taf_properties</em> folder</li><li>In the jar file in properties folder</li><li>On the classpath</li><li>In location specified by TAF_PROPERTIES_LOCATION_VARIABLE environment variable</li></ul><p><span style="color: rgb(255,0,0);"><strong>N.B.  </strong>The file extension must be <strong>.properties</strong></span></p><p><strong>Supported host types:<br /></strong></p><ul><li>MS</li><li>SC1</li><li>SC2</li><li>PL</li><li>NFS</li><li>SFS</li><li>RC</li><li>NETSIM</li><li>JBOSS</li><li>UNKNOWN</li></ul><h2 id="HostPropertiesFileStructureandExample-Example">Example</h2><p>Example <em>hosts.properties</em> file<strong><br /></strong></p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">host.ms1.ip=0.0.0.1
+host.ms1.user.root.pass=shroot
+host.ms1.user.root.type=admin
+host.ms1.port.ssh=22
+host.ms1.type=ms
+
+host.sc1.ip=0.0.0.2
+host.sc1.user.root.pass=cobbler
+host.sc1.user.root.type=admin
+host.sc1.type=sc1
+host.sc1.port.ssh=22
+
+host.sc1.node.jboss1.ip=0.0.0.2
+host.sc1.node.jboss1.type=jboss
+host.sc1.node.jboss1.user.root.pass=shroot
+host.sc1.node.jboss1.user.root.type=admin
+host.sc1.node.jboss1.user.guest.type=oper
+host.sc1.node.jboss1.user.guest.pass=guestp
+host.sc1.node.jboss1.port.http=8080
+host.sc1.node.jboss1.port.rmi=4447
+host.sc1.node.jboss1.port.jmx=9999
+host.sc1.node.jboss1.port.jboss_management=9999
+
+host.CI-Netsim.ip=0.0.0.3
+host.CI-Netsim.user.netsim.pass=netpass
+host.CI-Netsim.port.ssh=2202
+host.CI-Netsim.type=NETSIM</pre>
+</div></div><h1 id="HostPropertiesFileStructureandExample-Structure">Structure</h1><p>Each line in the properties file has the following structure:</p><p><span style="color: rgb(0,0,255);">host</span>.&lt;hostname&gt;.&lt;<span style="color: rgb(255,102,0);">hostParameter</span>&gt;=&lt;value&gt;<br /><span style="color: rgb(0,0,255);">host</span>.&lt;hostname&gt;.<span style="color: rgb(128,0,0);">port</span>.&lt;portType&gt;=&lt;value&gt;<br /><span style="color: rgb(0,0,255);">host</span>.&lt;hostname&gt;.<span style="color: rgb(255,0,0);">node</span>.&lt;nodename&gt;.&lt;<span style="color: rgb(255,102,0);">nodeParameter</span>&gt;=&lt;value&gt;<br /><span style="color: rgb(0,0,255);">host</span>.&lt;hostname&gt;.<span style="color: rgb(0,128,0);">user</span>.&lt;username&gt;.pass=&lt;password&gt;<br /><span style="color: rgb(0,0,255);">host</span>.&lt;hostname&gt;.<span style="color: rgb(0,128,0);">user</span>.&lt;username&gt;.type=&lt;admin|oper&gt;</p><ul><li><span style="color: rgb(0,0,255);">host</span>, <span style="color: rgb(255,0,0);">node, </span><span style="color: rgb(0,128,0);">user</span> and <span style="color: rgb(128,0,0);">port</span> are static prefixes</li><li>&lt;hostname&gt;, &lt;nodename&gt;, &lt;username&gt; are replaced with the name of the host, node or user and should be unique in the context</li><li>&lt;<span style="color: rgb(255,102,0);">hostParameter</span>&gt;, &lt;<span style="color: rgb(255,102,0);">nodeParameter</span>&gt; are replaced with whatever parameter you are setting</li><li>&lt;value&gt; is the value of this parameter.</li></ul><p>The parameters are:</p><ul><li><span style="color: rgb(0,0,0);">ip</span></li><li><span style="color: rgb(0,0,0);">type</span></li><li>port (which is a map of key value pairs)</li><li>node (which is a list of hostnames, followed by all the parameters for a host object)</li></ul><p>Supported user types</p><ul><li><pre>ADMIN - root user or JBoss management real user</pre></li><li><pre>OPER  - OS regular user or JBoss application realm user</pre></li></ul><p>Supported port types</p><ul><li><pre>HTTP</pre></li><li><pre>HTTPS</pre></li><li><pre>SSH</pre></li><li><pre>JMX</pre></li><li><pre>JMS</pre></li><li><pre>JBOSS_MANAGEMENT</pre></li><li><pre>RMI</pre></li></ul><h1 id="HostPropertiesFileStructureandExample-ExampleUsage">Example Usage</h1><pre> </pre><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">    public List&lt;Host&gt; getAllNetsimNosts(){
+        return DataHandler.hosts.findAll {it.type == HostType.NETSIM  &amp;&amp;  it.hostname ==&quot;CI-Netsim&quot; }
+    }</pre>
+</div></div><p> </p><p> </p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:39</small></p>
+            </div>
+        </div>     </body>
+</html>

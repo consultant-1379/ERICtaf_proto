@@ -1,0 +1,10 @@
+{
+	"name": "VisualizationEngineApp",
+	"version": "0.0.1-SNAPSHOT",
+	"dependencies": {
+		"jscore": "~1.0.34",
+		"widgets": "~1.0.18",
+		"branding": "~1.0.16",
+		"chartlib": "~1.0.1-SNAPSHOT"
+	}
+}

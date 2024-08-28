@@ -1,0 +1,71 @@
+/* Styles for the page */
+#new {
+    position: absolute;
+    left: 25px;
+    top: 8px;
+
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 40px;
+    text-decoration: none;
+}
+
+/* Custom styles for the Timeline */
+.timeline-frame {
+    border-color: #5D99C3;
+
+    border-radius: 5px;
+    -moz-border-radius: 5px; /* For Firefox 3.6 and older */
+}
+.timeline-axis {
+    border-color: #0066B3;
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A9D4', endColorstr='#00285E'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#00A9D4), to(#00285E)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #00A9D4,  #00285E); /* for firefox 3.6+ */
+    background-color: #0066B3;
+}
+.timeline-groups-axis {
+    border-color: #5D99C3;
+}
+.timeline-axis-text {
+    color: #F2F2F2;
+}
+.timeline-axis-grid-minor {
+    border-color: #E6E6E6;
+}
+.timeline-groups-text {
+    color: #4D4D4D;
+}
+.timeline-event {
+    color: #333333;
+    border-radius: 5px;
+    border-color: #00A9D4;
+    background-color: #E6E6E6;
+
+    &-selected {
+        border-color: #F08A00;
+        background-color: #FCD666;
+        z-index: 999;
+        font-weight: bold;
+    }
+}
+.timeline-event-content {
+    padding: 5px;
+}
+
+.unavailable {
+    background-color: #EE7A75; /* red */
+    border-color: #E32119;     /* red */
+}
+.available {
+    background-color: #89BA17; /* green */
+    border-color: #00625F;     /* green */
+}
+.maybe {
+    background-color: #FABB00; /* orange */
+    border-color: #F08A00;     /* orange */
+}
+.timeline-currenttime {
+    background-color: #E32119;
+}

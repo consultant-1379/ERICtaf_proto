@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Test Automation Framework : JMS Handler</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="main">
+                <div id="main-header" class="pageSectionHeader">
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            Test Automation Framework : JMS Handler
+                        </span>
+                    </h1>
+
+                    <div class="page-metadata">
+                        <p>This page last changed on May 13, 2013 by <font color="#0050B2">EGERGLE</font>.</p>
+                    </div>
+                </div>
+
+                <div id="content" class="view">
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="JMSHandler-WhatisJMS?">What is JMS?</h1><p>JMS is the Java Messaging Service. More info can be found at <a href="http://en.wikipedia.org/wiki/Java_Message_Service" class="external-link" rel="nofollow">http://en.wikipedia.org/wiki/Java_Message_Service</a></p><h1 id="JMSHandler-WhatistheTAFJMSHandler?">What is the TAF JMS Handler?</h1><p>The TAF JMS Handler is an API which abstracts the details of connecting to JMS on an instance of JBOSS.</p><p>Once an instance of the JMS Handler is created it starts listening to the destination specified and stores all messages from that destination that can then be used by the developer.</p><p>Note: It would not be recommended to listen to destinations with huge volumes of messages for a prolonged period as this may cause out of memory issues on the TAF JVM if too many messages require to be stored.</p><h1 id="JMSHandler-Howtogetstarted">How to get started</h1><p>Firstly you need to create an instance of the JMSHandler</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">JMSHandler jms = new JMSHandler(Host, destination)</pre>
+</div></div><div class='panelMacro'><table class='noteMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="images/icons/emoticons/warning.png" width="16" height="16" align="absmiddle" alt="" border="0"></td><td><p>Please note the host object need to specify RMI port and Application Realm user.</p></td></tr></table></div><p> </p><p>The host here is the jboss instance and the destination is the queue/topic which you want to read messages from.</p><p>The constructor also has 4 optional arguments. In order they are:</p><p> </p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">argument</th><th class="confluenceTh">description</th><th colspan="1" class="confluenceTh">default</th></tr><tr><td colspan="1" class="confluenceTd">transacted</td><td colspan="1" class="confluenceTd">indicates whether the session is transacte or not.</td><td colspan="1" class="confluenceTd">false</td></tr><tr><td class="confluenceTd">acknowledgementMode</td><td class="confluenceTd">indicates whether the client will acknowledge messages it receives</td><td colspan="1" class="confluenceTd">Client Acknowledge</td></tr><tr><td class="confluenceTd">consumeMessages</td><td class="confluenceTd">indicates whether this instance of JMSHandler will take the messages it receives off the queue.</td><td colspan="1" class="confluenceTd">false</td></tr><tr><td class="confluenceTd">producerOnly</td><td class="confluenceTd">indicates whether this instance of JMSHandler will not read messages from the destination but can send messages to the destination.</td><td colspan="1" class="confluenceTd">false</td></tr><tr><td colspan="1" class="confluenceTd"><p>messageWaitTimeOut</p></td><td colspan="1" class="confluenceTd">indicates and can be set that the timeout to receive messages from jms is a set period of time</td><td colspan="1" class="confluenceTd">1000</td></tr></tbody></table></div><p> </p><p>To search for messages from a specific destination call the following method passing 2 arguments. First the message content to look for and secondly the time to wait before timing out, this throws an exception which you must catch. The default time is 10 seconds.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">jms.getMessageFromJms(messageContent, timeout)</pre>
+</div></div><p>Once you are finished listening please close the JMS Handler. This is imperative as if you create a new instance of JMS Handler on the same destination you will have no way of knowing which handler will get which messages from the destination.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">jms.close()</pre>
+</div></div><p>The JMSHandler is continuously storing messages once it is instantiated. If the list gets too big you can clear it yourself.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">BlockingQueue jms.getAllMessages()
+BlockingQueue jms.getUndeliveredMessages
+
+jms.getAllMessages().clear()
+jms.getUndeliveredMessages.clear()</pre>
+</div></div><p>You can also asynchronously listen for messages with the JMSHandler. There are a number of steps involved.</p><ol><li>Create a class which implements MessageListener.</li><li>Implement the onMessage method which will execute when a message is found.</li><li><p>Register the Message Listener with JMS.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: java; gutter: false" style="font-size:12px;">jms.listen(Object expectedMessageContent,MessageListener messageListenerImplementation)</pre>
+</div></div></li></ol><p>It is also possible to send messages to the JMS Destination.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Confluence; brush: groovy; gutter: false" style="font-size:12px;">jms.sendObjectMessage(object)
+jms.sendTextMessage(string)</pre>
+</div></div><p> </p><h2 id="JMSHandler-BestuseofJMSHandler">Best use of JMSHandler</h2><p>JMSHandler works best when consuming messages in AUTO_ACKNOWLEDGE mode.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Eclipse; brush: java; gutter: false" style="font-size:12px;">Host host = DataHandler.getHostByName(&quot;sc1&quot;);
+String destination = &quot;jms/queue/test&quot; // Whatever has been setup in your JBOSS instance
+ 
+JmsHandler jms = new JmsHandler(node,destination,false,Session.AUTO_ACKNOWLEDGE,true,false);
+ 
+List allMessages = jms.getAllMessages().toList();
+//or
+Message m = jms.getMessageFromJms(&quot;whatever Object is in the message&quot;);</pre>
+</div></div><p> </p><p>AS a Producer,  sending messages to jms using JMSHandler the CLIENT_ACKNOWLEDGE mode  is best to use.</p><div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="theme: Eclipse; brush: java; gutter: false" style="font-size:12px;">JmsHandler jms = new JmsHandler(node,destination,false,Session.CLIENT_ACKNOWLEDGE,false,true);
+ 
+jms.sendObjectMessage(Object whatever);
+jms.sendTexttMessage(&quot;Hello World&quot;);
+ 
+//other examples
+Byte byteMessage = &quot;Message to send&quot;..getBytes();
+jms.sendByteMessage(byteMessage); //convert message to bytes first
+ 
+jms.sendMapMessage(Map mappedObject);</pre>
+</div></div><h1 id="JMSHandler-APIDocumentationLink">API Documentation Link</h1><p><a href="https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html" class="external-link" rel="nofollow">JMS Handler API Documentation</a></p><h1 id="JMSHandler-CurrentFunctionality">Current Functionality</h1><p>Create an instance of JMSHandler and wait for a messages, synchronously and asynchronously. Supported message types are TextMessage and ObjectMessage</p><p>Send Object and Text messages to destination.</p><h1 id="JMSHandler-PlannedImprovements">Planned Improvements</h1><p>Support for all JMS message types.</p><p>allow user to specify how many messages should be stored. Oldest messages would then be discarded. Allow user to prevent memory issues.</p><p>clear method on the jmshandler object to remove all stored messages.</p><h1 id="JMSHandler-Knownissuesandworkarounds">Known issues and workarounds</h1><p>Leaving jms handler instance not closed, will occur in warning from garbage collector closing the connection. </p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" style="background: url(http://confluence-oss.lmera.ericsson.se/images/border/border_bottom.gif) repeat-x;">
+                <p><small>Document generated by Confluence on Sep 11, 2013 15:39</small></p>
+            </div>
+        </div>     </body>
+</html>

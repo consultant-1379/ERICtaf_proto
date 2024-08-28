@@ -1,0 +1,7 @@
+Merchant is a CLI tool for analyzing software 3pp dependencies via Bazaar
+
+Usage: merchant ( QUERY [QUERY]... | COMPONENT_ID | DEPENDENCY_TREE_FILE )
+
+               QUERY - query string(-s) to lookup components in Bazaar
+        COMPONENT_ID - component ID of a particular Bazaar component
+DEPENDENCY_TREE_FILE - analyze project `mvn dependency:tree` output

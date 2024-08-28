@@ -1,0 +1,319 @@
+Interim Process for working with TAF, in non fully automated environment
+========================================================================
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-CIFrameworkTAF-InterimProcedures[CI
+Framework TAF - Interim Procedures]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Steps[Steps]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-SetupIDE[Setup
+IDE]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-JCAT[JCAT]
+
+*
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Structure[Structure]
+*
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Getthedetailsofthelatestrelease.[Get
+the details of the latest release.]
+*
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Addthedependencies.[Add
+the dependencies.]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-TestCaseAutomation[Test
+Case Automation]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-TestCaseNamingConvention[Test
+Case Naming Convention]
+
+*
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-GITpush[GIT
+push]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-BuildTestWare[Build
+TestWare]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ConfigureJenkins[Configure
+Jenkins]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-DeployTargetEnvironment[Deploy
+Target Environment]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-RunTestCases[Run
+Test Cases]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ConfigureTestStatistics[Configure
+Test Statistics]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-EnsureallTestArtifactsarerecovered[Ensure
+all Test Artifacts are recovered]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ReportandPresentation[Report
+and Presentation]
+
+link:#InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-AutomatedTestProcess[Automated
+Test Process]
+
+ 
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-CIFrameworkTAF-InterimProcedures]]
+CI Framework TAF - Interim Procedures
+-------------------------------------
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Steps]]
+Steps
+~~~~~
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-SetupIDE]]
+Setup IDE
+~~~~~~~~~
+
+It is important that all developers create their IDE in a common way
+
+Install Eclipse as per instruction
+[http://atrclin2.athtem.eei.ericsson.se/wiki/index.php/Development_Environment_Setup[Development
+Environment Setup]]
+
+*Note:* Couple of things to ensure are in place before setting up the
+server demo projects
+
+* JDK
+** It is stating the obvious but make sure a JDK is installed (not just
+a JRE)
+** JAVA_HOME is set as an environment viarable
+* Ensure the Maven is installed
+** settings.xml file is copied from the repo to
+c:/Users/<your_ericsson_id>/.m2/ (as outlined in the above link)
+** M2_HOME is set as an environment viarable
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-JCAT]]
+JCAT
+~~~~
+
+There are a no of steps required to create test cases through JCAT.
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Structure]]
+Structure
++++++++++
+
+If you have checked out the JCAT user guide yalready ou will see that
+JCAT usage is layered:
+
+1.  JCAT_FW
+2.  JCAT extensions
+3.  JCAT testcases and testsuites
+
+To reflect this layering the demo projects are split up accordingly.
+Standard project setup looks like this:
+
+* JCAT_<your sut>_extensions
+* JCAT_<your sut>_testcases
+
+*Remember: *SUT = System Under Test. ie Node, Network Element etc.
+
+* JCAT_<your sut>_extensions is where your specific extenstions (common
+libraries) will be developed.
+* JCAT_<your sut>_testcases is where your testcases and testsuites will
+be developed
+
+You need to add JCAT as a dependency in your maven project as detailed
+below.
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Getthedetailsofthelatestrelease.]]
+Get the details of the latest release.
+++++++++++++++++++++++++++++++++++++++
+
+1.  open the following
+link: https://eforge.lmera.ericsson.se/sf/frs/do/listReleases/projects.jcat/frs.jcat_ng[eforge.lmera.ericsson.se/sf/frs/do/listReleases/projects.jcat/frs.jcat_ng]
+2.  Select the release with ``General Availability'' in the Maturity
+column.
+3.  Note the Group Id, Artifact Id and the version of the jcat-fw and
+jcat-extensions in the description.
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-Addthedependencies.]]
+Add the dependencies.
++++++++++++++++++++++
+
+1.  Open eclipse
+2.  Open the pom.xml file of your project.
+3.  Switch to the dependencies tab.
+4.  Click Add.
+5.  Enter the Group Id, Artifact Id and version for the JCAT framework
+and JCAT extensions.
+
+ 
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-TestCaseAutomation]]
+Test Case Automation
+~~~~~~~~~~~~~~~~~~~~
+
+Write the Test Cases and push to GIT
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-TestCaseNamingConvention]]
+Test Case Naming Convention
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is very important that all Test Cases can be mapped and tracked
+within the project. This is vital in identifying progress and quality.
+As such, the naming of the test cases is important to ensure that the
+test results can ultimately be tracked back to User Stories.
+
+The following naming convention has been identified
+
+TC_<User Story ID>_<Test Obj>_<TCID>
+
+e.g. (only for example’s sake…real id’s to be added)
+
+---------------------
+  TC_TORSF50_Perf_001
+  TC_TORSF50_Perf_002
+  TC_TORSF50_Perf_003
+  TC_TORSF50_Load_001
+  TC_TORSF50_Load_002
+  TC_TORSF50_Func_001
+  TC_TORSF50_Func_002
+  TC_TORSF50_Func_003
+---------------------
+
+…
+
+ 
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-GITpush]]
+GIT push
+^^^^^^^^
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-BuildTestWare]]
+Build TestWare
+~~~~~~~~~~~~~~
+
+The testware will be build as part of a jenkins job - see following
+section for details
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ConfigureJenkins]]
+Configure Jenkins
+~~~~~~~~~~~~~~~~~
+
+1.  Check the code out from GIT
+2.  Compile and build the code
+3.  Package the dependencies
+4.  Place the test artifact on the SUT
+
+A new Jenkins job should be created to build the test cases for each
+project, when created this job the main steps are
+
+1.  Go the Jenkins home page and click on `New Job'
+2.  Give the new job a name of your choice
+3.  Select the `Build a maven2/3 project' option and click ok
+4.  A new job configuration window will open - give the job a
+description if required
+5.  If applicable, choose what slave the job is to be run on by checking
+the `Restrict where this project can be run' box and input the Jenkins
+slave name
+6.  In the Source Code Mangagement section, click `Git' option and input
+the repository url required to download the project from Git
+7.  If preferred, select the preferred branch to build or leave blank
+for the default option
+8.  In the `Build' section add the filename for the `Root POM' file -
+e.g. `pom.xml'
+9.  Input the Maven `Goals and options' - usually ``clean install''
+10. In the `Post Build Actions' section, check the box for `Archive the
+arifacts' - this will ensure the files created on the Jenkins slave a
+run time will get pulled back to the Jenkins master
+11. In the `Files to archive' section, input the names of the files to
+be archived or `**' to archive all files
+12. Check the box for `Publish TestNG Results' and input report pattern
+that Jenkins will use to search for the TestNG report file generated by
+JCAT e.g. `**/test-output/testng-results.xml'
+13. Check the boxes for `Escape Test description string?' & `Escape
+exception messages?'
+14. Click on `Save' to save the job
+
+ 
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-DeployTargetEnvironment]]
+Deploy Target Environment
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+At present this is a purely manual step!
+
+\1) Deploy LITP
+
+\2) Ensure JBOSS is installed and running
+
+------------------------
+ service jboss-as status
+------------------------
+
+\3) Ensure TOR software is deployed
+
+-----------------
+Steps to be added
+.................
+-----------------
+
+\4) Deploy Testware to Jenkins slave running JBOSS
+
+-----------------
+Steps to be added
+.................
+-----------------
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-RunTestCases]]
+Run Test Cases
+~~~~~~~~~~~~~~
+
+1.  By including a Test Runner main method in the packaged jar file
+2.  By invoking the TestNG runner on xml file containing the list of
+test cases
+
+ 
+
+------------------------------------------------------
+$ java $vmargs -classpath $CLASSPATH $mainclass $suite
+------------------------------------------------------
+
+ 
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ConfigureTestStatistics]]
+Configure Test Statistics
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1.  The host executing the test cases must be able to contact the Kista
+hub
+2.  A properties file (usually called logdb.properties) needs to be
+included in the project resource folder, this properties file holds the
+information on the path and access to the TS database in the Kista hub
+3.  The location of this file needs to be passed as a VM argument
+(-Dlogdb.configuration) at run time
+4.  An extra logwriter -
+`se.ericsson.jcat.fw.ng.logging.writers.DbLogWriterRIPNG' needs to be
+passed as a VM argument (-Dlogwriters) at runtime
+5.  A name to identify the test run in the TS database needs to be
+passed as VM argument (-Dname) at run time.
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-EnsureallTestArtifactsarerecovered]]
+Ensure all Test Artifacts are recovered
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\1) Jenkins must be configured to collect all relevent logs and retrieve
+to Master
+
+\2) If necessary use JCAT "_fetch logs_" to retrieve logs stored on
+remote system
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-ReportandPresentation]]
+Report and Presentation
+~~~~~~~~~~~~~~~~~~~~~~~
+
+-----------------
+Steps to be added
+.................
+-----------------
+
+[[InterimProcessforworkingwithTAF,innonfullyautomatedenvironment-AutomatedTestProcess]]
+Automated Test Process
+~~~~~~~~~~~~~~~~~~~~~~
+
+http://atrclin2.athtem.eei.ericsson.se/wiki/index.php/File:Automated_Test_Process.png[image:http://atrclin2.athtem.eei.ericsson.se/wiki/images/e/e7/Automated_Test_Process.png[Automated
+Test Process.png]]

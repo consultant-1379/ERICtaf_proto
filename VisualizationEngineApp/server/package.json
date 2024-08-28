@@ -1,0 +1,23 @@
+{
+	"name": "VisualizationEngineServer",
+	"version": "0.1.2",
+	"private": true,
+	"author": "Kristofer Svärd <kristofer.svard@ericsson.com>",
+	"dependencies": {
+		"express": "3.2.x",
+		"connect": "2.7.x",
+		"socket.io": "0.9.x",
+        "amqp": "0.1.x",
+        "log4js": "0.6.x",
+        "amdefine": "0.0.x",
+        "underscore": "~1.5.1"
+	},
+	"devDependencies": {
+	   "mocha": "*",
+	   "chai": "*",
+	   "sinon": "*",
+	   "socket.io-client": "~0.9.16",
+	   "jshint": "~2.1.9"
+	},
+	"engine": ">= 0.10.0"
+}

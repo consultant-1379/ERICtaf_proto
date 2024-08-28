@@ -1,0 +1,13 @@
+#%RAML 0.8
+---
+title: validatable trait used
+
+traits:
+  - validatable:
+      responses:
+        422:
+
+/resource:
+  get:
+    is:
+      - validatable

@@ -1,0 +1,4 @@
+com.ericsson.cifwk.taf.grid.runner.TestNGRunner
+com.ericsson.cifwk.taf.grid.runner.ClassRunner
+com.ericsson.cifwk.taf.grid.runner.MainRunner
+com.ericsson.cifwk.taf.grid.runner.ProcessRunner

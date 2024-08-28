@@ -1,0 +1,89 @@
+SshRemoteCommandExecutor
+========================
+
+[[SshRemoteCommandExecutor-WhatisSsh?]]
+What is Ssh?
+------------
+
+Ssh stands for Secure Shell and is a network protocol for secure data
+communication, more information can be found at
+http://en.wikipedia.org/wiki/Secure_Shell
+
+[[SshRemoteCommandExecutor-WhatistheTAFSshRemoteCommandExecutor?]]
+What is the TAF SshRemoteCommandExecutor?
+-----------------------------------------
+
+The TAF SshRemoteCommandExecutor is an API which allows you to connect
+to a host and execute commands on that host through TAF as if you had
+opened an ssh terminal on port 22.
+
+Note: is is also possible to ssh to a host with a port other than port
+22 - please see API for more details
+
+[[SshRemoteCommandExecutor-Howtogetstarted]]
+How to get started
+------------------
+
+First off, you’ll need to create an instance of
+SshRemoteCommandExecutor. The constructor takes
+a https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/data-handler/apidocs/index.html[Host
+object] which contains the info of the host to connect to.
+
+code,theme:,Confluence;,brush:,groovy;,gutter:,false------------------------------------------------------------------
+code,theme:,Confluence;,brush:,groovy;,gutter:,false
+SshRemoteCommandExecutor executor = SshRemoteCommandExecutor(host)
+------------------------------------------------------------------
+
+[[SshRemoteCommandExecutor-APIDocumentationLink]]
+API Documentation Link
+----------------------
+
+https://arm1s11-eiffel004.eiffel.gic.ericsson.se:8443/nexus/content/sites/tor/ERICtaf_util/taf/taf-core/apidocs/index.html[Ssh
+Remote Command Executor API Documentation]
+
+[[SshRemoteCommandExecutor-CurrentFunctionality]]
+Current Functionality
+---------------------
+
+The current functionality of the SshRemoteCommandExecutor allows you to
+run commands on a remote system over ssh.
+
+It has 2 overloaded methods to execute commands. Both are overloaded in
+the same way, they either take a string with the command and arguments
+in one string or they take a string with the command and a String array
+with all the arguments. The main difference is in what they return,
+execute returns a boolean for success or failure and simpleExec returns
+a string which contains the response of the command. You can also access
+the std out, the std error out and the exit code for execute() command
+but not for simplExec() using methods getStdOut() getErrOut
+getExitCode().
+
+[source,java]
+----
+String response = executor.simplExec("ls -al")
+boolean success = executor.execute("ls", "-a", "l")
+----
+
+The current functionality provided is:-
+
+* Set the host to execute the command on  - setHost(Host) 
+* Do a simple execute of a command without options e.g. `ls' on the
+host  - simplExec(String)
+* Do a simple execute of a command with options e.g. `ls -lrt' on the
+host  - simplExec(String, String…)
+* Do a regular execute of a command without options e.g. `ls' on the
+host - execute(String)
+* Do a regular execute of a command with options e.g. `ls -lrt' on the
+host - execute(String, String…)
+
+[[SshRemoteCommandExecutor-PlannedImprovements]]
+Planned Improvements
+--------------------
+
+None at this time
+
+[[SshRemoteCommandExecutor-Knownissuesandworkarounds]]
+Known issues and workarounds
+----------------------------
+
+None at this time

@@ -1,0 +1,11 @@
+Sample CLI Testcase
+===================
+
+ 
+
+CLI Example
+
+ 
+
+link:attachments/30029140/29951709.zip[CLITool.zip]  -This simply cd ’s
+to / and the performs an LS to find the bin folder.

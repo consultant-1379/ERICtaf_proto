@@ -1,0 +1,30 @@
+Setting up TAF project to use Legacy Logging (i.e. don't create a new
+folder for each test run)
+===============================================================================================
+
+[[SettingupTAFprojecttouseLegacyLogging(i.e.don'tcreateanewfolderforeachtestrun)-CIFrameworkTAF-LegacyLogging]]
+CI Framework TAF - Legacy Logging
+---------------------------------
+
+http://atrclin2.athtem.eei.ericsson.se/wiki/index.php/TOR_CI_Framework_Team[Back
+to TOR_CI_Framework_Team wiki]
+
+To stop TAF creating a new folder (based on the date & time) for each
+test run it is possible to enable ``Legacy logging'', this will stop TAF
+creating a new folder for each test run and repeatedly drop the html and
+other logs directly into the folder set with the ``-Dlogdir'' vm
+argument supplied at run time. *Note:* if nothing is supplied for the
+this argument then TAF will drop all logs into the users ``home''
+directory
+
+To enable ``legacy'' logging, the steps needed are:-
+
+1.  Update all Maven POM files in your project to use latest TAF
+2.  Add a new VM argument when you execute, the VM arg:
+-Dlegacylogging=``''
+
+If the test is being run from Jenkins there is a HTML publisher plugin
+that you can use to publish your index.html on the home page of the
+Jenkins job, the link to set this up
+ishttp://atrclin2.athtem.eei.ericsson.se/wiki/index.php/CI_Framework_TAF_-_Jenkins_HTML_Publisher[Setting
+up Jenkins to use HTML Publisher Plugin]

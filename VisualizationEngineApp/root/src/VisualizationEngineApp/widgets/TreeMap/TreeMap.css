@@ -1,0 +1,47 @@
+.eaVEApp-wTreeMap-TreeMapArea {
+  padding: 2px;
+}
+
+.eaVEApp-wTreeMap-TreeMapArea-leaf {
+  box-sizing: border-box;
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid #d6d6d6;
+  background-color: #f5f5f5;
+  padding: 8px;
+  -webkit-transition: border-color 1s, background-color 1s;
+  -moz-transition: border-color 1s, background-color 1s;
+  transition: border-color 1s, background-color 1s;
+}
+
+.eaVEApp-wTreeMap-TreeMapArea-leaf[data-result="success"] {
+  border-color: #a1c845;
+  background-color: #d0e3a2;
+}
+
+.eaVEApp-wTreeMap-TreeMapArea-leaf[data-result="failure"] {
+  border-color: #e94d47;
+  background-color: #f4a6a3;
+}
+
+.eaVEApp-wTreeMap-TreeMapArea-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.eaVEApp-wTreeMap-TreeMapArea-label-title {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+.eaVEApp-wTreeMap-TreeMapArea-label-summary {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+}
